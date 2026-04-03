@@ -25,22 +25,11 @@ public class SceneTransitionManager : PersistentService<ISceneTransitionManager>
         IsTransitioning = true;
         m_canvasGroup.blocksRaycasts = true;
         m_canvasGroup.interactable = true;
-        yield return FadeCanvasGroupAsync(m_canvasGroup, 1, 0.5f);
+        yield return m_canvasGroup.FadeToOpacity(1, 0.5f);
         yield return SceneManager.LoadSceneAsync(sceneName);
-        yield return FadeCanvasGroupAsync(m_canvasGroup, 0, 0.5f);
+        yield return m_canvasGroup.FadeToOpacity(0, 0.5f);
         m_canvasGroup.blocksRaycasts = false;
         m_canvasGroup.interactable = false;
         IsTransitioning = false;
-    }
-    static IEnumerator FadeCanvasGroupAsync(CanvasGroup groupToFade, float desiredAlpha, float duration)
-    {
-        float elapsed = 0;
-        float startAlpha = groupToFade.alpha;
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            groupToFade.alpha = Mathf.Lerp(startAlpha, desiredAlpha, elapsed / duration);
-            yield return null;
-        }
     }
 }

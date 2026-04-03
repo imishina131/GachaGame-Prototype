@@ -8,21 +8,20 @@ using UnityEngine.Events;
 
 public class SignUpScreenUI : MonoBehaviour
 {
-    [SerializeField, RequiredField] FieldData m_email;
-    [SerializeField, RequiredField] FieldData m_username;
-    [SerializeField, RequiredField] FieldData m_password;
+    [SerializeField, RequiredField] TMP_InputField m_email;
+    [SerializeField, RequiredField] TMP_InputField m_username;
+    [SerializeField, RequiredField] TMP_InputField m_password;
 
     [SerializeField] UnityEvent<PlayFabError> m_onSignUpFailed = new();
     [Inject] ISceneTransitionManager m_sceneTransitionManager;
     
     public void OnUserConfirmSignUp()
     {
-        if (!m_email.CheckFieldValidity() || !m_username.CheckFieldValidity() || !m_password.CheckFieldValidity()) return;
         PlayFabClientAPI.RegisterPlayFabUser(new()
         {
-            Email = m_email.InputField.text,
-            Username = m_username.InputField.text,
-            Password = m_password.InputField.text
+            Email = m_email.text,
+            Username = m_username.text,
+            Password = m_password.text
         }, OnSignUpSuccess, m_onSignUpFailed.Invoke);
     }
     void OnSignUpSuccess(RegisterPlayFabUserResult result)
