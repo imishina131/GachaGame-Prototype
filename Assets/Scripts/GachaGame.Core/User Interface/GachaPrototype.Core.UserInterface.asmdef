@@ -1,0 +1,20 @@
+{
+    "name": "GachaPrototype.Core.UserInterface",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:0da6d172d18a54e4389d0dce1e1ffdf2",
+        "GUID:6af97dccfc1dd8748a23e6e573e1435a",
+        "GUID:4518809ac6f46d446bd279199ffefa71",
+        "GUID:f6a0da6c76f2acf47af6e835216b3f47"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
