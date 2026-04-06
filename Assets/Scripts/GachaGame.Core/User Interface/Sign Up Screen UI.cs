@@ -1,5 +1,4 @@
 using MatrixUtils.Attributes;
-using MatrixUtils.DependencyInjection;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
@@ -12,8 +11,12 @@ public class SignUpScreenUI : MonoBehaviour
     [SerializeField, RequiredField] TMP_InputField m_username;
     [SerializeField, RequiredField] TMP_InputField m_password;
 
+    ISceneTransitionManager m_sceneTransitionManager;
     [SerializeField] UnityEvent<PlayFabError> m_onSignUpFailed = new();
-    [Inject] ISceneTransitionManager m_sceneTransitionManager;
+    void Start()
+    {
+        ServiceLocator.Global.Get(out m_sceneTransitionManager);
+    }
     
     public void OnUserConfirmSignUp()
     {
@@ -26,6 +29,16 @@ public class SignUpScreenUI : MonoBehaviour
     }
     void OnSignUpSuccess(RegisterPlayFabUserResult result)
     {
-        
+        if (ServiceLocator.Global.Get(out PlayerProfile profile))
+        {
+            profile.PlayFabId =  result.PlayFabId;
+            profile.Username = result.Username;
+            profile.SessionTicket =  result.SessionTicket;
+            profile.EntityToken = result.EntityToken;
+        }
+        else
+        {
+            ServiceLocator.Global.Register(new PlayerProfile(result.PlayFabId, result.Username, result.SessionTicket, result.EntityToken));
+        }
     }
 }

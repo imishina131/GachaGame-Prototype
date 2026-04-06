@@ -1,7 +1,9 @@
 {
-    "name": "GachaGame.Core",
+    "name": "MatrixUtils.ServiceLocator",
     "rootNamespace": "",
-    "references": ["GUID:0da6d172d18a54e4389d0dce1e1ffdf2"],
+    "references": [
+        "GUID:ecd059b573046fe409f5d0e442af6dc3"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,12 +1,9 @@
 using System.Collections;
-using JetBrains.Annotations;
-using MatrixUtils.DependencyInjection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 [RequireComponent(typeof(CanvasGroup))]
-public class SceneTransitionManager : PersistentService<ISceneTransitionManager>, ISceneTransitionManager
+public class SceneTransitionManager : MonoBehaviour, ISceneTransitionManager
 {
-    [Provide, UsedImplicitly] ISceneTransitionManager GetSceneTransitionManager() => this;
     public bool IsTransitioning { get; private set;}
     CanvasGroup m_canvasGroup;
 
@@ -14,6 +11,7 @@ public class SceneTransitionManager : PersistentService<ISceneTransitionManager>
     {
         m_canvasGroup = GetComponent<CanvasGroup>();
         m_canvasGroup.alpha = 0;
+        ServiceLocator.Global.Register<ISceneTransitionManager>(this);
     }
     public void TransitionToScene(string sceneName)
     {
