@@ -3,10 +3,14 @@ using JetBrains.Annotations;
 using MatrixUtils.DependencyInjection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+/// <summary>
+/// Handles transitioning from one <see cref="Scene"/> to another asynchronously with a nice fade animation using a <see cref="CanvasGroup"/>
+/// </summary>
 [RequireComponent(typeof(CanvasGroup))]
 public class SceneTransitionManager : PersistentService<ISceneTransitionManager>, ISceneTransitionManager
 {
     [Provide, UsedImplicitly] ISceneTransitionManager GetSceneTransitionManager() => this;
+    /// <inheritdoc/>
     public bool IsTransitioning { get; private set;}
     CanvasGroup m_canvasGroup;
 
@@ -15,6 +19,7 @@ public class SceneTransitionManager : PersistentService<ISceneTransitionManager>
         m_canvasGroup = GetComponent<CanvasGroup>();
         m_canvasGroup.alpha = 0;
     }
+    /// <inheritdoc/>
     public void TransitionToScene(string sceneName)
     {
         if(IsTransitioning) return;

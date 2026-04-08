@@ -4,6 +4,9 @@ using MatrixUtils.Attributes;
 using PlayFab;
 using TMPro;
 using UnityEngine;
+/// <summary>
+/// A box responsible for displaying a <see cref="PlayFabError"/> as plain text to the end user
+/// </summary>
 [RequireComponent(typeof(CanvasGroup))]
 public class ErrorBox : MonoBehaviour
 {
@@ -17,10 +20,15 @@ public class ErrorBox : MonoBehaviour
         m_canvasGroup.interactable = false;
         m_canvasGroup.blocksRaycasts = false;
     }
-    public void HandleError(string error)
+
+    void HandleError(string error)
     {
         StartCoroutine(DisplayError(error));
     }
+    /// <summary>
+    /// Displays the <see cref="PlayFabError"/> in plaintext to the user in this box
+    /// </summary>
+    /// <param name="error">The <see cref="PlayFabError"/> to display</param>
     public void HandleError(PlayFabError error)
     {
         HandleError(error.GenerateErrorReport());
