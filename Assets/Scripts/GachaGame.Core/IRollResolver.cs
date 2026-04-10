@@ -5,5 +5,10 @@ using System.Collections.Generic;
 /// <typeparam name="T">The type that this resolver should handle</typeparam>
 public interface IRollResolver<T> where T : IRollData
 {
-    T ResolveRoll(List<T> rolls);
+    /// <summary>
+    /// Resolves a roll for a <typeparamref name="T"/> through taking in a multiple <see cref="IRollData"/> and generating a single result
+    /// </summary>
+    /// <param name="possibleRolls">Each possible roll result</param>
+    /// <returns>The resulting roll</returns>
+    T ResolveRoll(List<T> possibleRolls);
 }

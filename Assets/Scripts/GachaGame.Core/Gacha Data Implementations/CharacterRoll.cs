@@ -4,6 +4,6 @@ using UnityEngine;
 [Serializable]
 public class CharacterRoll : IRollData
 {
-    [SerializeField] SerializableGuid m_id;
+    [SerializeField] CharacterDataSO m_character;
     [field:SerializeField] public uint Rarity { get; private set;}
 }
