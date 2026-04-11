@@ -1,7 +1,6 @@
 ﻿using GachaGame_Prototype.Azure;
-using GachaGame.Azure;
 using GachaGame.Azure.Core.DataTypes;
-using GachaGame.Azure.Core.Interfaces;
+using GachaGame.Azure.Core.Helpers;
 using GachaGame.Azure.Core.PlayfabHelpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;
@@ -11,6 +10,7 @@ using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.DataModels;
 using PlayFab.ServerModels;
+
 namespace GachaGame.Azure;
 
 public static class BannerRollRequest
@@ -18,9 +18,9 @@ public static class BannerRollRequest
     [Function("BannerRollRequest")]
     public static async Task<IActionResult> Run
     (
-        [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequest req,
-        ILogger logger,
-        IBannerRoller<Banner, Character> bannerRoller
+        [HttpTrigger(AuthorizationLevel.Function, "post")]
+        HttpRequest req,
+        ILogger logger
     )
     {
         FunctionExecutionContext<BannerRollRequestData>? context =
@@ -47,13 +47,20 @@ public static class BannerRollRequest
             }
         });
         await Task.WhenAll(getBannerInfo, getPlayerObjects);
-        if (getBannerInfo.Result.Error != null) 
-            return new BadRequestObjectResult(getBannerInfo.Result.Error.ErrorMessage);
-        if (getPlayerObjects.Result.Error != null)
-            return new BadRequestObjectResult(getPlayerObjects.Result.Error.ErrorMessage);
-        Banner? banner = JsonConvert.DeserializeObject<Banner>(getBannerInfo.Result.Result.Data[context.FunctionArgument.BannerId]);
-        if(banner is null) return new BadRequestObjectResult("Banner not found");
-        bannerRoller.RollBanner(banner);
-        return new OkResult();
+        return Optional<Banner>.OfNullable(
+                JsonConvert.DeserializeObject<Banner>(
+                    getBannerInfo.Result.Result.Data[context.FunctionArgument.BannerId]))
+            .SelectMany(resolvedBanner => Optional<RarityTier>.OfNullable(
+                resolvedBanner.RarityTiers is { Count: > 0 }
+                    ? resolvedBanner.RarityTierResolver?.ResolveRoll(resolvedBanner.RarityTiers)
+                    : null))
+            .SelectMany(resolvedRarityTier => Optional<Character>.OfNullable(
+                resolvedRarityTier.Characters is { Count: > 0 }
+                    ? resolvedRarityTier.CharacterResolver?.ResolveRoll(resolvedRarityTier.Characters)
+                    : null))
+            .Match(
+                onSome: IActionResult (c) => new OkObjectResult(new { c.CharacterID }),
+                onNone: () => new BadRequestObjectResult("Error in banner data")
+            );
     }
 }

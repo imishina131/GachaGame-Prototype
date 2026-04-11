@@ -1,7 +1,8 @@
 ﻿using GachaGame.Azure.Core.Interfaces;
+using Newtonsoft.Json;
 
 namespace GachaGame.Azure.Core.DataTypes;
-
+[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 public class Character : IRollData
 {
     public Guid CharacterID { get; set; }
