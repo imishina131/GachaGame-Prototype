@@ -1,6 +1,6 @@
-﻿using GachaGame_Prototype.Azure.Interfaces;
+﻿using GachaGame.Azure.Core.Interfaces;
 
-namespace GachaGame_Prototype.Azure.Core.Data_Types;
+namespace GachaGame.Azure.Core.DataTypes;
 
 public class Character : IRollData
 {

@@ -1,7 +1,5 @@
-using GachaGame_Prototype.Azure.Core.Data_Types;
-using GachaGame_Prototype.Azure.Interfaces;
-
-namespace GachaGame_Prototype.Azure.Data_Types;
+using GachaGame.Azure.Core.Interfaces;
+namespace GachaGame.Azure.Core.DataTypes;
 
 public class CharacterRollResolver: IRollResolver<Character>
 {

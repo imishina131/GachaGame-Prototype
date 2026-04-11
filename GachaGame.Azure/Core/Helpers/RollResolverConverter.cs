@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
-using GachaGame_Prototype.Azure.Interfaces;
+using GachaGame.Azure.Core.Interfaces;
 using Newtonsoft.Json;
 
-namespace GachaGame_Prototype.Azure.Helpers;
+namespace GachaGame.Azure.Core.Helpers;
 
 public class RollResolverConverter<T> : JsonConverter<IRollResolver<T>> where T : IRollData
 {

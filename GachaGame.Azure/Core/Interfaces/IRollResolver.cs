@@ -1,4 +1,4 @@
-namespace GachaGame_Prototype.Azure.Interfaces;
+namespace GachaGame.Azure.Core.Interfaces;
 
 
 public interface IRollResolver<T> where T : IRollData

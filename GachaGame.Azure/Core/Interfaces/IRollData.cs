@@ -1,4 +1,4 @@
-namespace GachaGame_Prototype.Azure.Interfaces;
+namespace GachaGame.Azure.Core.Interfaces;
 
 /// <summary>
 /// Represents a result of a random rollable value with a given rarity

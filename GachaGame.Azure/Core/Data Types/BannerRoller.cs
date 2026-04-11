@@ -1,9 +1,9 @@
 ﻿using GachaGame.Azure.Core.Interfaces;
 namespace GachaGame.Azure.Core.DataTypes;
 
-public class RarityTierRollResolver : IRollResolver<RarityTier>
+public class BannerRoller : IBannerRoller<Banner, Character>
 {
-    public RarityTier ResolveRoll(List<RarityTier> possibleRolls)
+    public Character RollBanner(Banner banner)
     {
         throw new NotImplementedException();
     }

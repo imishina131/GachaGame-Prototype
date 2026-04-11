@@ -1,4 +1,4 @@
-﻿namespace GachaGame_Prototype.Azure;
+﻿namespace GachaGame.Azure.Core.PlayfabHelpers;
 
 public class FunctionExecutionContext<T>
 {

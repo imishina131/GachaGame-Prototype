@@ -1,8 +1,8 @@
-﻿using GachaGame_Prototype.Azure.Helpers;
-using GachaGame_Prototype.Azure.Interfaces;
+﻿using GachaGame.Azure.Core.Helpers;
+using GachaGame.Azure.Core.Interfaces;
 using Newtonsoft.Json;
 
-namespace GachaGame_Prototype.Azure.Core.Data_Types;
+namespace GachaGame.Azure.Core.DataTypes;
 
 public class Banner
 {
