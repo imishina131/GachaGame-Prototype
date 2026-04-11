@@ -8,5 +8,6 @@ public class Banner
 {
     [JsonConverter(typeof(RollResolverConverter<RarityTier>))]
     public IRollResolver<RarityTier>? RarityTierResolver { get; set; }
-    public List<RarityTier>? RarityTiers { get; set; }
+
+    public List<RarityTier>? RarityTiers { get; set; } = [];
 }

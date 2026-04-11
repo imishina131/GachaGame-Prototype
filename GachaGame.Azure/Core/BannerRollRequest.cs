@@ -50,17 +50,11 @@ public static class BannerRollRequest
         return Optional<Banner>.OfNullable(
                 JsonConvert.DeserializeObject<Banner>(
                     getBannerInfo.Result.Result.Data[context.FunctionArgument.BannerId]))
-            .SelectMany(resolvedBanner => Optional<RarityTier>.OfNullable(
-                resolvedBanner.RarityTiers is { Count: > 0 }
-                    ? resolvedBanner.RarityTierResolver?.ResolveRoll(resolvedBanner.RarityTiers)
-                    : null))
-            .SelectMany(resolvedRarityTier => Optional<Character>.OfNullable(
-                resolvedRarityTier.Characters is { Count: > 0 }
-                    ? resolvedRarityTier.CharacterResolver?.ResolveRoll(resolvedRarityTier.Characters)
-                    : null))
+            .Bind(b => b.RarityTierResolver?.ResolveRoll(b.RarityTiers))
+            .Bind(t => t.CharacterResolver?.ResolveRoll(t.Characters))
             .Match(
                 onSome: IActionResult (c) => new OkObjectResult(new { c.CharacterID }),
-                onNone: () => new BadRequestObjectResult("Error in banner data")
+                onNone: () => new BadRequestObjectResult("Roll failed")
             );
     }
 }

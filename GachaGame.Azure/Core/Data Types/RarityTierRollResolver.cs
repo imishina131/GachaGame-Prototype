@@ -5,7 +5,7 @@ namespace GachaGame.Azure.Core.DataTypes;
 [UsedImplicitly]
 public class RarityTierRollResolver : IRollResolver<RarityTier>
 {
-    public RarityTier ResolveRoll(List<RarityTier> possibleRolls)
+    public RarityTier ResolveRoll(List<RarityTier>? possibleRolls)
     {
         throw new NotImplementedException();
     }

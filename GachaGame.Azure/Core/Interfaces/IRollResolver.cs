@@ -8,5 +8,5 @@ public interface IRollResolver<T> where T : IRollData
     /// </summary>
     /// <param name="possibleRolls">Each possible roll result</param>
     /// <returns>The resulting roll</returns>
-    T ResolveRoll(List<T> possibleRolls);
+    T? ResolveRoll(List<T>? possibleRolls);
 }
