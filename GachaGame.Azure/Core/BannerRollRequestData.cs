@@ -1,6 +1,9 @@
-﻿namespace GachaGame_Prototype.Azure;
+﻿using Newtonsoft.Json;
 
-public class BannerRollRequestData
+namespace GachaGame_Prototype.Azure;
+
+[method: JsonConstructor]
+public class BannerRollRequestData(string? bannerId)
 {
-    public string? BannerId{ get; private set; }
+    public string? BannerId { get; } = bannerId;
 }

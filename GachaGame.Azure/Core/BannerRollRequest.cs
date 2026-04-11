@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.DataModels;
@@ -13,25 +14,40 @@ using PlayFab.ServerModels;
 
 namespace GachaGame.Azure;
 
-public static class BannerRollRequest
+public class BannerRollRequest(ILogger<BannerRollRequest> logger)
 {
     [Function("BannerRollRequest")]
-    public static async Task<IActionResult> Run
+    public async Task<IActionResult> Run
     (
         [HttpTrigger(AuthorizationLevel.Function, "post")]
-        HttpRequest req,
-        ILogger logger
+        HttpRequest req
     )
     {
-        FunctionExecutionContext<BannerRollRequestData>? context =
-            JsonConvert.DeserializeObject<FunctionExecutionContext<BannerRollRequestData>>(
-                await new StreamReader(req.Body).ReadToEndAsync());
-        if (context?.FunctionArgument.BannerId is null) return new BadRequestResult();
+        FunctionExecutionContext<BannerRollRequestData>? context;
+        try
+        {
+            context =
+                JsonConvert.DeserializeObject<FunctionExecutionContext<BannerRollRequestData>>(
+                    await new StreamReader(req.Body).ReadToEndAsync());
+        }
+        catch(Exception e)
+        {
+            logger.LogError(e, "Failed to deserialize request");
+            return new BadRequestObjectResult("Failed to deserialize request");
+        }
+
+        if (context?.FunctionArgument.BannerId is null)
+        {
+            logger.LogError("Failed to deserialize request");
+            return new BadRequestObjectResult("Failed to deserialize request");
+        }
+        if (!req.Headers.TryGetValue("X-EntityToken", out StringValues entityToken)) return new BadRequestObjectResult("Missing Entity Token header");
         PlayFabAuthenticationContext userAuth = new()
         {
             EntityId = context.CallerEntityProfile.Entity.Id,
             PlayFabId = context.CallerEntityProfile.Lineage.MasterPlayerAccountId,
-            EntityType = context.CallerEntityProfile.Entity.Type
+            EntityType = context.CallerEntityProfile.Entity.Type,
+            EntityToken = entityToken
         };
         Task<PlayFabResult<GetTitleDataResult>> getBannerInfo = PlayFabServerAPI.GetTitleDataAsync(new()
         {
@@ -54,7 +70,10 @@ public static class BannerRollRequest
             .Bind(t => t.CharacterResolver?.ResolveRoll(t.Characters))
             .Match(
                 onSome: IActionResult (c) => new OkObjectResult(new { c.CharacterID }),
-                onNone: () => new BadRequestObjectResult("Roll failed")
-            );
+                onNone: () =>
+                {
+                    logger.LogError("Roll failed");
+                    return new BadRequestObjectResult("Roll failed");
+                });
     }
 }

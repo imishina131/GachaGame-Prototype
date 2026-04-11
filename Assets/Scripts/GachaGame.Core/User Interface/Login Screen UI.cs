@@ -30,5 +30,6 @@ public class LoginScreenUI : MonoBehaviour
     void OnLogInSuccess(LoginResult result)
     {
         m_sceneTransitionManager.TransitionToScene("Gacha Scene");
+        Debug.Log(result.EntityToken.EntityToken);
     }
 }
