@@ -3,11 +3,11 @@ using JetBrains.Annotations;
 
 namespace GachaGame.Azure.Core.DataTypes;
 [UsedImplicitly]
-public class RarityTierRollResolver : IRollResolver<RarityTier>
+public struct RarityTierRollResolver : IRollResolver<RarityTier>
 {
-    public RarityTier? ResolveRoll(List<RarityTier>? possibleRolls)
+    public  RarityTier ResolveRoll(List<RarityTier> possibleRolls)
     {
-        if (possibleRolls is null || possibleRolls.Count == 0) return null;
+        if (possibleRolls.Count == 0) return default;
         uint ratioSum = 0;
         foreach (RarityTier roll in possibleRolls) ratioSum += roll.Rarity;
         float numericValue = Random.Shared.Next() * ratioSum;

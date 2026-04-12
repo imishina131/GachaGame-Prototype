@@ -1,24 +1,42 @@
-﻿using System.Reflection;
-using GachaGame.Azure.Core.Interfaces;
+﻿using GachaGame.Azure.Core.Interfaces;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GachaGame.Azure.Core.Helpers;
 
-public class RollResolverConverter<T> : JsonConverter<IRollResolver<T>> where T : IRollData
+public class RollResolverConverter<T> : JsonConverter<IRollResolver<T>> where T : struct, IRollData
 {
-    public override IRollResolver<T> ReadJson(JsonReader reader, Type objectType, IRollResolver<T>? existingValue, bool hasExistingValue, JsonSerializer serializer)
+    public override IRollResolver<T> ReadJson(
+        JsonReader reader,
+        Type objectType,
+        IRollResolver<T>? existingValue,
+        bool hasExistingValue,
+        JsonSerializer serializer)
     {
-        if (reader.Value is not string typeName) throw new JsonException("Resolver name cannot be null");
-
-        Type? type = Assembly.GetExecutingAssembly()
-            .GetTypes()
-            .FirstOrDefault(t => t.Name == typeName && typeof(IRollResolver<T>).IsAssignableFrom(t));
-        if (type is null) throw new JsonException($"No resolver found with name {typeName}");
-        return (IRollResolver<T>)Activator.CreateInstance(type)!;
+        if (reader.TokenType == JsonToken.Null) return new EmptyRollResolver<T>();
+        JObject jo = JObject.Load(reader);
+        string? typeName = jo["$type"]?.Value<string>();
+        if (typeName is null) return new EmptyRollResolver<T>();
+        Type? resolverType = Type.GetType(typeName);
+        if (resolverType is null || !typeof(IRollResolver<T>).IsAssignableFrom(resolverType)) return new EmptyRollResolver<T>();
+        return (IRollResolver<T>?)Activator.CreateInstance(resolverType) ?? new EmptyRollResolver<T>();
     }
 
-    public override void WriteJson(JsonWriter writer, IRollResolver<T>? value, JsonSerializer serializer)
+    public override void WriteJson(
+        JsonWriter writer,
+        IRollResolver<T>? value,
+        JsonSerializer serializer)
     {
-        writer.WriteValue(value?.GetType().Name);
+        if (value is null or EmptyRollResolver<T>)
+        {
+            writer.WriteNull();
+            return;
+        }
+
+        JObject jo = new()
+        {
+            ["$type"] = value.GetType().AssemblyQualifiedName
+        };
+        jo.WriteTo(writer);
     }
 }

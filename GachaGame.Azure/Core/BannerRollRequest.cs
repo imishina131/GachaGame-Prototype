@@ -1,6 +1,5 @@
 ﻿using GachaGame_Prototype.Azure;
 using GachaGame.Azure.Core.DataTypes;
-using GachaGame.Azure.Core.Helpers;
 using GachaGame.Azure.Core.PlayfabHelpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;
@@ -19,28 +18,12 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
     [Function("BannerRollRequest")]
     public async Task<IActionResult> Run
     (
-        [HttpTrigger(AuthorizationLevel.Function, "post")]
-        HttpRequest req
+        [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequest req,
+        CancellationToken cancellationToken
     )
     {
-        FunctionExecutionContext<BannerRollRequestData>? context;
-        try
-        {
-            context =
-                JsonConvert.DeserializeObject<FunctionExecutionContext<BannerRollRequestData>>(
-                    await new StreamReader(req.Body).ReadToEndAsync());
-        }
-        catch(Exception e)
-        {
-            logger.LogError(e, "Failed to deserialize request");
-            return new BadRequestObjectResult("Failed to deserialize request");
-        }
-
-        if (context?.FunctionArgument.BannerId is null)
-        {
-            logger.LogError("Failed to deserialize request");
-            return new BadRequestObjectResult("Failed to deserialize request");
-        }
+        FunctionExecutionContext<BannerRollRequestData>? context = JsonConvert.DeserializeObject<FunctionExecutionContext<BannerRollRequestData>>(await new StreamReader(req.Body).ReadToEndAsync(cancellationToken));
+        if (context is null) return new BadRequestObjectResult("Invalid request");
         if (!req.Headers.TryGetValue("X-EntityToken", out StringValues entityToken)) return new BadRequestObjectResult("Missing Entity Token header");
         PlayFabAuthenticationContext userAuth = new()
         {
@@ -52,7 +35,7 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         Task<PlayFabResult<GetTitleDataResult>> getBannerInfo = PlayFabServerAPI.GetTitleDataAsync(new()
         {
             Keys = [context.FunctionArgument.BannerId]
-        });
+        }, cancellationToken);
         Task<PlayFabResult<GetObjectsResponse>> getPlayerObjects = PlayFabDataAPI.GetObjectsAsync(new()
         {
             AuthenticationContext = userAuth,
@@ -61,19 +44,13 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
                 Id = context.CallerEntityProfile.Entity.Id,
                 Type = context.CallerEntityProfile.Entity.Type
             }
-        });
-        await Task.WhenAll(getBannerInfo, getPlayerObjects);
-        return Optional<Banner>.OfNullable(
-                JsonConvert.DeserializeObject<Banner>(
-                    getBannerInfo.Result.Result.Data[context.FunctionArgument.BannerId]))
-            .Bind(b => b.RarityTierResolver?.ResolveRoll(b.RarityTiers))
-            .Bind(t => t.CharacterResolver?.ResolveRoll(t.Characters))
-            .Match(
-                onSome: IActionResult (c) => new OkObjectResult(new { c.CharacterID }),
-                onNone: () =>
-                {
-                    logger.LogError("Roll failed");
-                    return new BadRequestObjectResult("Roll failed");
-                });
+        }, cancellationToken);
+        await Task.WhenAll(getBannerInfo, getPlayerObjects).WaitAsync(cancellationToken);
+        Banner banner = JsonConvert.DeserializeObject<Banner>(getBannerInfo.Result.Result.Data[context.FunctionArgument.BannerId]);
+        RarityTier tier = banner.RarityTierResolver.ResolveRoll(banner.RarityTiers);
+        Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters);
+        if(rolledCharacter.CharacterID == Guid.Empty) return new BadRequestObjectResult("No characters available for this tier");
+        logger.LogInformation("Rolled Character: {character}", rolledCharacter.CharacterID);
+        return new OkObjectResult(rolledCharacter.CharacterID);
     }
 }
