@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TierRollResolver : IRollResolver<TierRoll>
+public class TierRollResolver : IRollResolver<TierRoll, float>
 {
     public TierRoll ResolveRoll(List<TierRoll> possibleRolls)
     {

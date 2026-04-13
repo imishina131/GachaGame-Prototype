@@ -36,6 +36,6 @@ public class GachaResolver<T> : IRollResolver<T, int> where T : IRollData<int>
             }
         }
 
-        return possibleRolls[possibleRolls.Count - 1];
+        return possibleRolls[^1];
     }
 }

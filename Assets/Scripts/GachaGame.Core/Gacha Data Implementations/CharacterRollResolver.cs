@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterRollResolver : IRollResolver<CharacterRoll>
+public class CharacterRollResolver : IRollResolver<CharacterRoll, float>
 {
     public CharacterRoll ResolveRoll(List<CharacterRoll> possibleRolls)
     {

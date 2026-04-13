@@ -52,7 +52,7 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         RarityTier tier = banner.RarityTierResolver.ResolveRoll(banner.RarityTiers, playerData, out PlayerData dataAfterRoll);
         Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, playerData, out dataAfterRoll);
         playerData = dataAfterRoll;
-        if(rolledCharacter.CharacterID == Guid.Empty) return new BadRequestObjectResult("No characters available for this tier");
+        if(rolledCharacter.CharacterID == Guid.Empty) return new BadRequestObjectResult("Character not rolled, User lacks currency or there are no characters in the tier");
         await PlayFabDataAPI.SetObjectsAsync(new()
         {
             AuthenticationContext = userAuth,

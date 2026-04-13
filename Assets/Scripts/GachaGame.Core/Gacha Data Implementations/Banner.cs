@@ -7,5 +7,5 @@ using UnityEngine;
 public class Banner : MonoBehaviour
 {
     public List<TierRoll> Tiers;
-    [SerializeReference, ClassSelector] IRollResolver<TierRoll> m_tierResolver;
+    [SerializeReference, ClassSelector] IRollResolver<TierRoll, float> m_tierResolver;
 }
