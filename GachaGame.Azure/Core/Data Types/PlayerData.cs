@@ -1,7 +1,6 @@
-﻿using GachaGame.Azure.Core.DataTypes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace GachaGame_Prototype.Azure.Core.Data_Types;
+namespace GachaGame.Azure.Core.DataTypes;
 [JsonObject]
 public class PlayerData
 {

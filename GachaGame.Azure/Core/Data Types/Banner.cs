@@ -7,7 +7,7 @@ namespace GachaGame.Azure.Core.DataTypes;
 public struct Banner
 {
     [JsonConstructor]
-    Banner(Guid bannerID, IRollResolver<RarityTier> rarityTierResolver, List<RarityTier> rarityTiers, Guid currencyID)
+    Banner(IRollResolver<RarityTier> rarityTierResolver, List<RarityTier> rarityTiers, Guid currencyID)
     {
         RarityTierResolver = rarityTierResolver;
         RarityTiers = rarityTiers;

@@ -1,6 +1,5 @@
-﻿using GachaGame_Prototype.Azure.Core.Data_Types;
-
-namespace GachaGame.Azure.Core.Interfaces;
+﻿using GachaGame.Azure.Core.Interfaces;
+namespace GachaGame.Azure.Core.DataTypes;
 
 public class EmptyRollResolver<T> : IRollResolver<T> where T : struct, IRollData
 {

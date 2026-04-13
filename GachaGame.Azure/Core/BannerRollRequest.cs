@@ -1,5 +1,4 @@
 ﻿using GachaGame_Prototype.Azure;
-using GachaGame_Prototype.Azure.Core.Data_Types;
 using GachaGame.Azure.Core.DataTypes;
 using GachaGame.Azure.Core.PlayFabHelpers;
 using Microsoft.AspNetCore.Http;
@@ -56,7 +55,8 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
             ? (PlayerData)playFabObject.DataObject 
             : new();
         RarityTier tier = banner.RarityTierResolver.ResolveRoll(banner.RarityTiers, playerData, out PlayerData dataAfterRoll);
-        logger.LogInformation("Tier: {Characters}", tier);
+        logger.LogInformation("Tier: {tier}", tier);
+        logger.LogInformation("tier Rarity: {Rarity}", tier.Rarity);
         logger.LogInformation("Characters: {Characters}", tier.Characters);
         logger.LogInformation("Resolver: {CharacterResolver}", tier.CharacterResolver);
         Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, playerData, out dataAfterRoll);

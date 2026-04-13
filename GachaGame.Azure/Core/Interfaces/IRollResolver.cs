@@ -1,4 +1,4 @@
-using GachaGame_Prototype.Azure.Core.Data_Types;
+using GachaGame.Azure.Core.DataTypes;
 
 namespace GachaGame.Azure.Core.Interfaces;
 

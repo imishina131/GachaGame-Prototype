@@ -1,4 +1,5 @@
-﻿using GachaGame.Azure.Core.Interfaces;
+﻿using GachaGame.Azure.Core.DataTypes;
+using GachaGame.Azure.Core.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -33,10 +34,8 @@ public class RollResolverConverter<T> : JsonConverter<IRollResolver<T>> where T 
             return;
         }
 
-        JObject jo = new()
-        {
-            ["$type"] = value.GetType().AssemblyQualifiedName
-        };
+        JObject jo = JObject.FromObject(value, serializer);
+        jo["$type"] = value.GetType().AssemblyQualifiedName;
         jo.WriteTo(writer);
     }
 }
