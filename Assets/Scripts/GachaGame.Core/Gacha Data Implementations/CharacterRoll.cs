@@ -2,9 +2,9 @@
 using UnityEngine;
 
 [Serializable]
-public class CharacterRoll : IRollData<float>
+public class CharacterRoll : IRollData
 {
     [SerializeField] CharacterDataSO m_character;
     [field:SerializeField] public uint Rarity { get; private set;}
-    public float Weight { get; private set;}
+    public int Weight { get; private set;}
 }

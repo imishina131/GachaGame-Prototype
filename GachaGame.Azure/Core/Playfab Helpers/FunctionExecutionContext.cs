@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GachaGame.Azure.Core.PlayfabHelpers;
+namespace GachaGame.Azure.Core.PlayFabHelpers;
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 public class FunctionExecutionContext<T>
 {

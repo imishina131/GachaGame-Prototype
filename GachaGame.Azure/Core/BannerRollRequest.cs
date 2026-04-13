@@ -1,16 +1,16 @@
 ﻿using GachaGame_Prototype.Azure;
 using GachaGame_Prototype.Azure.Core.Data_Types;
 using GachaGame.Azure.Core.DataTypes;
-using GachaGame.Azure.Core.PlayfabHelpers;
+using GachaGame.Azure.Core.PlayFabHelpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.DataModels;
 using PlayFab.ServerModels;
+using ObjectResult = PlayFab.DataModels.ObjectResult;
 
 namespace GachaGame.Azure;
 
@@ -25,13 +25,12 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
     {
         FunctionExecutionContext<BannerRollRequestData>? context = JsonConvert.DeserializeObject<FunctionExecutionContext<BannerRollRequestData>>(await new StreamReader(req.Body).ReadToEndAsync(cancellationToken));
         if (context is null) return new BadRequestObjectResult("Invalid request");
-        if (!req.Headers.TryGetValue("X-EntityToken", out StringValues entityToken)) return new BadRequestObjectResult("Missing Entity Token header");
         PlayFabAuthenticationContext userAuth = new()
         {
-            EntityId = context.CallerEntityProfile.Entity.Id,
+            EntityId = context.TitleAuthenticationContext.Id,
             PlayFabId = context.CallerEntityProfile.Lineage.MasterPlayerAccountId,
             EntityType = context.CallerEntityProfile.Entity.Type,
-            EntityToken = entityToken
+            EntityToken = context.TitleAuthenticationContext.EntityToken
         };
         Task<PlayFabResult<GetTitleDataResult>> getBannerInfo = PlayFabServerAPI.GetTitleDataAsync(new()
         {
@@ -47,9 +46,19 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
             }
         }, cancellationToken);
         await Task.WhenAll(getBannerInfo, getPlayerObjects).WaitAsync(TimeSpan.FromSeconds(5), cancellationToken);
-        Banner banner = JsonConvert.DeserializeObject<Banner>(getBannerInfo.Result.Result.Data[context.FunctionArgument.BannerId]);
-        PlayerData playerData = (PlayerData)getPlayerObjects.Result.Result.Objects["PlayerData"].DataObject ?? new PlayerData();
+        logger.LogInformation("Banner Roll Requested: {bannerId}", context.FunctionArgument.BannerId);
+        if (!getBannerInfo.Result.Result.Data.TryGetValue(context.FunctionArgument.BannerId, out string? bannerJson)) 
+            return new BadRequestObjectResult($"Banner '{context.FunctionArgument.BannerId}' not found in Title Data");
+        Banner banner = JsonConvert.DeserializeObject<Banner>(bannerJson);
+        PlayerData playerData = 
+            getPlayerObjects.Result.Result.Objects.TryGetValue("PlayerData", out ObjectResult? playFabObject) 
+            && playFabObject?.DataObject is not null
+            ? (PlayerData)playFabObject.DataObject 
+            : new();
         RarityTier tier = banner.RarityTierResolver.ResolveRoll(banner.RarityTiers, playerData, out PlayerData dataAfterRoll);
+        logger.LogInformation("Tier: {Characters}", tier);
+        logger.LogInformation("Characters: {Characters}", tier.Characters);
+        logger.LogInformation("Resolver: {CharacterResolver}", tier.CharacterResolver);
         Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, playerData, out dataAfterRoll);
         playerData = dataAfterRoll;
         if(rolledCharacter.CharacterID == Guid.Empty) return new BadRequestObjectResult("Character not rolled, User lacks currency or there are no characters in the tier");

@@ -6,5 +6,5 @@ public interface IRollData
     /// <summary>
     /// The rarity of the roll
     /// </summary>
-    public uint Rarity { get; }
+    public int Weight { get; }
 }

@@ -5,14 +5,27 @@ namespace GachaGame_Prototype.Azure.Core.Data_Types;
 [JsonObject]
 public class PlayerData
 {
-    public HashSet<RollData> PlayerRollData = [];
-    public Dictionary<Character, uint> CharacterInventory = new();
-    public Dictionary<Guid, uint> CurrencyInventory = new();
+    public PlayerData()
+    {
+        PlayerRollData = [];
+        CharacterInventory = new();
+        CurrencyInventory = new();
+    }
+    [JsonConstructor]
+    PlayerData(HashSet<RollData> playerRollData, Dictionary<Character, uint> characterInventory, Dictionary<Guid, uint> currencyInventory)
+    {
+        PlayerRollData = playerRollData;
+        CharacterInventory = characterInventory;
+        CurrencyInventory = currencyInventory;
+    }
+    public HashSet<RollData> PlayerRollData;
+    public Dictionary<Character, uint> CharacterInventory;
+    public Dictionary<Guid, uint> CurrencyInventory;
 }
-
-public readonly record struct RollData(DateTime RollTime, Banner BannerRolled, Character Character)
+[JsonObject]
+public struct RollData(DateTime rollTime, Banner bannerRolled, Character character)
 {
-    public readonly DateTime RollTime = RollTime;
-    public readonly Character Character = Character;
-    public readonly Banner BannerRolled = BannerRolled;
+    public DateTime RollTime { get; init; } = rollTime;
+    public Character Character { get; init; }= character;
+    public Banner BannerRolled { get; init; } = bannerRolled;
 }

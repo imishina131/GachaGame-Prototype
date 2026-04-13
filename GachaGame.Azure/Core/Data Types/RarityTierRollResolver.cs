@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 
 namespace GachaGame.Azure.Core.DataTypes;
 [UsedImplicitly]
-public readonly struct RarityTierRollResolver : IRollResolver<RarityTier>
+public struct RarityTierRollResolver : IRollResolver<RarityTier>
 {
     public  RarityTier ResolveRoll(List<RarityTier> possibleRolls, PlayerData playerData, out PlayerData playerDataAfterRoll)
     {

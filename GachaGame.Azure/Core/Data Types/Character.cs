@@ -3,8 +3,16 @@ using Newtonsoft.Json;
 
 namespace GachaGame.Azure.Core.DataTypes;
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-public readonly record struct Character : IRollData
+public record struct Character : IRollData
 {
-    public Guid CharacterID { get; }
-    public uint Rarity { get; }
+    [method: JsonConstructor]
+    Character(Guid characterID, uint rarity)
+    {
+        CharacterID = characterID;
+        Rarity = rarity;
+    }
+    [JsonRequired]
+    public required Guid CharacterID { get; init; }
+    [JsonRequired]
+    public required uint Rarity { get; init; }
 }

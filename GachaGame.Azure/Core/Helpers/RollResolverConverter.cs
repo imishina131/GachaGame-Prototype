@@ -19,7 +19,7 @@ public class RollResolverConverter<T> : JsonConverter<IRollResolver<T>> where T 
         if (typeName is null) return new EmptyRollResolver<T>();
         Type? resolverType = Type.GetType(typeName);
         if (resolverType is null || !typeof(IRollResolver<T>).IsAssignableFrom(resolverType)) return new EmptyRollResolver<T>();
-        return (IRollResolver<T>?)Activator.CreateInstance(resolverType) ?? new EmptyRollResolver<T>();
+        return (IRollResolver<T>?)jo.ToObject(resolverType, serializer) ?? new EmptyRollResolver<T>();
     }
 
     public override void WriteJson(
