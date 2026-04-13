@@ -1,12 +1,14 @@
-﻿using GachaGame.Azure.Core.Interfaces;
+﻿using GachaGame_Prototype.Azure.Core.Data_Types;
+using GachaGame.Azure.Core.Interfaces;
 using JetBrains.Annotations;
 
 namespace GachaGame.Azure.Core.DataTypes;
 [UsedImplicitly]
-public struct RarityTierRollResolver : IRollResolver<RarityTier>
+public readonly struct RarityTierRollResolver : IRollResolver<RarityTier>
 {
-    public  RarityTier ResolveRoll(List<RarityTier> possibleRolls)
+    public  RarityTier ResolveRoll(List<RarityTier> possibleRolls, PlayerData playerData, out PlayerData playerDataAfterRoll)
     {
+        playerDataAfterRoll = playerData;
         if (possibleRolls.Count == 0) return default;
         uint ratioSum = 0;
         foreach (RarityTier roll in possibleRolls) ratioSum += roll.Rarity;

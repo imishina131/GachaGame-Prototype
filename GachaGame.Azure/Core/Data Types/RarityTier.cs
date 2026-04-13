@@ -4,11 +4,11 @@ using GachaGame.Azure.Core.Interfaces;
 namespace GachaGame.Azure.Core.DataTypes;
 
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-public struct RarityTier : IRollData
+public readonly struct RarityTier : IRollData
 {
-    public Guid TierID { get; set; }
-    public uint Rarity { get; set; }
+    public Guid TierID { get; }
+    public uint Rarity { get; }
     [JsonConverter(typeof(RollResolverConverter<Character>))]
-    public IRollResolver<Character> CharacterResolver { get; set; }
-    public List<Character> Characters { get; set; }
+    public IRollResolver<Character> CharacterResolver { get; }
+    public List<Character> Characters { get; }
 }

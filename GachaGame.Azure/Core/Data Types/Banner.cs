@@ -4,9 +4,10 @@ using Newtonsoft.Json;
 
 namespace GachaGame.Azure.Core.DataTypes;
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-public struct Banner
+public readonly struct Banner
 {
     [JsonConverter(typeof(RollResolverConverter<RarityTier>))]
-    public IRollResolver<RarityTier> RarityTierResolver { get; set; }
-    public List<RarityTier> RarityTiers { get; set; }
+    public IRollResolver<RarityTier> RarityTierResolver { get; }
+    public List<RarityTier> RarityTiers { get; }
+    public Guid CurrencyID { get; }
 }
