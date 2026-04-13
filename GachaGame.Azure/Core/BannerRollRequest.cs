@@ -1,5 +1,4 @@
-﻿using GachaGame_Prototype.Azure;
-using GachaGame.Azure.Core.DataTypes;
+﻿using GachaGame.Azure.Core.DataTypes;
 using GachaGame.Azure.Core.PlayFabHelpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;
@@ -49,11 +48,11 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         if (!getBannerInfo.Result.Result.Data.TryGetValue(context.FunctionArgument.BannerId, out string? bannerJson)) 
             return new BadRequestObjectResult($"Banner '{context.FunctionArgument.BannerId}' not found in Title Data");
         Banner banner = JsonConvert.DeserializeObject<Banner>(bannerJson);
-        PlayerData playerData = 
-            getPlayerObjects.Result.Result.Objects.TryGetValue("PlayerData", out ObjectResult? playFabObject) 
+        PlayerData playerData =
+            getPlayerObjects.Result.Result.Objects.TryGetValue("PlayerData", out ObjectResult? playFabObject)
             && playFabObject?.DataObject is not null
-            ? (PlayerData)playFabObject.DataObject 
-            : new();
+                ? JsonConvert.DeserializeObject<PlayerData>(JsonConvert.SerializeObject(playFabObject.DataObject)) ?? new()
+                : new();
         RarityTier tier = banner.RarityTierResolver.ResolveRoll(banner.RarityTiers, playerData, out PlayerData dataAfterRoll);
         logger.LogInformation("Tier: {tier}", tier);
         logger.LogInformation("tier Rarity: {Rarity}", tier.Rarity);

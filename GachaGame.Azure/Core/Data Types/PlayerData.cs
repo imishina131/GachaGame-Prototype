@@ -1,25 +1,26 @@
 ﻿using Newtonsoft.Json;
 
 namespace GachaGame.Azure.Core.DataTypes;
-[JsonObject]
+[JsonObject(MemberSerialization.OptIn)]
 public class PlayerData
 {
-    public PlayerData()
+    public HashSet<RollData> PlayerRollData = [];
+    [JsonIgnore]
+    public Dictionary<Character, uint> CharacterInventory = new();
+    [JsonProperty]
+    List<KeyValuePair<Character, uint>> SerializedCharacterInventory
     {
-        PlayerRollData = [];
-        CharacterInventory = new();
-        CurrencyInventory = new();
+        get => CharacterInventory.ToList();
+        set { CharacterInventory = value.ToDictionary(x => x.Key, x => x.Value); }
     }
-    [JsonConstructor]
-    PlayerData(HashSet<RollData> playerRollData, Dictionary<Character, uint> characterInventory, Dictionary<Guid, uint> currencyInventory)
+    [JsonIgnore]
+    public Dictionary<Guid, uint> CurrencyInventory = new();
+    [JsonProperty]
+    List<KeyValuePair<Guid, uint>> SerializedCurrencyInventory
     {
-        PlayerRollData = playerRollData;
-        CharacterInventory = characterInventory;
-        CurrencyInventory = currencyInventory;
+        get => CurrencyInventory.ToList();
+        set { CurrencyInventory = value.ToDictionary(x => x.Key, x => x.Value); }
     }
-    public HashSet<RollData> PlayerRollData;
-    public Dictionary<Character, uint> CharacterInventory;
-    public Dictionary<Guid, uint> CurrencyInventory;
 }
 [JsonObject]
 public struct RollData(DateTime rollTime, Banner bannerRolled, Character character)

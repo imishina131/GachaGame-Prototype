@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GachaGame_Prototype.Azure;
+namespace GachaGame.Azure;
 
 [method: JsonConstructor]
 public struct BannerRollRequestData(string bannerId)
