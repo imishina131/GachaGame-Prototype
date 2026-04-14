@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New Character Data", menuName = "Scriptable Objects/Character Data")]
 public class CharacterDataSO : ScriptableObject
 {
-    [field: SerializeField] public SerializableDictionary<SerializableGuid, CharacterData> Characters { get; private set; } = new();
+    [SerializeField] SerializableDictionary<SerializableGuid, CharacterData> m_characters = new();
+    public IReadOnlyDictionary<SerializableGuid, CharacterData> Characters => m_characters.Dictionary;
+    
 }
 [Serializable]
 public class CharacterData

@@ -75,6 +75,6 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
             ]
         });
         logger.LogInformation("Rolled Character: {character}", rolledCharacter.CharacterID);
-        return new OkObjectResult(rolledCharacter.CharacterID);
+        return new OkObjectResult(new RollResultData(rolledCharacter.CharacterID, tier.TierID));
     }
 }

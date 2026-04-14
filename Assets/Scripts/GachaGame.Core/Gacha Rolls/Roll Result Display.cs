@@ -1,16 +1,15 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RollResultDisplay : MonoBehaviour
 {
     [SerializeField] CanvasGroup m_rollResultVisuals;
     [SerializeField] float m_displayTime = 1f;
-    RoutineQueue m_rollQueue;
+    readonly RoutineQueue m_rollQueue = new();
     GameObject m_rollResultDisplay;
     void Awake()
     {
+        m_rollResultVisuals.alpha = 0;
         m_rollQueue.Initialize(this);
     }
     public void DisplayRollResult(CharacterData characterData)

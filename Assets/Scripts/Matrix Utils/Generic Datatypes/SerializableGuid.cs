@@ -31,21 +31,22 @@ public struct SerializableGuid : IEquatable<SerializableGuid> {
     public static SerializableGuid NewGuid() => Guid.NewGuid().ToSerializableGuid();
 
     public static SerializableGuid FromHexString(string hexString) {
-        if (hexString.Length != 32) {
-            return Empty;
-        }
-
-        return new SerializableGuid
-        (
-            Convert.ToUInt32(hexString.Substring(0, 8), 16),
-            Convert.ToUInt32(hexString.Substring(8, 8), 16),
-            Convert.ToUInt32(hexString.Substring(16, 8), 16),
-            Convert.ToUInt32(hexString.Substring(24, 8), 16)
-        );
+        if (hexString.Length != 32) return Empty;
+        uint p1 = Convert.ToUInt32(hexString.Substring(0, 8), 16);
+        uint p2 = Convert.ToUInt32(hexString.Substring(8, 8), 16);
+        uint p3 = Convert.ToUInt32(hexString.Substring(16, 8), 16);
+        uint p4 = Convert.ToUInt32(hexString.Substring(24, 8), 16);
+        p1 = ((p1 & 0xFF000000) >> 24) | ((p1 & 0x00FF0000) >> 8) | ((p1 & 0x0000FF00) << 8) | ((p1 & 0x000000FF) << 24);
+        p2 = ((p2 & 0xFFFF0000) >> 16) | ((p2 & 0x0000FFFF) << 16);
+        p3 = ((p3 & 0xFF000000) >> 24) | ((p3 & 0x00FF0000) >> 8) | ((p3 & 0x0000FF00) << 8) | ((p3 & 0x000000FF) << 24);
+        return new(p1, p2, p3, p4);
     }
 
     public string ToHexString() {
-        return $"{Part1:X8}{Part2:X8}{Part3:X8}{Part4:X8}";
+        uint p1 = ((Part1 & 0xFF000000) >> 24) | ((Part1 & 0x00FF0000) >> 8) | ((Part1 & 0x0000FF00) << 8) | ((Part1 & 0x000000FF) << 24);
+        uint p2 = ((Part2 & 0xFFFF0000) >> 16) | ((Part2 & 0x0000FFFF) << 16);
+        uint p3 = ((Part3 & 0xFF000000) >> 24) | ((Part3 & 0x00FF0000) >> 8) | ((Part3 & 0x0000FF00) << 8) | ((Part3 & 0x000000FF) << 24);
+        return $"{p1:X8}{p2:X8}{p3:X8}{Part4:X8}";
     }
 
     public Guid ToGuid() {

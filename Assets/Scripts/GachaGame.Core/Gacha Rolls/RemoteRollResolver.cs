@@ -1,5 +1,6 @@
 using System;
 using MatrixUtils.Attributes;
+using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.CloudScriptModels;
 using UnityEngine;
@@ -38,8 +39,11 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
     }
     void ResultCallback(ExecuteFunctionResult obj)
     {
-        if(!Guid.TryParse(obj.FunctionResult.ToString().Trim('"'), out Guid result)) return;
-        if (!CharacterData.Characters.TryGetValue(result, out CharacterData characterData)) return;
+        RollResultData data = JsonConvert.DeserializeObject<RollResultData>(obj.FunctionResult.ToString());
+        Debug.Log($"Result ID: {data.CharacterID}");
+        if (!CharacterData.Characters.TryGetValue(data.CharacterID, out CharacterData characterData)) return;
+        Debug.Log($"Rolled: {characterData.Name}");
         OnRollComplete.Invoke(characterData);
     }
+    
 }

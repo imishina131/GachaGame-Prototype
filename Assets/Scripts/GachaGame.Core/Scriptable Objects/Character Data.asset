@@ -12,30 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f38a91a4b42a824383bf7e1f8d69d89, type: 3}
   m_Name: Character Data
   m_EditorClassIdentifier: GachaGame.Core::CharacterDataSO
-  <Characters>k__BackingField:
+  m_characters:
     m_list:
     - Key:
-        Part1: 2234074802
-        Part2: 1123879690
-        Part3: 2116431760
-        Part4: 2573435033
+        Part1: 1494492428
+        Part2: 1224278236
+        Part3: 1892002745
+        Part4: 2497167522
       Value:
-        <Name>k__BackingField: 
-        <Prefab>k__BackingField: {fileID: 0}
+        <Name>k__BackingField: Lizard
+        <Prefab>k__BackingField: {fileID: 6842458599697738422, guid: cefda5744f2acb54d8f08973a10bee1e, type: 3}
     - Key:
-        Part1: 3481885129
-        Part2: 1333877916
-        Part3: 3472479916
-        Part4: 3448229173
+        Part1: 3161669748
+        Part2: 1089466555
+        Part3: 983927478
+        Part4: 4106927952
       Value:
-        <Name>k__BackingField: 
-        <Prefab>k__BackingField: {fileID: 0}
+        <Name>k__BackingField: Muskrat
+        <Prefab>k__BackingField: {fileID: 4950779065795438720, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
     m_stagingEntry:
       Key:
-        Part1: 3481885129
-        Part2: 1333877916
-        Part3: 3472479916
-        Part4: 3448229173
+        Part1: 3161669748
+        Part2: 1089466555
+        Part3: 983927478
+        Part4: 4106927952
       Value:
         <Name>k__BackingField: 
         <Prefab>k__BackingField: {fileID: 0}

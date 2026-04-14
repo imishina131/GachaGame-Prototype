@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e00ff0b22833a04a925ebfa1f408453, type: 3}
+  m_Name: Rarity Tiers
+  m_EditorClassIdentifier: GachaGame.Core::RarityTier
+  m_rarities:
+    m_list:
+    - Key:
+        Part1: 2726701850
+        Part2: 1278928939
+        Part3: 192872864
+        Part4: 3717077342
+      Value:
+        <Icon>k__BackingField: {fileID: 0}
+        <Name>k__BackingField: Common
+        <Color>k__BackingField: {r: 0.5924529, g: 0.5924529, b: 0.5924529, a: 1}
+    m_stagingEntry:
+      Key:
+        Part1: 2726701850
+        Part2: 1278928939
+        Part3: 192872864
+        Part4: 3717077342
+      Value:
+        <Icon>k__BackingField: {fileID: 0}
+        <Name>k__BackingField: 
+        <Color>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
