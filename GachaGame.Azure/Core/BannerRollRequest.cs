@@ -54,10 +54,6 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
                 ? JsonConvert.DeserializeObject<PlayerData>(JsonConvert.SerializeObject(playFabObject.DataObject)) ?? new()
                 : new();
         RarityTier tier = banner.RarityTierResolver.ResolveRoll(banner.RarityTiers, playerData, out PlayerData dataAfterRoll);
-        logger.LogInformation("Tier: {tier}", tier);
-        logger.LogInformation("tier Rarity: {Rarity}", tier.Rarity);
-        logger.LogInformation("Characters: {Characters}", tier.Characters);
-        logger.LogInformation("Resolver: {CharacterResolver}", tier.CharacterResolver);
         Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, playerData, out dataAfterRoll);
         playerData = dataAfterRoll;
         if(rolledCharacter.CharacterID == Guid.Empty) return new BadRequestObjectResult("Character not rolled, User lacks currency or there are no characters in the tier");

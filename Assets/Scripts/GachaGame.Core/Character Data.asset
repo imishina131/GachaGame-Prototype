@@ -10,10 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f38a91a4b42a824383bf7e1f8d69d89, type: 3}
-  m_Name: New Character Data
+  m_Name: Character Data
   m_EditorClassIdentifier: GachaGame.Core::CharacterDataSO
-  <ID>k__BackingField:
-    Part1: 386730543
-    Part2: 1240974864
-    Part3: 1892739728
-    Part4: 3354189133
+  <Characters>k__BackingField:
+    m_list: []
+    m_stagingValue:
+      <Name>k__BackingField: 
+      <ID>k__BackingField:
+        Part1: 1336056469
+        Part2: 1135015200
+        Part3: 2274814643
+        Part4: 155540154
+      <Prefab>k__BackingField: {fileID: 0}

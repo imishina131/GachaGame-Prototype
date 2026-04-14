@@ -2,9 +2,12 @@ using System;
 using PlayFab;
 using PlayFab.CloudScriptModels;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RemoteRollHandler : MonoBehaviour, IRollHandler
 {
+    [SerializeField] CharacterDataSO CharacterData;
+    public UnityEvent<CharacterData> OnRollComplete;
     public void DefaultRoll()
     {
         Roll("Main Banner");
@@ -20,7 +23,8 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
                     Type = PlayFabSettings.staticPlayer.EntityType
                 },
                 FunctionName = "BannerRollRequest",
-                FunctionParameter = new BannerRollRequestData(bannerID)
+                FunctionParameter = new BannerRollRequestData(bannerID),
+                GeneratePlayStreamEvent = true
             }, 
             ResultCallback,
             ErrorCallback
@@ -33,6 +37,8 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
     }
     void ResultCallback(ExecuteFunctionResult obj)
     {
-        Debug.Log(obj.FunctionResult);
+        Guid result = Guid.Parse(obj.FunctionResult.ToString().Trim('"'));
+        if (!CharacterData.Characters.TryGetValue(result, out CharacterData characterData)) return;
+        OnRollComplete.Invoke(characterData);
     }
 }
