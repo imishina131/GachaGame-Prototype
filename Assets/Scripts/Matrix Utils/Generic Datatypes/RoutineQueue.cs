@@ -7,7 +7,7 @@ using UnityEngine;
 public class RoutineQueue
 {
     readonly Queue<IEnumerator> m_routineQueue = new();
-    IEnumerator m_fadeTextRoutine;
+    Coroutine m_activeRoutine;
     MonoBehaviour m_monoBehaviour;
     /// <summary>
     /// Initializes the <see cref="RoutineQueue"/>
@@ -24,17 +24,14 @@ public class RoutineQueue
     public void QueueRoutine(IEnumerator routineToQueue)
     {
         m_routineQueue.Enqueue(routineToQueue);
-        if (m_fadeTextRoutine == null)
-        {
-            m_monoBehaviour.StartCoroutine(HandleFadeTextQueue());
-        }
+        m_activeRoutine ??= m_monoBehaviour.StartCoroutine(HandleQueue());
     }
-    IEnumerator HandleFadeTextQueue()
+    IEnumerator HandleQueue()
     {
         while (m_routineQueue.Count > 0)
         {
             yield return m_routineQueue.Dequeue();
         }
-        m_fadeTextRoutine = null;
+        m_activeRoutine = null;
     }
 }

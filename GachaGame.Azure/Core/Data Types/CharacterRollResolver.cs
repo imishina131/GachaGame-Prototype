@@ -11,7 +11,7 @@ public struct CharacterRollResolver: IRollResolver<Character>
         if (possibleRolls.Count == 0) return default;
         uint ratioSum = 0;
         foreach (Character roll in possibleRolls) ratioSum += roll.Rarity;
-        float numericValue = Random.Shared.Next() * ratioSum;
+        float numericValue = Random.Shared.NextSingle() * ratioSum;
         foreach (Character roll in possibleRolls)
         {
             numericValue -= roll.Rarity;
