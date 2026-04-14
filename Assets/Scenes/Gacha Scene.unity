@@ -516,7 +516,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba89329b6ec9aa4fa97394bff10e29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GachaGame.Core.GachaRolls::RemoteRollHandler
-  m_bannerID: F93C6B824D818344D057CC8FBC026B74
+  CharacterData: {fileID: 11400000, guid: f739eb15a53cace43a5d252eb023a6d3, type: 2}
+  OnRollComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1047467507}
+        m_TargetAssemblyTypeName: RollResultDisplay, GachaGame.Core.GachaRolls
+        m_MethodName: DisplayRollResult
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &216560975
 Transform:
   m_ObjectHideFlags: 0
@@ -1082,6 +1097,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977185275}
   m_CullTransparentMesh: 1
+--- !u!1 &1047467506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1047467508}
+  - component: {fileID: 1047467507}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1047467507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047467506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00376ad865c314140b8a15c9636d3662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GachaGame.Core.GachaRolls::RollResultDisplay
+  m_rollResultVisuals: {fileID: 0}
+  m_displayTime: 1
+--- !u!4 &1047467508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047467506}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1110818965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,3 +1836,4 @@ SceneRoots:
   - {fileID: 4290500596741471061}
   - {fileID: 200459944}
   - {fileID: 216560975}
+  - {fileID: 1047467508}

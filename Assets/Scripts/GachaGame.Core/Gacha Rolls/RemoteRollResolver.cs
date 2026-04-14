@@ -1,4 +1,5 @@
 using System;
+using MatrixUtils.Attributes;
 using PlayFab;
 using PlayFab.CloudScriptModels;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.Events;
 
 public class RemoteRollHandler : MonoBehaviour, IRollHandler
 {
-    [SerializeField] CharacterDataSO CharacterData;
+    [SerializeField, RequiredField] CharacterDataSO CharacterData;
     public UnityEvent<CharacterData> OnRollComplete;
     public void DefaultRoll()
     {
