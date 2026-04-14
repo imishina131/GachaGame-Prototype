@@ -18,7 +18,7 @@ public class RollResultDisplay : MonoBehaviour
     }
     IEnumerator DisplayResultAsync(CharacterData characterData)
     {
-        m_rollResultDisplay = Instantiate(m_rollResultVisuals.gameObject, transform);
+        m_rollResultDisplay = Instantiate(characterData.Prefab, transform);
         yield return m_rollResultVisuals.FadeToOpacity(1, 0.5f);
         yield return new WaitForSeconds(m_displayTime);
         yield return m_rollResultVisuals.FadeToOpacity(0, 0.5f);
