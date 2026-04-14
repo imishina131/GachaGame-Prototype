@@ -37,7 +37,7 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
     }
     void ResultCallback(ExecuteFunctionResult obj)
     {
-        Guid result = Guid.Parse(obj.FunctionResult.ToString().Trim('"'));
+        if(!Guid.TryParse(obj.FunctionResult.ToString().Trim('"'), out Guid result)) return;
         if (!CharacterData.Characters.TryGetValue(result, out CharacterData characterData)) return;
         OnRollComplete.Invoke(characterData);
     }
