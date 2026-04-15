@@ -21,7 +21,8 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         CancellationToken cancellationToken
     )
     {
-        FunctionExecutionContext<BannerRollRequestData>? context = JsonConvert.DeserializeObject<FunctionExecutionContext<BannerRollRequestData>>(await new StreamReader(req.Body).ReadToEndAsync(cancellationToken));
+        FunctionExecutionContext<BannerRollRequestData>? context = 
+            JsonConvert.DeserializeObject<FunctionExecutionContext<BannerRollRequestData>>(await new StreamReader(req.Body).ReadToEndAsync(cancellationToken));
         if (context is null) return new BadRequestObjectResult("Invalid request");
         PlayFabAuthenticationContext userAuth = new()
         {
@@ -33,7 +34,7 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         Task<PlayFabResult<GetTitleDataResult>> getBannerInfo = PlayFabServerAPI.GetTitleDataAsync(new()
         {
             Keys = [context.FunctionArgument.BannerId]
-        }, cancellationToken);
+        });
         Task<PlayFabResult<GetObjectsResponse>> getPlayerObjects = PlayFabDataAPI.GetObjectsAsync(new()
         {
             AuthenticationContext = userAuth,
@@ -42,39 +43,61 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
                 Id = context.CallerEntityProfile.Entity.Id,
                 Type = context.CallerEntityProfile.Entity.Type
             }
-        }, cancellationToken);
+        });
         await Task.WhenAll(getBannerInfo, getPlayerObjects).WaitAsync(TimeSpan.FromSeconds(5), cancellationToken);
-        logger.LogInformation("Banner Roll Requested: {bannerId}", context.FunctionArgument.BannerId);
-        if (!getBannerInfo.Result.Result.Data.TryGetValue(context.FunctionArgument.BannerId, out string? bannerJson)) 
-            return new BadRequestObjectResult($"Banner '{context.FunctionArgument.BannerId}' not found in Title Data");
-        Banner banner = JsonConvert.DeserializeObject<Banner>(bannerJson);
         PlayerData playerData =
             getPlayerObjects.Result.Result.Objects.TryGetValue("PlayerData", out ObjectResult? playFabObject)
             && playFabObject?.DataObject is not null
                 ? JsonConvert.DeserializeObject<PlayerData>(JsonConvert.SerializeObject(playFabObject.DataObject)) ?? new()
                 : new();
-        RarityTier tier = banner.RarityTierResolver.ResolveRoll(banner.RarityTiers, playerData, out PlayerData dataAfterRoll);
-        Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, playerData, out dataAfterRoll);
-        playerData = dataAfterRoll;
-        if(rolledCharacter.CharacterID == Guid.Empty) return new BadRequestObjectResult("Character not rolled, User lacks currency or there are no characters in the tier");
+        if (!getBannerInfo.Result.Result.Data.TryGetValue(context.FunctionArgument.BannerId, out string? bannerJson)) 
+            return new BadRequestObjectResult($"Banner '{context.FunctionArgument.BannerId}' not found in Title Data");
+        Banner banner = JsonConvert.DeserializeObject<Banner>(bannerJson);
+        RollData result = await TryRollBanner(context, banner, playerData, userAuth);
+        await UpdatePlayerDataAsync(result, playerData, userAuth);
+        return new OkObjectResult(result);
+    }
+
+    async Task<RollData> TryRollBanner(FunctionExecutionContext<BannerRollRequestData> context, Banner banner, PlayerData playerData, PlayFabAuthenticationContext userAuth)
+    {
+        //This is for the currency system which needs to be setup on the client api so we can still test rolls
+        // PlayFabResult<GetUserInventoryResult> userInventory = await PlayFabServerAPI.GetUserInventoryAsync(new()
+        // {
+        //     AuthenticationContext = userAuth,
+        //     PlayFabId = userAuth.PlayFabId
+        // });
+        // if(!userInventory.Result.VirtualCurrency.TryGetValue(banner.Currency, out int currentAmount) || currentAmount < banner.Cost)
+        //     return new();
+        // await PlayFabServerAPI.SubtractUserVirtualCurrencyAsync(new()
+        // {
+        //     VirtualCurrency = banner.Currency,
+        //     Amount = banner.Cost,
+        //     PlayFabId = userAuth.PlayFabId,
+        //     AuthenticationContext = userAuth
+        // });
+        RarityTier tier = banner.RarityTierResolver.ResolveRoll(banner.RarityTiers, playerData);
+        Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, playerData);
+        return new(DateTime.Now, context.FunctionArgument.BannerId, rolledCharacter.CharacterID, tier.TierID);
+    }
+    
+    async Task UpdatePlayerDataAsync(RollData result, PlayerData playerData, PlayFabAuthenticationContext userAuth)
+    {
+        if(!result.Success) return;
+        playerData.PlayerRollData.Add(result);
         await PlayFabDataAPI.SetObjectsAsync(new()
         {
             AuthenticationContext = userAuth,
             Entity = new()
             {
-                Id = context.CallerEntityProfile.Entity.Id,
-                Type = context.CallerEntityProfile.Entity.Type
+                Type = userAuth.EntityType,
+                Id = userAuth.EntityId
             },
-            Objects =
-            [
-                new()
-                {
-                    ObjectName = "PlayerData",
-                    DataObject = playerData
-                }
-            ]
+            Objects = [new()
+            {
+                ObjectName = "PlayerData",
+                 DataObject = playerData,
+            }]
         });
-        logger.LogInformation("Rolled Character: {character}", rolledCharacter.CharacterID);
-        return new OkObjectResult(new RollResultData(rolledCharacter.CharacterID, tier.TierID));
+
     }
 }

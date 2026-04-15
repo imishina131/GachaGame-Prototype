@@ -7,16 +7,19 @@ namespace GachaGame.Azure.Core.DataTypes;
 public struct Banner
 {
     [JsonConstructor]
-    Banner(IRollResolver<RarityTier> rarityTierResolver, List<RarityTier> rarityTiers, Guid currencyID)
+    Banner(IRollResolver<RarityTier> rarityTierResolver, List<RarityTier> rarityTiers, string currency, int cost)
     {
         RarityTierResolver = rarityTierResolver;
         RarityTiers = rarityTiers;
-        CurrencyID = currencyID;
+        Currency = currency;
+        Cost = cost;
     }
     [JsonConverter(typeof(RollResolverConverter<RarityTier>)), JsonRequired]
     public required IRollResolver<RarityTier> RarityTierResolver { get; init; }
     [JsonRequired]
     public required List<RarityTier> RarityTiers { get; init; }
     [JsonRequired]
-    public required Guid CurrencyID { get; init; }
+    public required string Currency { get; init; }
+    [JsonRequired]
+    public required int Cost{ get; init;}
 }

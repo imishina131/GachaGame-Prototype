@@ -4,9 +4,8 @@ namespace GachaGame.Azure.Core.DataTypes;
 public class EmptyRollResolver<T> : IRollResolver<T> where T : struct, IRollData
 {
 
-    public T ResolveRoll(List<T> possibleRolls, PlayerData playerData, out PlayerData playerDataAfterRoll)
+    public T ResolveRoll(List<T> possibleRolls, PlayerData playerData)
     {
-        playerDataAfterRoll = playerData;
         return default;
     }
 }

@@ -12,5 +12,5 @@ public interface IRollResolver<T> where T : struct, IRollData
     /// <param name="playerData">The data for the player performing the roll</param>
     /// <param name="modifiedPlayerData">The player data updated with any results changed by the roll occurring</param>
     /// <returns>The resulting roll</returns>
-    public T ResolveRoll(List<T> possibleRolls, PlayerData playerData, out PlayerData modifiedPlayerData);
+    public T ResolveRoll(List<T> possibleRolls, PlayerData playerData);
 }

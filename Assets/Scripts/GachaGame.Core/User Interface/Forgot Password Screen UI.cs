@@ -23,6 +23,7 @@ public class ForgotPasswordScreenUI : MonoBehaviour
             new()
             {
                 Email = m_email.text,
+                TitleId = PlayFabSettings.TitleId
             },
             OnSendRecoverySuccessSuccess,
             m_onSignInFailed.Invoke
@@ -30,6 +31,6 @@ public class ForgotPasswordScreenUI : MonoBehaviour
     }
     void OnSendRecoverySuccessSuccess(SendAccountRecoveryEmailResult result)
     {
-        
+        m_sceneTransitionManager.TransitionToScene("Log In Screen");
     }
 }
