@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MatrixUtils.Attributes;
 using Newtonsoft.Json;
 using PlayFab;
@@ -42,6 +43,13 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
         Debug.Log(obj.FunctionResult);
         RollData data = JsonConvert.DeserializeObject<RollData>(obj.FunctionResult.ToString());
         SerializableGuid characterID = SerializableGuid.FromHexString(data.Character.ToString("N").ToUpper());
+        Debug.Log(data.Character.ToString());
+        Debug.Log(characterID.ToGuid().ToString());
+        foreach (KeyValuePair<SerializableGuid, CharacterData> kvp in CharacterData.Characters)
+        {
+            Debug.Log(kvp.Key.ToGuid() == data.Character);
+            Debug.Log(kvp.Key.ToGuid().ToString());
+        }
         if (!CharacterData.Characters.TryGetValue(characterID, out CharacterData characterData)) return;
         Debug.Log($"Rolled: {characterData.Name}");
         OnRollComplete.Invoke(characterData);
