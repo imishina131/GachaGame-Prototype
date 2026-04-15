@@ -11,6 +11,8 @@ public class SceneTransitionManager : PersistentService<ISceneTransitionManager>
 {
     [Provide, UsedImplicitly] ISceneTransitionManager GetSceneTransitionManager() => this;
     /// <inheritdoc/>
+    /// 
+    
     public bool IsTransitioning { get; private set;}
     CanvasGroup m_canvasGroup;
 
