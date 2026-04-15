@@ -83,7 +83,12 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
     async Task UpdatePlayerDataAsync(RollData result, PlayerData playerData, PlayFabAuthenticationContext userAuth)
     {
         if(!result.Success) return;
-        playerData.PlayerRollData.Add(result);
+        if (!playerData.BannerData.TryGetValue(result.BannerRolled, out PlayerBannerData? bannerData))
+        {
+            bannerData = new();
+            playerData.BannerData[result.BannerRolled] = bannerData;
+        }
+        bannerData.RollData.Add(result);
         await PlayFabDataAPI.SetObjectsAsync(new()
         {
             AuthenticationContext = userAuth,
