@@ -2,7 +2,7 @@
 
 namespace GachaGame.Azure;
 
-[method: JsonConstructor]
+[JsonObject]
 public struct BannerRollRequestData(string bannerId)
 {
     public string BannerId { get; } = bannerId;

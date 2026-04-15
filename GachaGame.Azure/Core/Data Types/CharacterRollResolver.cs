@@ -5,9 +5,8 @@ namespace GachaGame.Azure.Core.DataTypes;
 [UsedImplicitly]
 public struct CharacterRollResolver: IRollResolver<Character>
 {
-    public Character ResolveRoll(List<Character> possibleRolls, PlayerData playerData, out PlayerData playerDataAfterRoll)
+    public Character ResolveRoll(List<Character> possibleRolls, PlayerData playerData)
     {
-        playerDataAfterRoll = playerData;
         if (possibleRolls.Count == 0) return default;
         uint ratioSum = 0;
         foreach (Character roll in possibleRolls) ratioSum += roll.Rarity;

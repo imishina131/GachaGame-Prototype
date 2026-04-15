@@ -25,10 +25,23 @@ public class SignUpScreenUI : MonoBehaviour
         {
             Email = m_email.text,
             Username = m_username.text,
-            Password = m_password.text
+            Password = m_password.text,
+            
         }, OnSignUpSuccess, m_onSignUpFailed.Invoke);
     }
     void OnSignUpSuccess(RegisterPlayFabUserResult result)
+    {
+        PlayFabClientAPI.AddOrUpdateContactEmail
+        (
+            new()
+            {
+                EmailAddress = m_email.text
+            },
+            OnEmailUpdateSuccess,
+            m_onSignUpFailed.Invoke
+       );
+    }
+    void OnEmailUpdateSuccess(AddOrUpdateContactEmailResult result)
     {
         m_sceneTransitionManager.TransitionToScene("Gacha Scene");
     }
