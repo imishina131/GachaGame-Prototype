@@ -26,7 +26,7 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         if (context is null) return new BadRequestObjectResult("Invalid request");
         PlayFabAuthenticationContext userAuth = new()
         {
-            EntityId = context.TitleAuthenticationContext.Id,
+            EntityId = context.CallerEntityProfile.Entity.Id,
             PlayFabId = context.CallerEntityProfile.Lineage.MasterPlayerAccountId,
             EntityType = context.CallerEntityProfile.Entity.Type,
             EntityToken = context.TitleAuthenticationContext.EntityToken

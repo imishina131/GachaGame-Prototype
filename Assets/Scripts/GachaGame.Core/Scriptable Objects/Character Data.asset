@@ -15,27 +15,19 @@ MonoBehaviour:
   m_characters:
     m_list:
     - Key:
-        Part1: 1950888880
-        Part2: 1126264351
-        Part3: 4271838393
-        Part4: 2128390468
-      Value:
-        <Name>k__BackingField: Gecko
-        <Prefab>k__BackingField: {fileID: 6842458599697738422, guid: cefda5744f2acb54d8f08973a10bee1e, type: 3}
-    - Key:
-        Part1: 2613353862
-        Part2: 1328948972
-        Part3: 1828667793
-        Part4: 3288503568
+        Part1: 1104697177
+        Part2: 1321536212
+        Part3: 2698707114
+        Part4: 4193962724
       Value:
         <Name>k__BackingField: Colobus
         <Prefab>k__BackingField: {fileID: 6182162820492919152, guid: 84b7c8441f160174fa5c6f94cf397f0a, type: 3}
     m_stagingEntry:
       Key:
-        Part1: 2613353862
-        Part2: 1328948972
-        Part3: 1828667793
-        Part4: 3288503568
+        Part1: 1104697177
+        Part2: 1321536212
+        Part3: 2698707114
+        Part4: 4193962724
       Value:
         <Name>k__BackingField: 
         <Prefab>k__BackingField: {fileID: 0}

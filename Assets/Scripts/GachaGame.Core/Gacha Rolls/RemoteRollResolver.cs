@@ -39,9 +39,10 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
     }
     void ResultCallback(ExecuteFunctionResult obj)
     {
-        RollResultData data = JsonConvert.DeserializeObject<RollResultData>(obj.FunctionResult.ToString());
-        Debug.Log($"Result ID: {data.CharacterID}");
-        if (!CharacterData.Characters.TryGetValue(data.CharacterID, out CharacterData characterData)) return;
+        Debug.Log(obj.FunctionResult);
+        RollData data = JsonConvert.DeserializeObject<RollData>(obj.FunctionResult.ToString());
+        SerializableGuid characterID = SerializableGuid.FromHexString(data.Character.ToString("N").ToUpper());
+        if (!CharacterData.Characters.TryGetValue(characterID, out CharacterData characterData)) return;
         Debug.Log($"Rolled: {characterData.Name}");
         OnRollComplete.Invoke(characterData);
     }

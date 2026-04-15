@@ -2,7 +2,7 @@
 namespace GachaGame.Azure.Core.DataTypes;
 
 [JsonObject]
-public struct RollData
+public struct RollData : IEquatable<RollData>
 {
     public RollData(DateTime rollTime, string bannerRolled, Guid character, Guid rarityTier)
     {
@@ -25,4 +25,26 @@ public struct RollData
     public string BannerRolled { get; init; }
     public Guid RarityTier { get; init; }
     public bool Success { get; init; }
+    public bool Equals(RollData other)
+    {
+        return RollTime.Equals(other.RollTime) && Character.Equals(other.Character) && BannerRolled == other.BannerRolled && RarityTier.Equals(other.RarityTier) && Success == other.Success;
+    }
+    public override bool Equals(object? obj)
+    {
+        return obj is RollData other && Equals(other);
+    }
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(RollTime, Character, BannerRolled, RarityTier, Success);
+    }
+
+    public static bool operator ==(RollData left, RollData right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(RollData left, RollData right)
+    {
+        return !(left == right);
+    }
 }

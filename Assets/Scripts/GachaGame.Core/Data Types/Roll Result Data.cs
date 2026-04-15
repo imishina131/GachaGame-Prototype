@@ -2,30 +2,11 @@ using System;
 using Newtonsoft.Json;
 
 [JsonObject]
-public struct RollResultData
+public struct RollData
 {
-    [JsonConstructor]
-    public RollResultData(DateTime rollTime, string bannerRolled, Guid characterID, Guid rarityTierID, bool success)
-    {
-        CharacterIDHex = characterID.ToString("N").ToUpper();
-        RarityTierIDHex = rarityTierID.ToString("N").ToUpper();
-        RollTime = rollTime;
-        BannerRolled = bannerRolled;
-        Success = success;
-    }
-    DateTime RollTime{ get; init;}
-    
-    [JsonProperty("CharacterID")]
-    string CharacterIDHex { get; init; }
-
-    string BannerRolled { get; init; }
-    [JsonProperty("RarityTierID")]
-    string RarityTierIDHex { get; init; }
-    bool Success { get; init; }
-    
-    [JsonIgnore]
-    public SerializableGuid CharacterID => SerializableGuid.FromHexString(CharacterIDHex);
-
-    [JsonIgnore]
-    public SerializableGuid RarityTierID => SerializableGuid.FromHexString(RarityTierIDHex);
+    public DateTime RollTime { get; init; }
+    public Guid Character { get; init; }
+    public string BannerRolled { get; init; }
+    public Guid RarityTier { get; init; }
+    public bool Success { get; init; }
 }

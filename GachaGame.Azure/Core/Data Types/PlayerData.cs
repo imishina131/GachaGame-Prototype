@@ -4,6 +4,6 @@ namespace GachaGame.Azure.Core.DataTypes;
 [JsonObject]
 public class PlayerData
 {
-    public HashSet<RollData> PlayerRollData = [];
-    public Dictionary<string, uint> Pity = new();
+    public HashSet<RollData> PlayerRollData { get; init;} = [];
+    public Dictionary<string, uint> Pity {get; init;} = new();
 }
