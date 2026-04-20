@@ -1,7 +1,6 @@
 ﻿using GachaGame.Azure.Core.Helpers;
 using GachaGame.Azure.Core.Interfaces;
 using Newtonsoft.Json;
-
 namespace GachaGame.Azure.Core.DataTypes;
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 public struct Banner
