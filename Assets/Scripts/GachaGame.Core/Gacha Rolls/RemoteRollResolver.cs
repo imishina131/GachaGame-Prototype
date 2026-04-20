@@ -10,13 +10,12 @@ using UnityEngine.Events;
 public class RemoteRollHandler : MonoBehaviour, IRollHandler
 {
     [SerializeField, RequiredField] CharacterDataSO CharacterData;
-    public UnityEvent<CharacterData> OnRollComplete;
+    public UnityEvent<CharacterData> OnRollComplete = new();
     public void DefaultRoll()
     {
         Roll("Main Banner");
     }
-
-
+    
     public CharacterDataSO Roll(string bannerID)
     {
         PlayFabCloudScriptAPI.ExecuteFunction(
@@ -42,18 +41,9 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
     }
     void ResultCallback(ExecuteFunctionResult obj)
     {
-        Debug.Log(obj.FunctionResult);
         RollData data = JsonConvert.DeserializeObject<RollData>(obj.FunctionResult.ToString());
         SerializableGuid characterID = SerializableGuid.FromHexString(data.Character.ToString("N").ToUpper());
-        Debug.Log(data.Character.ToString());
-        Debug.Log(characterID.ToGuid().ToString());
-        foreach (KeyValuePair<SerializableGuid, CharacterData> kvp in CharacterData.Characters)
-        {
-            Debug.Log(kvp.Key.ToGuid() == data.Character);
-            Debug.Log(kvp.Key.ToGuid().ToString());
-        }
         if (!CharacterData.Characters.TryGetValue(characterID, out CharacterData characterData)) return;
-        Debug.Log($"Rolled: {characterData.Name}");
         OnRollComplete.Invoke(characterData);
     }
     
