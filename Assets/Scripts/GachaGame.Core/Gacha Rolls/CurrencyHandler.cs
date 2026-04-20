@@ -1,44 +1,25 @@
-using System;
-using System.Collections.Generic;
 using MatrixUtils.Attributes;
-using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
-using PlayFab.CloudScriptModels;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-//using TMPro;
 
 public class CurrencyHandler : MonoBehaviour
 {
-    //public TMP_Text coinsAmountText;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField, RequiredField] TMP_Text m_coinsAmountText;
+    public void UpdateCurrency()
+    {
+        PlayFabClientAPI.GetUserInventory(new(), OnGetUserInventorySuccess, OnError);
+    }
     void Start()
     {
-        GetCurrency();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void OnLoginSuccess(LoginResult result)
-    {
-        GetCurrency();
-    }
-
-    public void GetCurrency()
-    {
-        PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(), OnGetUserInventorySuccess, OnError);
+        UpdateCurrency();
     }
 
     void OnGetUserInventorySuccess(GetUserInventoryResult result)
     {
         int coins = result.VirtualCurrency["CN"];
-        Debug.Log("Coins: " + coins);
-        //coinsAmountText.text = coins.ToString();
+        m_coinsAmountText.text = coins.ToString();
 
     }
 
@@ -56,7 +37,7 @@ public class CurrencyHandler : MonoBehaviour
     void OnGiveVirtualCurrencySuccess(ModifyUserVirtualCurrencyResult result)
     {
         Debug.Log("Currency added");
-        GetCurrency();
+        UpdateCurrency();
     }
 
     void OnError(PlayFabError error)
