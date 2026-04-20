@@ -15,6 +15,8 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
     {
         Roll("Main Banner");
     }
+
+
     public CharacterDataSO Roll(string bannerID)
     {
         PlayFabCloudScriptAPI.ExecuteFunction(

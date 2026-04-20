@@ -61,20 +61,20 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
     async Task<RollData> TryRollBanner(FunctionExecutionContext<BannerRollRequestData> context, Banner banner, PlayerData playerData, PlayFabAuthenticationContext userAuth)
     {
         //This is for the currency system which needs to be setup on the client api so we can still test rolls
-        // PlayFabResult<GetUserInventoryResult> userInventory = await PlayFabServerAPI.GetUserInventoryAsync(new()
-        // {
-        //     AuthenticationContext = userAuth,
-        //     PlayFabId = userAuth.PlayFabId
-        // });
-        // if(!userInventory.Result.VirtualCurrency.TryGetValue(banner.Currency, out int currentAmount) || currentAmount < banner.Cost)
-        //     return new();
-        // await PlayFabServerAPI.SubtractUserVirtualCurrencyAsync(new()
-        // {
-        //     VirtualCurrency = banner.Currency,
-        //     Amount = banner.Cost,
-        //     PlayFabId = userAuth.PlayFabId,
-        //     AuthenticationContext = userAuth
-        // });
+         PlayFabResult<GetUserInventoryResult> userInventory = await PlayFabServerAPI.GetUserInventoryAsync(new()
+         {
+             AuthenticationContext = userAuth,
+             PlayFabId = userAuth.PlayFabId
+         });
+         if(!userInventory.Result.VirtualCurrency.TryGetValue(banner.Currency, out int currentAmount) || currentAmount < banner.Cost)
+             return new();
+         await PlayFabServerAPI.SubtractUserVirtualCurrencyAsync(new()
+         {
+             VirtualCurrency = banner.Currency,
+             Amount = banner.Cost,
+             PlayFabId = userAuth.PlayFabId,
+             AuthenticationContext = userAuth
+        });
         RarityTier tier = banner.RarityTierResolver.ResolveRoll(banner.RarityTiers, playerData);
         Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, playerData);
         return new(DateTime.Now, context.FunctionArgument.BannerId, rolledCharacter.CharacterID, tier.TierID);
