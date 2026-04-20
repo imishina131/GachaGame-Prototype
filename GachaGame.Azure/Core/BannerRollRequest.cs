@@ -11,9 +11,18 @@ using PlayFab.ServerModels;
 using ObjectResult = PlayFab.DataModels.ObjectResult;
 
 namespace GachaGame.Azure;
-
+/// <summary>
+/// Represents a request to roll a banner
+/// </summary>
+/// <param name="logger">A <see cref="ILogger"/> to log details</param>
 public class BannerRollRequest(ILogger<BannerRollRequest> logger)
 {
+    /// <summary>
+    /// Executes the banner roll request received from the client
+    /// </summary>
+    /// <param name="req">The <see cref="HttpRequest"/> to with the <see cref="BannerRollRequestData"/> from the client</param>
+    /// <param name="cancellationToken">The token to cancel this roll</param>
+    /// <returns>The resulting <see cref="IActionResult"/> with the <see cref="RollData"/> result from this roll</returns>
     [Function("BannerRollRequest")]
     public async Task<IActionResult> Run
     (
@@ -60,7 +69,6 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
 
     async Task<RollData> TryRollBanner(FunctionExecutionContext<BannerRollRequestData> context, Banner banner, PlayerData playerData, PlayFabAuthenticationContext userAuth)
     {
-        //This is for the currency system which needs to be setup on the client api so we can still test rolls
          PlayFabResult<GetUserInventoryResult> userInventory = await PlayFabServerAPI.GetUserInventoryAsync(new()
          {
              AuthenticationContext = userAuth,

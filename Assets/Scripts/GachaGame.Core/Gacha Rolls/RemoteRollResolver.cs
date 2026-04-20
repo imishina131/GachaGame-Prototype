@@ -11,12 +11,9 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
 {
     [SerializeField, RequiredField] CharacterDataSO CharacterData;
     public UnityEvent<CharacterData> OnRollComplete = new();
-    public void DefaultRoll()
-    {
-        Roll("Main Banner");
-    }
+    [field:SerializeField] public string BannerID { get; private set; } = "Main Banner";
     
-    public CharacterDataSO Roll(string bannerID)
+    public void Roll()
     {
         PlayFabCloudScriptAPI.ExecuteFunction(
             new()
@@ -27,13 +24,16 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
                     Type = PlayFabSettings.staticPlayer.EntityType
                 },
                 FunctionName = "BannerRollRequest",
-                FunctionParameter = new BannerRollRequestData(bannerID),
+                FunctionParameter = new BannerRollRequestData(BannerID),
                 GeneratePlayStreamEvent = true
             }, 
             ResultCallback,
             ErrorCallback
         );
-        return null;
+    }
+    public void UpdateBannerToRoll(string bannerID)
+    {
+        BannerID = bannerID;
     }
     static void ErrorCallback(PlayFabError obj)
     {

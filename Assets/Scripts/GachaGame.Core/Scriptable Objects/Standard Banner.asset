@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f00d64f2f681a4dbff22cf34b62664, type: 3}
+  m_Name: Standard Banner
+  m_EditorClassIdentifier: GachaGame.Core::BannerDataSO
+  <BannerName>k__BackingField: Standard Banner
+  <BannerCurrency>k__BackingField: {fileID: 11400000, guid: a26b8904df16e2240bc593adcc60b9b4, type: 2}
+  <BannerBackgroundColor>k__BackingField: {r: 0.25882354, g: 0.5019608, b: 0.69803923, a: 1}
+  <BannerRollAreaColor>k__BackingField: {r: 0.13333334, g: 0.27058825, b: 0.38039216, a: 1}
+  <BannerRollButtonColor>k__BackingField: {r: 0.3647059, g: 0.7607843, b: 1, a: 1}
+  <BannerDetailsButtonColor>k__BackingField: {r: 0.90588236, g: 0.63529414, b: 0.6745098, a: 1}
