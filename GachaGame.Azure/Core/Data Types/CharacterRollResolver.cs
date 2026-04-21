@@ -31,24 +31,6 @@ public struct CharacterRollResolver : IRollResolver<Character>
 
         var tierPool = possibleRolls.Where(character => character.Rarity == targetRarity).ToList();
 
-        if (targetRarity == 5)
-        {
-            var featuredPool = tierPool.Where(character => character.IsFeatured).ToList();
-            var standardPool = tierPool.Where(character => !character.IsFeatured).ToList();
-
-            bool winFiftyFifty = playerData.HasPityCounter || Random.Shared.NextDouble() < 0.5;
-
-            if (winFiftyFifty && featuredPool.Count > 0)
-            {
-                return featuredPool[Random.Shared.Next(featuredPool.Count)];
-            }
-
-            if (standardPool.Count > 0)
-            {
-                return standardPool[Random.Shared.Next(standardPool.Count)];
-            }
-        }
-
         return tierPool[Random.Shared.Next(tierPool.Count)];
     }
 }
