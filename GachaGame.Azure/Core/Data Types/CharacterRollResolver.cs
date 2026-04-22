@@ -1,5 +1,6 @@
 using GachaGame.Azure.Core.Interfaces;
 using JetBrains.Annotations;
+using Microsoft.Extensions.Logging;
 
 namespace GachaGame.Azure.Core.DataTypes;
 /// <summary>
@@ -9,7 +10,7 @@ namespace GachaGame.Azure.Core.DataTypes;
 public struct CharacterRollResolver: IRollResolver<Character>
 {
     /// <inheritdoc/>
-    public Character ResolveRoll(List<Character> possibleRolls, RollContext rollContext)
+    public Character ResolveRoll(List<Character> possibleRolls, RollContext rollContext, ILogger logger)
     {
         if (possibleRolls.Count == 0) return default;
         uint ratioSum = 0;

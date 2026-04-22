@@ -1,4 +1,5 @@
 using GachaGame.Azure.Core.DataTypes;
+using Microsoft.Extensions.Logging;
 namespace GachaGame.Azure.Core.Interfaces;
 
 /// <summary>

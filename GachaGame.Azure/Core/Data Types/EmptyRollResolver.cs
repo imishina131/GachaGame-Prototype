@@ -1,4 +1,5 @@
 ﻿using GachaGame.Azure.Core.Interfaces;
+using Microsoft.Extensions.Logging;
 namespace GachaGame.Azure.Core.DataTypes;
 /// <summary>
 /// A <see cref="IRollResolver{T}"/> that always returns the default value of <typeparamref name="T"/>
@@ -7,5 +8,5 @@ namespace GachaGame.Azure.Core.DataTypes;
 public class EmptyRollResolver<T> : IRollResolver<T> where T : struct, IRollData
 {
     /// <inheritdoc/>
-    public T ResolveRoll(List<T> possibleRolls, RollContext rollContext) => default;
+    public T ResolveRoll(List<T> possibleRolls, RollContext rollContext, ILogger logger) => default;
 }

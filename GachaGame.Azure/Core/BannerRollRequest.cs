@@ -74,6 +74,18 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         //Try and roll the banner
         RollData result = await TryRollBanner(context, rollContext, userAuth);
         await UpdatePlayerDataAsync(result, rollContext, userAuth);
+        await PlayFabEventsAPI.WriteTelemetryEventsAsync(new()
+        {
+            AuthenticationContext = userAuth,
+            Events = 
+            [
+                new()
+                {
+                    Name = "BannerRoll",
+                    
+                }
+            ]
+        });
         return new OkObjectResult(result);
     }
     async Task<RollData> TryRollBanner(FunctionExecutionContext<BannerRollRequestData> context, RollContext rollContext, PlayFabAuthenticationContext userAuth)
@@ -94,9 +106,9 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
              AuthenticationContext = userAuth
         });
         //Roll the tier on the banner
-        RarityTier tier = rollContext.Banner.RarityTierResolver.ResolveRoll(rollContext.Banner.RarityTiers, rollContext);
+        RarityTier tier = rollContext.Banner.RarityTierResolver.ResolveRoll(rollContext.Banner.RarityTiers, rollContext, logger);
         //Roll the character on the tier
-        Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, rollContext);
+        Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, rollContext, logger);
         //Return the roll data using the results of the roll
         return new(DateTime.Now, context.FunctionArgument.BannerId, rolledCharacter.CharacterID, tier.TierID);
     }
