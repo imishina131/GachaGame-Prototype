@@ -12,17 +12,10 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
     /// <inheritdoc/>
     public  RarityTier ResolveRoll(List<RarityTier> possibleRolls, RollContext rollContext, ILogger logger)
     {
-        var playerBannerData = rollContext.PlayerData.BannerData[rollContext.BannerName];
-        uint pity = playerBannerData.CurrentPity;
-        pity++;
-        playerBannerData.CurrentPity = pity;
-        logger.LogInformation("Pity: " + pity);
-
-
-        if(playerBannerData != null)
-        {
-            rollContext.TryAddMutation(PlayerData =>
+            rollContext.TryAddMutation(playerData =>
             {
+                uint pity = playerData.BannerData[rollContext.BannerName].CurrentPity;
+                pity++;
                 uint rarityValue3Star = rollContext.Banner.RarityTiers[0].Rarity;
                 uint rarityValue4Star = rollContext.Banner.RarityTiers[1].Rarity;
                 uint rarityValue5Star = rollContext.Banner.RarityTiers[2].Rarity;
@@ -65,8 +58,9 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
                 logger.LogInformation("Rarity Value 5 Star: " + rarityValue5Star);
                 logger.LogInformation("Rarity Value 4 Star: " + rarityValue4Star);
                 logger.LogInformation("Rarity Value 3 Star: " + rarityValue3Star);
+                playerData.BannerData[rollContext.BannerName].CurrentPity = pity;
+                logger.LogInformation("Pity: " + pity);
             });
-        }
 
         if (possibleRolls.Count == 0) return default;
         uint ratioSum = 0;
