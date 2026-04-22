@@ -25,7 +25,7 @@ public class RarityTier : IRollData
     /// The rarity of rolling this tier.
     /// </summary>
     [JsonRequired]
-    public required uint Rarity { get; init; }
+    public required uint Rarity { get; set; }
     /// <summary>
     /// The <see cref="IRollResolver{T}"/> for each <see cref="Character"/> in this tier.
     /// </summary>
