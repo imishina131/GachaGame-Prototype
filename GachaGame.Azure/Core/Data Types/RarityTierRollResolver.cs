@@ -11,7 +11,37 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
     /// <inheritdoc/>
     public  RarityTier ResolveRoll(List<RarityTier> possibleRolls, RollContext rollContext)
     {
+        var playerBannerData = rollContext.PlayerData.BannerData[rollContext.BannerName];
+        uint pity = playerBannerData.CurrentPity;
+        pity++;
 
+        if(playerBannerData != null)
+        {
+            rollContext.TryAddMutation(PlayerData =>
+            {
+                if (pity >= 30)
+                {
+                    uint rarityValue = rollContext.Banner.RarityTiers[0].Rarity;
+                    rarityValue = 75;
+
+                }
+                else if (pity >= 55)
+                {
+
+                }
+                else if (pity >= 76)
+                {
+                }
+                else
+                {
+                }
+            });
+        }
+
+        //ideas of how code should work
+        //uint pity = PlayerBannerData.CurrentPity;
+        //pity++;
+        //PlayerBannerData.CurrentPity = pity;
         if (possibleRolls.Count == 0) return default;
         uint ratioSum = 0;
         foreach (RarityTier roll in possibleRolls) ratioSum += roll.Rarity;

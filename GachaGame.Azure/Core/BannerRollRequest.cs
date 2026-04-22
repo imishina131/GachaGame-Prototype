@@ -70,7 +70,7 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
             return new BadRequestObjectResult($"Banner '{context.FunctionArgument.BannerId}' not found in Title Data");
         Banner banner = JsonConvert.DeserializeObject<Banner>(bannerJson);
         //Create roll context to pass into the resolvers to safely make changes to the player data
-        RollContext rollContext = new(playerData, banner);
+        RollContext rollContext = new(playerData, banner, context.FunctionArgument.BannerId);
         //Try and roll the banner
         RollData result = await TryRollBanner(context, rollContext, userAuth);
         await UpdatePlayerDataAsync(result, rollContext, userAuth);

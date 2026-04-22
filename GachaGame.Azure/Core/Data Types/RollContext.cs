@@ -4,8 +4,9 @@
 /// </summary>
 /// <param name="playerData">The <see cref="PlayerData"/> that may be mutated by the roll</param>
 /// <param name="banner">The <see cref="Banner"/> the player is attempting to roll</param>
-public class RollContext(PlayerData playerData, Banner banner)
+public class RollContext(PlayerData playerData, Banner banner, string bannerName)
 {
+    public string BannerName { get; private set; } = bannerName;
     /// <summary>
     /// The <see cref="PlayerData"/> that may be mutated by the roll
     /// </summary>
