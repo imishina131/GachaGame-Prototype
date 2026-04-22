@@ -13,6 +13,7 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
     public  RarityTier ResolveRoll(List<RarityTier> possibleRolls, RollContext rollContext, ILogger logger)
     {
         uint pity = rollContext.PlayerData.BannerData[rollContext.BannerName].CurrentPity;
+        logger.LogInformation("Pity BEFORE: " + pity);
         pity++;
         uint rarityValue3Star = rollContext.Banner.RarityTiers[0].Rarity;
         uint rarityValue4Star = rollContext.Banner.RarityTiers[1].Rarity;
