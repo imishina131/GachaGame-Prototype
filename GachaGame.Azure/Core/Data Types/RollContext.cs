@@ -44,7 +44,9 @@ public class RollContext(PlayerData playerData, Banner banner, string bannerName
     /// </summary>
     public void ApplyPlayerDataMutations()
     {
+        logger.LogInformation("Before Apply: " + rollContext.PlayerData.BannerData[rollContext.BannerName].CurrentPity);
         foreach (Action<PlayerData> mutation in m_rollDataMutations) mutation(PlayerData);
         m_rollDataMutations.Clear();
+        logger.LogInformation("After Apply: " + rollContext.PlayerData.BannerData[rollContext.BannerName].CurrentPity);
     }
 }
