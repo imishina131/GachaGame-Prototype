@@ -6,7 +6,7 @@ namespace GachaGame.Azure.Core.Interfaces;
 /// Represents a resolver for a <typeparamref name="T"/>
 /// </summary>
 /// <typeparam name="T">The type of object the resolver will handle</typeparam>
-public interface IRollResolver<T> where T : struct, IRollData
+public interface IRollResolver<T> where T : IRollData
 {
     /// <summary>
     /// Resolves a roll for a <typeparamref name="T"/> through taking in a multiple <see cref="IRollData"/> and generating a single result

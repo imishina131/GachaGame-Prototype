@@ -5,7 +5,7 @@ namespace GachaGame.Azure.Core.DataTypes;
 /// A <see cref="IRollResolver{T}"/> that always returns the default value of <typeparamref name="T"/>
 /// </summary>
 /// <typeparam name="T">The type of object to roll</typeparam>
-public class EmptyRollResolver<T> : IRollResolver<T> where T : struct, IRollData
+public class EmptyRollResolver<T> : IRollResolver<T> where T : IRollData
 {
     /// <inheritdoc/>
     public T ResolveRoll(List<T> possibleRolls, RollContext rollContext, ILogger logger) => default;

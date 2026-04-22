@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.DataModels;
+using PlayFab.EventsModels;
 using PlayFab.ServerModels;
 using ObjectResult = PlayFab.DataModels.ObjectResult;
 
@@ -74,18 +75,6 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         //Try and roll the banner
         RollData result = await TryRollBanner(context, rollContext, userAuth);
         await UpdatePlayerDataAsync(result, rollContext, userAuth);
-        await PlayFabEventsAPI.WriteTelemetryEventsAsync(new()
-        {
-            AuthenticationContext = userAuth,
-            Events = 
-            [
-                new()
-                {
-                    Name = "BannerRoll",
-                    
-                }
-            ]
-        });
         return new OkObjectResult(result);
     }
     async Task<RollData> TryRollBanner(FunctionExecutionContext<BannerRollRequestData> context, RollContext rollContext, PlayFabAuthenticationContext userAuth)
@@ -127,7 +116,7 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         //Add our roll data to the player data
         bannerData.RollData.Add(result);
         //Set the player data to the updated player data
-        await PlayFabDataAPI.SetObjectsAsync(new()
+        Task<PlayFabResult<SetObjectsResponse>> setObjects = PlayFabDataAPI.SetObjectsAsync(new()
         {
             AuthenticationContext = userAuth,
             Entity = new()
@@ -141,5 +130,19 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
                  DataObject = rollContext.PlayerData,
             }]
         });
+        //Write the roll data to telemetry
+        Task<PlayFabResult<WriteEventsResponse>> writeTelemetry = PlayFabEventsAPI.WriteTelemetryEventsAsync(new()
+        {
+            AuthenticationContext = userAuth,
+            Events = 
+            [
+                new()
+                {
+                    Name = "BannerRoll",
+                    Payload = result
+                }
+            ]
+        });
+        await Task.WhenAll(setObjects, writeTelemetry);
     }
 }
