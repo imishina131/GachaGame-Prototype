@@ -23,14 +23,21 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
                 {
                     uint rarityValue = rollContext.Banner.RarityTiers[0].Rarity;
                     rarityValue = 75;
-
                 }
                 else if (pity >= 55)
                 {
-
+                    uint rarityValue = rollContext.Banner.RarityTiers[0].Rarity;
+                    rarityValue = 85;
                 }
                 else if (pity >= 76)
                 {
+                    uint rarityValue = rollContext.Banner.RarityTiers[0].Rarity;
+                    rarityValue = 90;
+                }
+                else if(pity >= 90)
+                {
+                    uint rarityValue = rollContext.Banner.RarityTiers[0].Rarity;
+                    rarityValue = 100;
                 }
                 else
                 {
