@@ -48,6 +48,7 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
                     rarityValue5Star = 100;
                     rarityValue4Star = 0;
                     rarityValue3Star = 0;
+                    pity = 0;
                 }
                 else
                 {
