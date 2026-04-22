@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f00d64f2f681a4dbff22cf34b62664, type: 3}
+  m_Name: Event Banner
+  m_EditorClassIdentifier: GachaGame.Core::BannerDataSO
+  <BannerName>k__BackingField: Event Banner
+  <BannerCurrency>k__BackingField: {fileID: 11400000, guid: d22ef839b47c93e479812005eb05c17c, type: 2}
+  <BannerBackgroundColor>k__BackingField: {r: 0.5803922, g: 0.81568635, b: 0.54509807, a: 1}
+  <BannerRollAreaColor>k__BackingField: {r: 0.23137257, g: 0.62352943, b: 0.35686275, a: 1}
+  <BannerRollButtonColor>k__BackingField: {r: 0.38823533, g: 0.7372549, b: 0.38823533, a: 1}
+  <BannerDetailsButtonColor>k__BackingField: {r: 0.8117648, g: 0.47058827, b: 0, a: 1}

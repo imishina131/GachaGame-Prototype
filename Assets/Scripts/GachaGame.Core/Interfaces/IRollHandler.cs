@@ -3,5 +3,6 @@ using UnityEngine;
 
 public interface IRollHandler
 {
-    CharacterDataSO Roll(string bannerID);
+    void Roll();
+    void UpdateBannerToRoll(string bannerID);
 }

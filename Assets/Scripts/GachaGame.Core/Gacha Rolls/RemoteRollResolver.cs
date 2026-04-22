@@ -10,14 +10,10 @@ using UnityEngine.Events;
 public class RemoteRollHandler : MonoBehaviour, IRollHandler
 {
     [SerializeField, RequiredField] CharacterDataSO CharacterData;
-    public UnityEvent<CharacterData> OnRollComplete;
-    public void DefaultRoll()
-    {
-        Roll("Main Banner");
-    }
-
-
-    public CharacterDataSO Roll(string bannerID)
+    public UnityEvent<CharacterData> OnRollComplete = new();
+    [field:SerializeField] public string BannerID { get; private set; } = "Main Banner";
+    
+    public void Roll()
     {
         PlayFabCloudScriptAPI.ExecuteFunction(
             new()
@@ -28,13 +24,16 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
                     Type = PlayFabSettings.staticPlayer.EntityType
                 },
                 FunctionName = "BannerRollRequest",
-                FunctionParameter = new BannerRollRequestData(bannerID),
+                FunctionParameter = new BannerRollRequestData(BannerID),
                 GeneratePlayStreamEvent = true
             }, 
             ResultCallback,
             ErrorCallback
         );
-        return null;
+    }
+    public void UpdateBannerToRoll(string bannerID)
+    {
+        BannerID = bannerID;
     }
     static void ErrorCallback(PlayFabError obj)
     {
@@ -45,15 +44,7 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
         Debug.Log(obj.FunctionResult);
         RollData data = JsonConvert.DeserializeObject<RollData>(obj.FunctionResult.ToString());
         SerializableGuid characterID = SerializableGuid.FromHexString(data.Character.ToString("N").ToUpper());
-        Debug.Log(data.Character.ToString());
-        Debug.Log(characterID.ToGuid().ToString());
-        foreach (KeyValuePair<SerializableGuid, CharacterData> kvp in CharacterData.Characters)
-        {
-            Debug.Log(kvp.Key.ToGuid() == data.Character);
-            Debug.Log(kvp.Key.ToGuid().ToString());
-        }
         if (!CharacterData.Characters.TryGetValue(characterID, out CharacterData characterData)) return;
-        Debug.Log($"Rolled: {characterData.Name}");
         OnRollComplete.Invoke(characterData);
     }
     

@@ -1,52 +1,45 @@
-using System;
-using System.Collections.Generic;
 using MatrixUtils.Attributes;
-using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
-using PlayFab.CloudScriptModels;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-//using TMPro;
+using UnityEngine.UI;
 
-public class CurrencyHandler : MonoBehaviour
+public class CurrencyHandler : MonoBehaviour, ICurrencyDisplay
 {
-    //public TMP_Text coinsAmountText;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] CurrencyInfoSO m_activeCurrencyInfo;
+    [field: SerializeField, RequiredField] public TMP_Text CurrencyText { get; private set;}
+    [field: SerializeField, RequiredField] public RawImage CurrencyIcon { get; private set;}
+    
+    public void UpdateDisplayedCurrency(CurrencyInfoSO currencyInfo)
+    {
+        m_activeCurrencyInfo = currencyInfo;
+        CurrencyIcon.texture = currencyInfo.CurrencyIcon;
+        UpdateActiveCurrency();
+    }
+    
+    public void UpdateActiveCurrency()
+    {
+        PlayFabClientAPI.GetUserInventory(new(), OnGetUserInventorySuccess, OnError);
+    }
+    
     void Start()
     {
-        GetCurrency();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void OnLoginSuccess(LoginResult result)
-    {
-        GetCurrency();
-    }
-
-    public void GetCurrency()
-    {
-        PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(), OnGetUserInventorySuccess, OnError);
+        UpdateActiveCurrency();
     }
 
     void OnGetUserInventorySuccess(GetUserInventoryResult result)
     {
-        int coins = result.VirtualCurrency["CN"];
-        Debug.Log("Coins: " + coins);
-        //coinsAmountText.text = coins.ToString();
+        int coins = result.VirtualCurrency[m_activeCurrencyInfo.CurrencyCode];
+        CurrencyText.text = coins.ToString();
 
     }
 
     public void AddCurrency()
     {
-        var request = new AddUserVirtualCurrencyRequest
+        AddUserVirtualCurrencyRequest request = new()
         {
-            VirtualCurrency = "CN",
+            VirtualCurrency = m_activeCurrencyInfo.CurrencyCode,
             Amount = 100
         };
 
@@ -55,12 +48,11 @@ public class CurrencyHandler : MonoBehaviour
 
     void OnGiveVirtualCurrencySuccess(ModifyUserVirtualCurrencyResult result)
     {
-        Debug.Log("Currency added");
-        GetCurrency();
+        UpdateActiveCurrency();
     }
 
     void OnError(PlayFabError error)
     {
-        Debug.Log("Something went wrong: " + error.ErrorMessage);
+        Debug.LogError("Something went wrong: " + error.GenerateErrorReport());
     }
 }

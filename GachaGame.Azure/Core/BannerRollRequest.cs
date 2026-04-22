@@ -11,9 +11,18 @@ using PlayFab.ServerModels;
 using ObjectResult = PlayFab.DataModels.ObjectResult;
 
 namespace GachaGame.Azure;
-
+/// <summary>
+/// Represents a request to roll a banner
+/// </summary>
+/// <param name="logger">A <see cref="ILogger"/> to log details</param>
 public class BannerRollRequest(ILogger<BannerRollRequest> logger)
 {
+    /// <summary>
+    /// Executes the banner roll request received from the client
+    /// </summary>
+    /// <param name="req">The <see cref="HttpRequest"/> to with the <see cref="BannerRollRequestData"/> from the client</param>
+    /// <param name="cancellationToken">The token to cancel this roll</param>
+    /// <returns>The resulting <see cref="IActionResult"/> with the <see cref="RollData"/> result from this roll</returns>
     [Function("BannerRollRequest")]
     public async Task<IActionResult> Run
     (
@@ -53,40 +62,40 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         if (!getBannerInfo.Result.Result.Data.TryGetValue(context.FunctionArgument.BannerId, out string? bannerJson)) 
             return new BadRequestObjectResult($"Banner '{context.FunctionArgument.BannerId}' not found in Title Data");
         Banner banner = JsonConvert.DeserializeObject<Banner>(bannerJson);
-        RollData result = await TryRollBanner(context, banner, playerData, userAuth);
-        await UpdatePlayerDataAsync(result, playerData, userAuth);
+        RollContext rollContext = new(playerData, banner);
+        RollData result = await TryRollBanner(context, rollContext, userAuth);
+        await UpdatePlayerDataAsync(result, rollContext, userAuth);
         return new OkObjectResult(result);
     }
 
-    async Task<RollData> TryRollBanner(FunctionExecutionContext<BannerRollRequestData> context, Banner banner, PlayerData playerData, PlayFabAuthenticationContext userAuth)
+    async Task<RollData> TryRollBanner(FunctionExecutionContext<BannerRollRequestData> context, RollContext rollContext, PlayFabAuthenticationContext userAuth)
     {
-        //This is for the currency system which needs to be setup on the client api so we can still test rolls
          PlayFabResult<GetUserInventoryResult> userInventory = await PlayFabServerAPI.GetUserInventoryAsync(new()
          {
              AuthenticationContext = userAuth,
              PlayFabId = userAuth.PlayFabId
          });
-         if(!userInventory.Result.VirtualCurrency.TryGetValue(banner.Currency, out int currentAmount) || currentAmount < banner.Cost)
-             return new();
+         if(!userInventory.Result.VirtualCurrency.TryGetValue(rollContext.Banner.Currency, out int currentAmount) || currentAmount < rollContext.Banner.Cost) return new();
          await PlayFabServerAPI.SubtractUserVirtualCurrencyAsync(new()
          {
-             VirtualCurrency = banner.Currency,
-             Amount = banner.Cost,
+             VirtualCurrency = rollContext.Banner.Currency,
+             Amount = rollContext.Banner.Cost,
              PlayFabId = userAuth.PlayFabId,
              AuthenticationContext = userAuth
         });
-        RarityTier tier = banner.RarityTierResolver.ResolveRoll(banner.RarityTiers, playerData);
-        Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, playerData);
+        RarityTier tier = rollContext.Banner.RarityTierResolver.ResolveRoll(rollContext.Banner.RarityTiers, rollContext);
+        Character rolledCharacter = tier.CharacterResolver.ResolveRoll(tier.Characters, rollContext);
         return new(DateTime.Now, context.FunctionArgument.BannerId, rolledCharacter.CharacterID, tier.TierID);
     }
     
-    async Task UpdatePlayerDataAsync(RollData result, PlayerData playerData, PlayFabAuthenticationContext userAuth)
+    async Task UpdatePlayerDataAsync(RollData result, RollContext rollContext, PlayFabAuthenticationContext userAuth)
     {
         if(!result.Success) return;
-        if (!playerData.BannerData.TryGetValue(result.BannerRolled, out PlayerBannerData? bannerData))
+        rollContext.ApplyPlayerDataMutations();
+        if (!rollContext.PlayerData.BannerData.TryGetValue(result.BannerRolled, out PlayerBannerData? bannerData))
         {
             bannerData = new();
-            playerData.BannerData[result.BannerRolled] = bannerData;
+            rollContext.PlayerData.BannerData[result.BannerRolled] = bannerData;
         }
         bannerData.RollData.Add(result);
         await PlayFabDataAPI.SetObjectsAsync(new()
@@ -100,7 +109,7 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
             Objects = [new()
             {
                 ObjectName = "PlayerData",
-                 DataObject = playerData,
+                 DataObject = rollContext.PlayerData,
             }]
         });
 
