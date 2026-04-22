@@ -56,7 +56,6 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
         logger.LogInformation("Rarity Value 5 Star: " + rarityValue5Star);
         logger.LogInformation("Rarity Value 4 Star: " + rarityValue4Star);
         logger.LogInformation("Rarity Value 3 Star: " + rarityValue3Star);
-        rollContext.PlayerData.BannerData[rollContext.BannerName].CurrentPity = pity;
         logger.LogInformation("Pity: " + pity);
         
         rollContext.TryAddMutation(playerData =>
