@@ -2,10 +2,14 @@ using GachaGame.Azure.Core.Interfaces;
 using JetBrains.Annotations;
 
 namespace GachaGame.Azure.Core.DataTypes;
+/// <summary>
+/// A <see cref="IRollResolver{T}"/> that rolls a <see cref="Character"/> based on the rarity of the <see cref="Character"/> and the pity in the <see cref="PlayerData"/> from the <see cref="RollContext"/>
+/// </summary>
 [UsedImplicitly]
 public struct CharacterRollResolver: IRollResolver<Character>
 {
-    public Character ResolveRoll(List<Character> possibleRolls, PlayerData playerData)
+    /// <inheritdoc/>
+    public Character ResolveRoll(List<Character> possibleRolls, RollContext rollContext)
     {
         if (possibleRolls.Count == 0) return default;
         uint ratioSum = 0;

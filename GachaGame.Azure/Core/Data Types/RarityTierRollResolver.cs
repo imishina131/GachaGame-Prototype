@@ -2,10 +2,14 @@
 using JetBrains.Annotations;
 
 namespace GachaGame.Azure.Core.DataTypes;
+/// <summary>
+/// Resolves the rolled <see cref="RarityTier"/> from the options provided
+/// </summary>
 [UsedImplicitly]
 public struct RarityTierRollResolver : IRollResolver<RarityTier>
 {
-    public  RarityTier ResolveRoll(List<RarityTier> possibleRolls, PlayerData playerData)
+    /// <inheritdoc/>
+    public  RarityTier ResolveRoll(List<RarityTier> possibleRolls, RollContext rollContext)
     {
 
         if (possibleRolls.Count == 0) return default;

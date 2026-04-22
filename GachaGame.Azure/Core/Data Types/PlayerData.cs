@@ -1,12 +1,18 @@
 ﻿using Newtonsoft.Json;
 
 namespace GachaGame.Azure.Core.DataTypes;
+/// <summary>
+/// Represents the data of a player stored in PlayFab as a JSON object
+/// </summary>
 [JsonObject]
 public class PlayerData
 {
     public Dictionary<string, PlayerBannerData> BannerData {get; set;} = new();
 }
 
+/// <summary>
+/// Represents the data of a player relating to a specific <see cref="Banner"/> stored in PlayFab as a JSON object
+/// </summary>
 [JsonObject]
 public class PlayerBannerData
 {
