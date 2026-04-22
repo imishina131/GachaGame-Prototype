@@ -6,7 +6,7 @@ namespace GachaGame.Azure.Core.DataTypes;
 /// Represents a banner that can be rolled. Stored as a JSON object on PlayFab
 /// </summary>
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-public class Banner
+public struct Banner
 {
     [JsonConstructor]
     Banner(IRollResolver<RarityTier> rarityTierResolver, List<RarityTier> rarityTiers, string currency, int cost)

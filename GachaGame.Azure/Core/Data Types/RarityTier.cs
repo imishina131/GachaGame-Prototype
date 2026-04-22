@@ -6,7 +6,7 @@ namespace GachaGame.Azure.Core.DataTypes;
 /// Represents a tier of characters that can be rolled. Stored as a JSON object on PlayFab
 /// </summary>
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-public struct RarityTier : IRollData
+public class RarityTier : IRollData
 {
     [JsonConstructor]
     RarityTier(Guid tierID, uint rarity, IRollResolver<Character> characterResolver, List<Character> characters)
