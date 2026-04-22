@@ -17,17 +17,12 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
         uint rarityValue3Star = rollContext.Banner.RarityTiers[0].Rarity;
         uint rarityValue4Star = rollContext.Banner.RarityTiers[1].Rarity;
         uint rarityValue5Star = rollContext.Banner.RarityTiers[2].Rarity;
-        if (pity >= 30)
+        if(pity >= 90)
         {
-            rarityValue5Star = 10;
-            rarityValue4Star = 23;
-            rarityValue3Star = 67;
-        }
-        else if (pity >= 55)
-        {
-            rarityValue5Star = 15;
-            rarityValue4Star = 20;
-            rarityValue3Star = 65;
+            rarityValue5Star = 100;
+            rarityValue4Star = 0;
+            rarityValue3Star = 0;
+            pity = 0;
         }
         else if (pity >= 74)
         {
@@ -35,12 +30,17 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
             rarityValue4Star = 18;
             rarityValue3Star = 57;
         }
-        else if(pity >= 90)
+        else if (pity >= 55)
         {
-            rarityValue5Star = 100;
-            rarityValue4Star = 0;
-            rarityValue3Star = 0;
-            pity = 0;
+            rarityValue5Star = 15;
+            rarityValue4Star = 20;
+            rarityValue3Star = 65;
+        }
+        else if (pity >= 30)
+        {
+            rarityValue5Star = 10;
+            rarityValue4Star = 23;
+            rarityValue3Star = 67;
         }
         else
         {
