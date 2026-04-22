@@ -9,46 +9,58 @@ namespace GachaGame.Azure.Core.DataTypes;
 public struct RarityTierRollResolver : IRollResolver<RarityTier>
 {
     /// <inheritdoc/>
-    public  RarityTier ResolveRoll(List<RarityTier> possibleRolls, RollContext rollContext)
+    public  RarityTier ResolveRoll(List<RarityTier> possibleRolls, RollContext rollContext, ILogger logger)
     {
         var playerBannerData = rollContext.PlayerData.BannerData[rollContext.BannerName];
         uint pity = playerBannerData.CurrentPity;
         pity++;
+        logger.LogInformation("Pity: " + pity);
+
 
         if(playerBannerData != null)
         {
             rollContext.TryAddMutation(PlayerData =>
             {
+                uint rarityValue3Star = rollContext.Banner.RarityTiers[0].Rarity;
+                uint rarityValue4Star = rollContext.Banner.RarityTiers[1].Rarity;
+                uint rarityValue5Star = rollContext.Banner.RarityTiers[2].Rarity;
                 if (pity >= 30)
                 {
-                    uint rarityValue = rollContext.Banner.RarityTiers[0].Rarity;
-                    rarityValue = 75;
+                    rarityValue5Star = 10;
+                    rarityValue4Star = 23;
+                    rarityValue3Star = 67;
                 }
                 else if (pity >= 55)
                 {
-                    uint rarityValue = rollContext.Banner.RarityTiers[0].Rarity;
-                    rarityValue = 85;
+                    rarityValue5Star = 15;
+                    rarityValue4Star = 20;
+                    rarityValue3Star = 65;
                 }
-                else if (pity >= 76)
+                else if (pity >= 74)
                 {
-                    uint rarityValue = rollContext.Banner.RarityTiers[0].Rarity;
-                    rarityValue = 90;
+                    rarityValue5Star = 25;
+                    rarityValue4Star = 18;
+                    rarityValue3Star = 57;
                 }
                 else if(pity >= 90)
                 {
-                    uint rarityValue = rollContext.Banner.RarityTiers[0].Rarity;
-                    rarityValue = 100;
+                    rarityValue5Star = 100;
+                    rarityValue4Star = 0;
+                    rarityValue3Star = 0;
                 }
                 else
                 {
+                    rarityValue5Star = 5;
+                    rarityValue4Star = 25;
+                    rarityValue3Star = 70;
                 }
+
+                logger.LogInformation("Rarity Value 5 Star: " + rarityValue5Star);
+                logger.LogInformation("Rarity Value 4 Star: " + rarityValue4Star);
+                logger.LogInformation("Rarity Value 3 Star: " + rarityValue3Star);
             });
         }
 
-        //ideas of how code should work
-        //uint pity = PlayerBannerData.CurrentPity;
-        //pity++;
-        //PlayerBannerData.CurrentPity = pity;
         if (possibleRolls.Count == 0) return default;
         uint ratioSum = 0;
         foreach (RarityTier roll in possibleRolls) ratioSum += roll.Rarity;
