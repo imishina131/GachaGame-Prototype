@@ -15,6 +15,7 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
         var playerBannerData = rollContext.PlayerData.BannerData[rollContext.BannerName];
         uint pity = playerBannerData.CurrentPity;
         pity++;
+        playerBannerData.CurrentPity = pity;
         logger.LogInformation("Pity: " + pity);
 
 
@@ -56,6 +57,10 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
                     rarityValue4Star = 25;
                     rarityValue3Star = 70;
                 }
+
+                rollContext.Banner.RarityTiers[0].Rarity = rarityValue3Star;
+                rollContext.Banner.RarityTiers[1].Rarity = rarityValue4Star;
+                rollContext.Banner.RarityTiers[2].Rarity = rarityValue5Star;
 
                 logger.LogInformation("Rarity Value 5 Star: " + rarityValue5Star);
                 logger.LogInformation("Rarity Value 4 Star: " + rarityValue4Star);
