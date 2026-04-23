@@ -12,12 +12,21 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
     /// <inheritdoc/>
     public  RarityTier ResolveRoll(List<RarityTier> possibleRolls, RollContext rollContext, ILogger logger)
     {
-        uint pity = rollContext.PlayerData.BannerData[rollContext.BannerName].CurrentPity;
+        uint pity = 0;
+        if (rollContext.PlayerData.BannerData.TryGetValue(rollContext.BannerName, out PlayerBannerData? data))
+        {
+            pity = data.CurrentPity;
+        }
+        else
+        {
+            rollContext.TryAddMutation(playerData => playerData.BannerData[rollContext.BannerName] = new());
+        }
+        
         logger.LogInformation("Pity BEFORE: " + pity);
         pity++;
-        uint rarityValue3Star = rollContext.Banner.RarityTiers[0].Rarity;
-        uint rarityValue4Star = rollContext.Banner.RarityTiers[1].Rarity;
-        uint rarityValue5Star = rollContext.Banner.RarityTiers[2].Rarity;
+        uint rarityValue3Star;
+        uint rarityValue4Star;
+        uint rarityValue5Star;
         if(pity >= 90)
         {
             rarityValue5Star = 100;

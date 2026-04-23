@@ -43,7 +43,7 @@ public class RollContext(PlayerData playerData, Banner banner, string bannerName
     /// <summary>
     /// Applies all mutations from <see cref="RollDataMutations"/> to the <see cref="PlayerData"/>
     /// </summary>
-    public PlayerData ApplyPlayerDataMutations()
+    public PlayerData GetMutatedPlayerData()
     {
         PlayerData updatedData = new(PlayerData);
         foreach (Action<PlayerData> mutation in m_rollDataMutations) mutation(updatedData);

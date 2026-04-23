@@ -104,18 +104,16 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
     async Task UpdatePlayerDataAsync(RollData result, RollContext rollContext, PlayFabAuthenticationContext userAuth)
     {
         //Create the mutated player data from the roll context
-        PlayerData playerData = rollContext.ApplyPlayerDataMutations();
+        PlayerData playerData = rollContext.GetMutatedPlayerData();
         //If banner data doesn't exist, create it for the player
         if (!rollContext.PlayerData.BannerData.TryGetValue(result.BannerRolled, out PlayerBannerData? bannerData))
         {
             bannerData = new();
         }
-        //Add our roll data to the player data
-        bannerData.RollData.Add(result);
         playerData.BannerData[result.BannerRolled] = bannerData;
         
         //Set the player data to the updated player data
-        var setResult = await PlayFabDataAPI.SetObjectsAsync(new()
+        PlayFabResult<SetObjectsResponse>? setResult = await PlayFabDataAPI.SetObjectsAsync(new()
         {
             AuthenticationContext = userAuth,
             Entity = new()

@@ -21,6 +21,6 @@ public class PlayerData
 [JsonObject]
 public class PlayerBannerData
 {
-    public HashSet<RollData> RollData {get; set;} = [];
+    public bool IsGuaranteedFeatured {get; set;}
     public uint CurrentPity {get; set;}
 }
