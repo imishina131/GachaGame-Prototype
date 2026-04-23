@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6f00d64f2f681a4dbff22cf34b62664, type: 3}
-  m_Name: Standard Banner
+  m_Name: Main Banner
   m_EditorClassIdentifier: GachaGame.Core::BannerDataSO
-  <BannerName>k__BackingField: Default Banner
+  <BannerName>k__BackingField: Main Banner
   <BannerCurrency>k__BackingField: {fileID: 11400000, guid: a26b8904df16e2240bc593adcc60b9b4, type: 2}
   <BannerBackgroundColor>k__BackingField: {r: 0.25882354, g: 0.5019608, b: 0.69803923, a: 1}
   <BannerRollAreaColor>k__BackingField: {r: 0.13333334, g: 0.27058825, b: 0.38039216, a: 1}
