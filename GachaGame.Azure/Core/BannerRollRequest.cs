@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.DataModels;
-using PlayFab.EventsModels;
 using PlayFab.ServerModels;
 using ObjectResult = PlayFab.DataModels.ObjectResult;
 
@@ -61,17 +60,17 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
         //Wait for the PlayFab API to return the results
         await Task.WhenAll(getBannerInfo, getPlayerObjects);
         //Try and deserialize the PlayerData and if we fail, create some new data to store our results and pity
-        PlayerData playerData =
-            getPlayerObjects.Result.Result.Objects.TryGetValue("PlayerData", out ObjectResult? playFabObject)
-            && playFabObject?.DataObject is not null
-                ? JsonConvert.DeserializeObject<PlayerData>(JsonConvert.SerializeObject(playFabObject.DataObject)) ?? new()
-                : new();
+        PlayerData playerData = new();
+        if (getPlayerObjects.Result.Result.Objects.TryGetValue("PlayerData", out ObjectResult? playFabObject))
+        {
+            playerData = JsonConvert.DeserializeObject<PlayerData>(JsonConvert.SerializeObject(playFabObject.DataObject)) ?? new();
+        }
         //Try and get the banner the user is requesting from the title data and if it exists, deserialize it
         if (!getBannerInfo.Result.Result.Data.TryGetValue(context.FunctionArgument.BannerId, out string? bannerJson)) 
             return new BadRequestObjectResult($"Banner '{context.FunctionArgument.BannerId}' not found in Title Data");
         Banner banner = JsonConvert.DeserializeObject<Banner>(bannerJson);
         //Create roll context to pass into the resolvers to safely make changes to the player data
-        RollContext rollContext = new(playerData, banner, context.FunctionArgument.BannerId);
+        RollContext rollContext = new(playerData, banner, context.FunctionArgument.BannerId, logger);
         //Try and roll the banner
         RollData result = await TryRollBanner(context, rollContext, userAuth);
         await UpdatePlayerDataAsync(result, rollContext, userAuth);
@@ -104,19 +103,19 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
     
     async Task UpdatePlayerDataAsync(RollData result, RollContext rollContext, PlayFabAuthenticationContext userAuth)
     {
-        if(!result.Success) return;
-        //Apply the player data mutations to the player data
-        rollContext.ApplyPlayerDataMutations();
+        //Create the mutated player data from the roll context
+        PlayerData playerData = rollContext.ApplyPlayerDataMutations();
         //If banner data doesn't exist, create it for the player
         if (!rollContext.PlayerData.BannerData.TryGetValue(result.BannerRolled, out PlayerBannerData? bannerData))
         {
             bannerData = new();
-            rollContext.PlayerData.BannerData[result.BannerRolled] = bannerData;
         }
         //Add our roll data to the player data
         bannerData.RollData.Add(result);
+        playerData.BannerData[result.BannerRolled] = bannerData;
+        
         //Set the player data to the updated player data
-        Task<PlayFabResult<SetObjectsResponse>> setObjects = PlayFabDataAPI.SetObjectsAsync(new()
+        var setResult = await PlayFabDataAPI.SetObjectsAsync(new()
         {
             AuthenticationContext = userAuth,
             Entity = new()
@@ -127,22 +126,12 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
             Objects = [new()
             {
                 ObjectName = "PlayerData",
-                 DataObject = rollContext.PlayerData,
+                 DataObject = playerData
             }]
         });
-        //Write the roll data to telemetry
-        Task<PlayFabResult<WriteEventsResponse>> writeTelemetry = PlayFabEventsAPI.WriteTelemetryEventsAsync(new()
-        {
-            AuthenticationContext = userAuth,
-            Events = 
-            [
-                new()
-                {
-                    Name = "BannerRoll",
-                    Payload = result
-                }
-            ]
-        });
-        await Task.WhenAll(setObjects, writeTelemetry);
+        if (setResult.Error != null)
+            logger.LogError("SetObjects failed: " + setResult.Error.GenerateErrorReport());
+        else
+            logger.LogInformation("SetObjects succeeded");
     }
 }

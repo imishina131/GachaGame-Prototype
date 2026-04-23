@@ -1,16 +1,17 @@
-﻿namespace GachaGame.Azure.Core.DataTypes;
+﻿using Microsoft.Extensions.Logging;
+namespace GachaGame.Azure.Core.DataTypes;
 /// <summary>
 /// Represents the context of a roll and the data that is relevant to it
 /// </summary>
 /// <param name="playerData">The <see cref="PlayerData"/> that may be mutated by the roll</param>
 /// <param name="banner">The <see cref="Banner"/> the player is attempting to roll</param>
-public class RollContext(PlayerData playerData, Banner banner, string bannerName)
+public class RollContext(PlayerData playerData, Banner banner, string bannerName, ILogger logger)
 {
-    public string BannerName { get; private set; } = bannerName;
+    public string BannerName { get; } = bannerName;
     /// <summary>
     /// The <see cref="PlayerData"/> that may be mutated by the roll
     /// </summary>
-    public PlayerData PlayerData { get; private set; } = playerData;
+    public PlayerData PlayerData { get; } = playerData;
     /// <summary>
     /// The <see cref="Banner"/> the player is attempting to roll
     /// </summary>
@@ -42,11 +43,11 @@ public class RollContext(PlayerData playerData, Banner banner, string bannerName
     /// <summary>
     /// Applies all mutations from <see cref="RollDataMutations"/> to the <see cref="PlayerData"/>
     /// </summary>
-    public void ApplyPlayerDataMutations()
+    public PlayerData ApplyPlayerDataMutations()
     {
-        logger.LogInformation("Before Apply: " + rollContext.PlayerData.BannerData[rollContext.BannerName].CurrentPity);
-        foreach (Action<PlayerData> mutation in m_rollDataMutations) mutation(PlayerData);
+        PlayerData updatedData = new(PlayerData);
+        foreach (Action<PlayerData> mutation in m_rollDataMutations) mutation(updatedData);
         m_rollDataMutations.Clear();
-        logger.LogInformation("After Apply: " + rollContext.PlayerData.BannerData[rollContext.BannerName].CurrentPity);
+        return updatedData;
     }
 }
