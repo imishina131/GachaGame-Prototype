@@ -60,13 +60,11 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
     logger.LogInformation("Rarity Value 4 Star: " + rarityValue4Star);
     logger.LogInformation("Rarity Value 3 Star: " + rarityValue3Star);
     logger.LogInformation("Pity: " + pity);
-    //Had to add this because closures in C# are passed as references
-    uint finalPity = pity;
     rollContext.TryAddMutation(playerData =>
     {
         if (!playerData.BannerData.ContainsKey(rollContext.BannerName))
             playerData.BannerData[rollContext.BannerName] = new();
-        playerData.BannerData[rollContext.BannerName].CurrentPity = finalPity;
+        playerData.BannerData[rollContext.BannerName].CurrentPity = pity;
     });
 
     if (possibleRolls.Count == 0) return default;
