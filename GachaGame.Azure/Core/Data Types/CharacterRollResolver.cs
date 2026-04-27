@@ -21,7 +21,7 @@ public struct CharacterRollResolver : IRollResolver<Character>
         }
 
         uint targetRarity = possibleRolls[0].Rarity;
-
+            logger?.LogWarning("Test.");
         if (targetRarity == 5)
         {
             int half = possibleRolls.Count / 2;
