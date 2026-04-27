@@ -9,10 +9,11 @@ namespace GachaGame.Azure.Core.DataTypes;
 public record struct Character : IRollData
 {
     [method: JsonConstructor]
-    Character(Guid characterID, uint rarity)
+    Character(Guid characterID, uint rarity, bool isFeatured)
     {
         CharacterID = characterID;
         Rarity = rarity;
+        IsFeatured = isFeatured;
     }
     /// <summary>
     /// The ID of the character. This is used for lookups on the client side.
@@ -24,4 +25,6 @@ public record struct Character : IRollData
     /// </summary>
     [JsonRequired]
     public required uint Rarity { get; init; }
+    [JsonRequired]
+    public required bool IsFeatured { get; init; }
 }
