@@ -7,7 +7,12 @@ namespace GachaGame.Azure.Core.DataTypes;
 [JsonObject]
 public class PlayerData
 {
-    public Dictionary<string, PlayerBannerData> BannerData {get; set;} = new();
+    public PlayerData(){}
+    public PlayerData(PlayerData playerData)
+    {
+        BannerData = new(playerData.BannerData);
+    }
+    public Dictionary<string, PlayerBannerData> BannerData {get; init;} = new();
 }
 
 /// <summary>
@@ -16,6 +21,6 @@ public class PlayerData
 [JsonObject]
 public class PlayerBannerData
 {
-    public HashSet<RollData> RollData {get; set;} = [];
+    public bool IsGuaranteedFeatured {get; set;}
     public uint CurrentPity {get; set;}
 }

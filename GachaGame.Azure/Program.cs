@@ -14,5 +14,4 @@ PlayFab.PlayFabSettings.staticSettings.TitleId =
     Environment.GetEnvironmentVariable("PLAYFAB_TITLE_ID");
 PlayFab.PlayFabSettings.staticSettings.DeveloperSecretKey = 
     Environment.GetEnvironmentVariable("PLAYFAB_SECRET_KEY");
-
 builder.Build().Run();

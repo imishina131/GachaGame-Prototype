@@ -8,7 +8,7 @@ namespace GachaGame.Azure.Core.Helpers;
 /// A <see cref="JsonConverter{T}"/> that serializes and deserializes <see cref="IRollResolver{T}"/>
 /// </summary>
 /// <typeparam name="T">The type that the <see cref="IRollResolver{T}"/> resolves</typeparam>
-public class RollResolverConverter<T> : JsonConverter<IRollResolver<T>> where T : struct, IRollData
+public class RollResolverConverter<T> : JsonConverter<IRollResolver<T>> where T : IRollData
 {
     /// <inheritdoc/>
     public override IRollResolver<T> ReadJson(
