@@ -10,8 +10,6 @@ namespace GachaGame.Azure.Core.DataTypes;
 [UsedImplicitly]
 public struct CharacterRollResolver : IRollResolver<Character>
 {
-   
-
     public Character ResolveRoll(List<Character> possibleRolls, RollContext rollContext, ILogger logger)
     {
         if (possibleRolls == null || possibleRolls.Count == 0)
@@ -21,12 +19,11 @@ public struct CharacterRollResolver : IRollResolver<Character>
         }
 
         uint targetRarity = possibleRolls[0].Rarity;
-            logger?.LogWarning("Test.");
+
         if (targetRarity == 5)
         {
-            int half = possibleRolls.Count / 2;
-            List<Character> featuredPool = possibleRolls.Take(half).ToList();
-            List<Character> standardPool = possibleRolls.Skip(half).ToList();
+            List<Character> featuredPool = possibleRolls.Where(c => c.IsFeatured).ToList();
+            List<Character> standardPool = possibleRolls.Where(c => !c.IsFeatured).ToList();
 
             Character selected;
             bool won5050 = Random.Shared.NextSingle() > 0.5f;
@@ -43,12 +40,10 @@ public struct CharacterRollResolver : IRollResolver<Character>
                 selected = fallbackPool[Random.Shared.Next(fallbackPool.Count)];
             }
 
-
             var currentBanner = rollContext.Banner;
 
             rollContext.TryAddMutation(data =>
             {
-
                 string bannerKey = currentBanner.GetHashCode().ToString();
 
                 if (data.BannerData.TryGetValue(bannerKey, out var bannerEntry))
@@ -61,13 +56,19 @@ public struct CharacterRollResolver : IRollResolver<Character>
         }
 
         uint ratioSum = 0;
-        foreach (Character roll in possibleRolls) ratioSum += roll.Rarity;
+        foreach (Character roll in possibleRolls)
+        {
+            ratioSum += roll.Rarity;
+        }
 
         float numericValue = Random.Shared.NextSingle() * ratioSum;
         foreach (Character roll in possibleRolls)
         {
             numericValue -= roll.Rarity;
-            if (numericValue <= 0) return roll;
+            if (numericValue <= 0)
+            {
+                return roll;
+            }
         }
 
         return possibleRolls[Random.Shared.Next(possibleRolls.Count)];
