@@ -1,0 +1,87 @@
+\doxysection{Remote\+Roll\+Handler Class Reference}
+\hypertarget{class_remote_roll_handler}{}\label{class_remote_roll_handler}\index{RemoteRollHandler@{RemoteRollHandler}}
+
+
+Handles requesting a remote roll from the azure function in playfab. Outputs the result via On\+Roll\+Complete.  
+
+
+Inheritance diagram for Remote\+Roll\+Handler:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_remote_roll_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_remote_roll_handler_aac8b94f0f7148db239e47db9ddf35bfa}{Roll}} ()
+\begin{DoxyCompactList}\small\item\em Rolls the active banner. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_remote_roll_handler_a380b5f72cd5a9950c1766278b83c04cb}{Update\+Banner\+To\+Roll}} (string banner\+ID)
+\begin{DoxyCompactList}\small\item\em Updates the current banner to roll.
+
+
+\begin{DoxyParams}{Parameters}
+{\em banner\+ID} & The new banner to roll\\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_remote_roll_handler_aba6eae81a5910c1548de3db0b00abdf0}\label{class_remote_roll_handler_aba6eae81a5910c1548de3db0b00abdf0} 
+Unity\+Event$<$ \doxymbox{\hyperlink{class_character_data}{Character\+Data}} $>$ {\bfseries On\+Roll\+Complete} = new()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_remote_roll_handler_a16fe08d8b04f419f261ebe597e7c23a8}\label{class_remote_roll_handler_a16fe08d8b04f419f261ebe597e7c23a8} 
+string {\bfseries Banner\+ID} = "{}Main Banner"{}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em The ID of the banner that will be rolled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles requesting a remote roll from the azure function in playfab. Outputs the result via On\+Roll\+Complete. 
+
+\label{doc-func-members}
+\Hypertarget{class_remote_roll_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_remote_roll_handler_aac8b94f0f7148db239e47db9ddf35bfa}\index{RemoteRollHandler@{RemoteRollHandler}!Roll@{Roll}}
+\index{Roll@{Roll}!RemoteRollHandler@{RemoteRollHandler}}
+\doxysubsubsection{\texorpdfstring{Roll()}{Roll()}}
+{\footnotesize\ttfamily \label{class_remote_roll_handler_aac8b94f0f7148db239e47db9ddf35bfa} 
+void Remote\+Roll\+Handler.\+Roll (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Rolls the active banner. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_i_roll_handler_a1e34f538110837ee88580d745ee11869}{IRoll\+Handler}}.
+
+\Hypertarget{class_remote_roll_handler_a380b5f72cd5a9950c1766278b83c04cb}\index{RemoteRollHandler@{RemoteRollHandler}!UpdateBannerToRoll@{UpdateBannerToRoll}}
+\index{UpdateBannerToRoll@{UpdateBannerToRoll}!RemoteRollHandler@{RemoteRollHandler}}
+\doxysubsubsection{\texorpdfstring{UpdateBannerToRoll()}{UpdateBannerToRoll()}}
+{\footnotesize\ttfamily \label{class_remote_roll_handler_a380b5f72cd5a9950c1766278b83c04cb} 
+void Remote\+Roll\+Handler.\+Update\+Banner\+To\+Roll (\begin{DoxyParamCaption}\item[{string}]{banner\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Updates the current banner to roll.
+
+
+\begin{DoxyParams}{Parameters}
+{\em banner\+ID} & The new banner to roll\\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \doxymbox{\hyperlink{interface_i_roll_handler_a2a73c4de3659557fd0cc05b20fe3321d}{IRoll\+Handler}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+F:\+/\+\+Programs/\+\+Unity/\+\+Projects/\+\+Gacha/\+\+Assets/\+\+Scripts/\+\+Gacha\+Game.\+Core/\+\+Gacha Rolls/\+Remote\+Roll\+Resolver.\+cs\end{DoxyCompactItemize}
