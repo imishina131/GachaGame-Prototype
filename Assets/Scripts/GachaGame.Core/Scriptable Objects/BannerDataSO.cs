@@ -1,4 +1,4 @@
-using System;
+
 using UnityEngine;
 /// <summary>
 /// Represents a Banner that can be selected in the gacha UI
