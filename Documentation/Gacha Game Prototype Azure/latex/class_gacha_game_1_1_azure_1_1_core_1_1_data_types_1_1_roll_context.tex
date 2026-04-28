@@ -1,0 +1,136 @@
+\doxysection{Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Roll\+Context(Player\+Data player\+Data, Banner banner, string banner\+Name, ILogger logger) Class Reference}
+\hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{}\label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}\index{GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}}
+
+
+Represents the context of a roll and the data that is relevant to it.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a278239d3aa3fee571a4671fdd86a81d8}{Try\+Add\+Mutation}} (Action$<$ \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91}{Player\+Data}} $>$ player\+Data\+Mutation)
+\begin{DoxyCompactList}\small\item\em Adds a mutation to the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_af3477f56c6ebff0ff2b0563c115e005f}{Roll\+Data\+Mutations}. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a9b6bec93025e7fd0d7ae68995affbe91}{Try\+Remove\+Mutation}} (Action$<$ \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91}{Player\+Data}} $>$ player\+Data\+Mutation)
+\begin{DoxyCompactList}\small\item\em Removes a mutation from the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_af3477f56c6ebff0ff2b0563c115e005f}{Roll\+Data\+Mutations}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91}{Player\+Data}} \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a4437370d2fa0dde23c529166ac28f701}{Get\+Mutated\+Player\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Applies all mutations from \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_af3477f56c6ebff0ff2b0563c115e005f}{Roll\+Data\+Mutations} to the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a2355032c46245b25edefab4c223986c3}{Banner\+Name}} = banner\+Name\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\item 
+Player\+Data \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91}{Player\+Data}} = player\+Data\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em The \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data} that may be mutated by the roll. \end{DoxyCompactList}\item 
+Banner \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_aa578f4ef6dd6549046ece0988f8fa85a}{Banner}} = banner\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em The \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_banner}{Banner} the player is attempting to roll. \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ Action$<$ \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91}{Player\+Data}} $>$ $>$ \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_af3477f56c6ebff0ff2b0563c115e005f}{Roll\+Data\+Mutations}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em The mutations to apply to the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the context of a roll and the data that is relevant to it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Data} & The \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data} that may be mutated by the roll\\
+\hline
+{\em banner} & The \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_banner}{Banner} the player is attempting to roll\\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a4437370d2fa0dde23c529166ac28f701}\index{GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}!GetMutatedPlayerData@{GetMutatedPlayerData}}
+\index{GetMutatedPlayerData@{GetMutatedPlayerData}!GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}}
+\doxysubsubsection{\texorpdfstring{GetMutatedPlayerData()}{GetMutatedPlayerData()}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a4437370d2fa0dde23c529166ac28f701} 
+\doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91}{Player\+Data}} Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Roll\+Context.\+Get\+Mutated\+Player\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Applies all mutations from \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_af3477f56c6ebff0ff2b0563c115e005f}{Roll\+Data\+Mutations} to the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data}. 
+
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a278239d3aa3fee571a4671fdd86a81d8}\index{GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}!TryAddMutation@{TryAddMutation}}
+\index{TryAddMutation@{TryAddMutation}!GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}}
+\doxysubsubsection{\texorpdfstring{TryAddMutation()}{TryAddMutation()}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a278239d3aa3fee571a4671fdd86a81d8} 
+bool Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Roll\+Context.\+Try\+Add\+Mutation (\begin{DoxyParamCaption}\item[{Action$<$ \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91}{Player\+Data}} $>$}]{player\+Data\+Mutation}{}\end{DoxyParamCaption})}
+
+
+
+Adds a mutation to the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_af3477f56c6ebff0ff2b0563c115e005f}{Roll\+Data\+Mutations}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Data\+Mutation} & The mutation to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A bool indicating whether the mutation was added successfully
+\end{DoxyReturn}
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a9b6bec93025e7fd0d7ae68995affbe91}\index{GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}!TryRemoveMutation@{TryRemoveMutation}}
+\index{TryRemoveMutation@{TryRemoveMutation}!GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}}
+\doxysubsubsection{\texorpdfstring{TryRemoveMutation()}{TryRemoveMutation()}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a9b6bec93025e7fd0d7ae68995affbe91} 
+bool Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Roll\+Context.\+Try\+Remove\+Mutation (\begin{DoxyParamCaption}\item[{Action$<$ \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91}{Player\+Data}} $>$}]{player\+Data\+Mutation}{}\end{DoxyParamCaption})}
+
+
+
+Removes a mutation from the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_af3477f56c6ebff0ff2b0563c115e005f}{Roll\+Data\+Mutations}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Data\+Mutation} & The mutation to remove\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A bool indicating whether the mutation was removed successfully
+\end{DoxyReturn}
+
+
+\label{doc-property-members}
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_aa578f4ef6dd6549046ece0988f8fa85a}\index{GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}!Banner@{Banner}}
+\index{Banner@{Banner}!GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}}
+\doxysubsubsection{\texorpdfstring{Banner}{Banner}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_aa578f4ef6dd6549046ece0988f8fa85a} 
+Banner Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Roll\+Context.\+Banner = banner\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_banner}{Banner} the player is attempting to roll. 
+
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a2355032c46245b25edefab4c223986c3}\index{GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}!BannerName@{BannerName}}
+\index{BannerName@{BannerName}!GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}}
+\doxysubsubsection{\texorpdfstring{BannerName}{BannerName}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a2355032c46245b25edefab4c223986c3} 
+string Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Roll\+Context.\+Banner\+Name = banner\+Name\hspace{0.3cm}{\ttfamily [get]}}
+
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91}\index{GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}!PlayerData@{PlayerData}}
+\index{PlayerData@{PlayerData}!GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}}
+\doxysubsubsection{\texorpdfstring{PlayerData}{PlayerData}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91} 
+Player\+Data Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Roll\+Context.\+Player\+Data = player\+Data\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data} that may be mutated by the roll. 
+
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_af3477f56c6ebff0ff2b0563c115e005f}\index{GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}!RollDataMutations@{RollDataMutations}}
+\index{RollDataMutations@{RollDataMutations}!GachaGame.Azure.Core.DataTypes.RollContext@{GachaGame.Azure.Core.DataTypes.RollContext}}
+\doxysubsubsection{\texorpdfstring{RollDataMutations}{RollDataMutations}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_af3477f56c6ebff0ff2b0563c115e005f} 
+IRead\+Only\+List$<$Action$<$\doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context_a92976c25a1edaecb39bddc443bbb7e91}{Player\+Data}}$>$ $>$ Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Roll\+Context.\+Roll\+Data\+Mutations\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The mutations to apply to the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data}. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+F:\+/\+\+Programs/\+\+Unity/\+\+Projects/\+\+Gacha/\+\+Gacha\+Game.\+Azure/\+\+Core/\+\+Data Types/\+\doxymbox{\hyperlink{_roll_context_8cs}{Roll\+Context.\+cs}}\end{DoxyCompactItemize}

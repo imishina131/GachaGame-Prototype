@@ -1,0 +1,66 @@
+\doxysection{Gacha\+Game.\+Azure.\+Core.\+Interfaces.\+IRoll\+Resolver\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Interface Template Reference}
+\hypertarget{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{}\label{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}\index{GachaGame.Azure.Core.Interfaces.IRollResolver$<$ T $>$@{GachaGame.Azure.Core.Interfaces.IRollResolver$<$ T $>$}}
+
+
+Represents a resolver for a {\itshape T} .  
+
+
+Inheritance diagram for Gacha\+Game.\+Azure.\+Core.\+Interfaces.\+IRoll\+Resolver\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.028466cm]{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+T \doxymbox{\hyperlink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g_a13d267958b395de1cc94700689df154c}{Resolve\+Roll}} (List$<$ T $>$ possible\+Rolls, \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}} roll\+Context, ILogger logger)
+\begin{DoxyCompactList}\small\item\em Resolves a roll for a {\itshape T}  through taking in a multiple \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_data}{IRoll\+Data} and generating a single result. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a resolver for a {\itshape T} . 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of object the resolver will handle\\
+\hline
+\end{DoxyTemplParams}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em \doxymbox{\hyperlink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_data}{IRoll\+Data}}}]\end{description}
+\end{Desc}
+
+
+\label{doc-func-members}
+\Hypertarget{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g_a13d267958b395de1cc94700689df154c}\index{GachaGame.Azure.Core.Interfaces.IRollResolver$<$ T $>$@{GachaGame.Azure.Core.Interfaces.IRollResolver$<$ T $>$}!ResolveRoll@{ResolveRoll}}
+\index{ResolveRoll@{ResolveRoll}!GachaGame.Azure.Core.Interfaces.IRollResolver$<$ T $>$@{GachaGame.Azure.Core.Interfaces.IRollResolver$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ResolveRoll()}{ResolveRoll()}}
+{\footnotesize\ttfamily \label{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g_a13d267958b395de1cc94700689df154c} 
+T Gacha\+Game.\+Azure.\+Core.\+Interfaces.\+IRoll\+Resolver$<$ T $>$.Resolve\+Roll (\begin{DoxyParamCaption}\item[{List$<$ T $>$}]{possible\+Rolls}{, }\item[{\doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}}}]{roll\+Context}{, }\item[{ILogger}]{logger}{}\end{DoxyParamCaption})}
+
+
+
+Resolves a roll for a {\itshape T}  through taking in a multiple \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_data}{IRoll\+Data} and generating a single result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em possible\+Rolls} & Each possible roll result\\
+\hline
+{\em roll\+Context} & The \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context} with data for the current roll\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting roll
+\end{DoxyReturn}
+
+
+Implemented in \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_empty_roll_resolver-1-g_ad40c58093874d25c3d32242aa7c7c60c}{Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Empty\+Roll\+Resolver$<$ T $>$}}.
+
+
+
+The documentation for this interface was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+F:\+/\+\+Programs/\+\+Unity/\+\+Projects/\+\+Gacha/\+\+Gacha\+Game.\+Azure/\+\+Core/\+\+Interfaces/\+\doxymbox{\hyperlink{_i_roll_resolver_8cs}{IRoll\+Resolver.\+cs}}\end{DoxyCompactItemize}

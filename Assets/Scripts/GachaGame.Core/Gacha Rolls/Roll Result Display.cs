@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
-
+/// <summary>
+/// Displays the resulting character data from a roll in the UI using <see cref="DisplayRollResult"/>
+/// </summary>
 public class RollResultDisplay : MonoBehaviour
 {
     [SerializeField] CanvasGroup m_rollResultVisuals;
@@ -12,6 +14,10 @@ public class RollResultDisplay : MonoBehaviour
         m_rollResultVisuals.alpha = 0;
         m_rollQueue.Initialize(this);
     }
+    /// <summary>
+    /// Displays a character result from a roll in the UI
+    /// </summary>
+    /// <param name="characterData">The data for the character to be displayed</param>
     public void DisplayRollResult(CharacterData characterData)
     {
         m_rollQueue.QueueRoutine(DisplayResultAsync(characterData));

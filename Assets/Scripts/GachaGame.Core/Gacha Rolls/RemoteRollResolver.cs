@@ -1,18 +1,21 @@
-using System;
-using System.Collections.Generic;
 using MatrixUtils.Attributes;
 using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.CloudScriptModels;
 using UnityEngine;
 using UnityEngine.Events;
-
+/// <summary>
+/// Handles requesting a remote roll from the azure function in playfab. Outputs the result via <see cref="OnRollComplete"/>
+/// </summary>
 public class RemoteRollHandler : MonoBehaviour, IRollHandler
 {
     [SerializeField, RequiredField] CharacterDataSO CharacterData;
     public UnityEvent<CharacterData> OnRollComplete = new();
+    /// <summary>
+    /// The ID of the banner that will be rolled
+    /// </summary>
     [field:SerializeField] public string BannerID { get; private set; } = "Main Banner";
-    
+    /// <inheritdoc/>
     public void Roll()
     {
         PlayFabCloudScriptAPI.ExecuteFunction(
@@ -31,6 +34,7 @@ public class RemoteRollHandler : MonoBehaviour, IRollHandler
             ErrorCallback
         );
     }
+    /// <inheritdoc/>
     public void UpdateBannerToRoll(string bannerID)
     {
         BannerID = bannerID;

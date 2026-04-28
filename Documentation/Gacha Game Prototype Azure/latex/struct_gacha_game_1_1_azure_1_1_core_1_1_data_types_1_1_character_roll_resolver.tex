@@ -1,0 +1,46 @@
+\doxysection{Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character\+Roll\+Resolver Struct Reference}
+\hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver}{}\label{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver}\index{GachaGame.Azure.Core.DataTypes.CharacterRollResolver@{GachaGame.Azure.Core.DataTypes.CharacterRollResolver}}
+
+
+A \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{IRoll\+Resolver$<$\+T$>$} that rolls a \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} based on the rarity of the \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} and the pity in the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data} from the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}.  
+
+
+Inheritance diagram for Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character\+Roll\+Resolver:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_a853165413a9a69c537625f3a2e956a22}{Resolve\+Roll}} (List$<$ \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} $>$ possible\+Rolls, \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}} roll\+Context, ILogger logger)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{Gacha\+Game.\+Azure.\+Core.\+Interfaces.\+IRoll\+Resolver$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+T \doxymbox{\hyperlink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g_a13d267958b395de1cc94700689df154c}{Resolve\+Roll}} (List$<$ T $>$ possible\+Rolls, \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}} roll\+Context, ILogger logger)
+\begin{DoxyCompactList}\small\item\em Resolves a roll for a {\itshape T}  through taking in a multiple \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_data}{IRoll\+Data} and generating a single result. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{IRoll\+Resolver$<$\+T$>$} that rolls a \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} based on the rarity of the \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} and the pity in the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data} from the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}. 
+
+\label{doc-func-members}
+\Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_a853165413a9a69c537625f3a2e956a22}\index{GachaGame.Azure.Core.DataTypes.CharacterRollResolver@{GachaGame.Azure.Core.DataTypes.CharacterRollResolver}!ResolveRoll@{ResolveRoll}}
+\index{ResolveRoll@{ResolveRoll}!GachaGame.Azure.Core.DataTypes.CharacterRollResolver@{GachaGame.Azure.Core.DataTypes.CharacterRollResolver}}
+\doxysubsubsection{\texorpdfstring{ResolveRoll()}{ResolveRoll()}}
+{\footnotesize\ttfamily \label{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_a853165413a9a69c537625f3a2e956a22} 
+\doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character\+Roll\+Resolver.\+Resolve\+Roll (\begin{DoxyParamCaption}\item[{List$<$ \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} $>$}]{possible\+Rolls}{, }\item[{\doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}}}]{roll\+Context}{, }\item[{ILogger}]{logger}{}\end{DoxyParamCaption})}
+
+
+
+
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+F:\+/\+\+Programs/\+\+Unity/\+\+Projects/\+\+Gacha/\+\+Gacha\+Game.\+Azure/\+\+Core/\+\+Data Types/\+\doxymbox{\hyperlink{_character_roll_resolver_8cs}{Character\+Roll\+Resolver.\+cs}}\end{DoxyCompactItemize}

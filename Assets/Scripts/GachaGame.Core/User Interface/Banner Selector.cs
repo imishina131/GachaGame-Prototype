@@ -4,7 +4,9 @@ using MatrixUtils.Attributes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// Sends data to multiple UI components relating to the banner selected
+/// </summary>
 public class BannerSelector : MonoBehaviour
 {
     [SerializeField] List<BannerSelectorData> m_bannerSelectorData;

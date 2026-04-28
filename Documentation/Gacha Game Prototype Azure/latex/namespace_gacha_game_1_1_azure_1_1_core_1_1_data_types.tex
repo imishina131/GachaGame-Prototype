@@ -1,0 +1,25 @@
+\doxysection{Gacha\+Game.\+Azure.\+Core.\+Data\+Types Namespace Reference}
+\hypertarget{namespace_gacha_game_1_1_azure_1_1_core_1_1_data_types}{}\label{namespace_gacha_game_1_1_azure_1_1_core_1_1_data_types}\index{GachaGame.Azure.Core.DataTypes@{GachaGame.Azure.Core.DataTypes}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_banner}{Banner}}
+\begin{DoxyCompactList}\small\item\em Represents a banner that can be rolled. Stored as a JSON object on Play\+Fab. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}}
+\begin{DoxyCompactList}\small\item\em Represents a character that can be rolled. Stored as a JSON object on Play\+Fab inside a \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier}{Rarity\+Tier} in the title data. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver}{Character\+Roll\+Resolver}}
+\begin{DoxyCompactList}\small\item\em A \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{IRoll\+Resolver$<$\+T$>$} that rolls a \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} based on the rarity of the \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} and the pity in the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data} from the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_empty_roll_resolver-1-g}{Empty\+Roll\+Resolver$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em A \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{IRoll\+Resolver$<$\+T$>$} that always returns the default value of {\itshape T} . \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data}}
+\begin{DoxyCompactList}\small\item\em Represents the data of a player stored in Play\+Fab as a JSON object. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_banner_data}{Player\+Banner\+Data}}
+\begin{DoxyCompactList}\small\item\em Represents the data of a player relating to a specific \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_banner}{Banner} stored in Play\+Fab as a JSON object. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier}{Rarity\+Tier}}
+\begin{DoxyCompactList}\small\item\em Represents a tier of characters that can be rolled. Stored as a JSON object on Play\+Fab. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_roll_resolver}{Rarity\+Tier\+Roll\+Resolver}}
+\begin{DoxyCompactList}\small\item\em Resolves the rolled \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier}{Rarity\+Tier} from the options provided. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}}
+\begin{DoxyCompactList}\small\item\em Represents the context of a roll and the data that is relevant to it. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_data}{Roll\+Data}}
+\begin{DoxyCompactList}\small\item\em Represents the resulting data from roll on a \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_banner}{Banner} sent to the client to display to the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
