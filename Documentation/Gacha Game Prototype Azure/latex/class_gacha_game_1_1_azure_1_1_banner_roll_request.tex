@@ -1,0 +1,52 @@
+\doxysection{Gacha\+Game.\+Azure.\+Banner\+Roll\+Request(ILogger\texorpdfstring{$<$}{<} Banner\+Roll\+Request \texorpdfstring{$>$}{>} logger) Class Reference}
+\hypertarget{class_gacha_game_1_1_azure_1_1_banner_roll_request}{}\label{class_gacha_game_1_1_azure_1_1_banner_roll_request}\index{GachaGame.Azure.BannerRollRequest@{GachaGame.Azure.BannerRollRequest}}
+
+
+Represents a request to roll a banner.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+async Task$<$ IAction\+Result $>$ \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_banner_roll_request_ae75c3a046c89ab9caf16c0deae14e99b}{Run}} (\+[Http\+Trigger(Authorization\+Level.\+Function, "{}post"{})]\+ Http\+Request req, Cancellation\+Token cancellation\+Token)
+\begin{DoxyCompactList}\small\item\em Executes the banner roll request received from the client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a request to roll a banner. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em logger} & A ILogger to log details\\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_gacha_game_1_1_azure_1_1_banner_roll_request_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_gacha_game_1_1_azure_1_1_banner_roll_request_ae75c3a046c89ab9caf16c0deae14e99b}\index{GachaGame.Azure.BannerRollRequest@{GachaGame.Azure.BannerRollRequest}!Run@{Run}}
+\index{Run@{Run}!GachaGame.Azure.BannerRollRequest@{GachaGame.Azure.BannerRollRequest}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_banner_roll_request_ae75c3a046c89ab9caf16c0deae14e99b} 
+async Task$<$ IAction\+Result $>$ Gacha\+Game.\+Azure.\+Banner\+Roll\+Request.\+Run (\begin{DoxyParamCaption}\item[{\+[\+Http\+Trigger(\+Authorization\+Level.\+Function, "{}post"{})]\+ Http\+Request}]{req}{, }\item[{Cancellation\+Token}]{cancellation\+Token}{}\end{DoxyParamCaption})}
+
+
+
+Executes the banner roll request received from the client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & The Http\+Request to with the \doxylink{struct_gacha_game_1_1_azure_1_1_banner_roll_request_data}{Banner\+Roll\+Request\+Data} from the client\\
+\hline
+{\em cancellation\+Token} & The token to cancel this roll\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting IAction\+Result with the \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_data}{Roll\+Data} result from this roll
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+F:\+/\+\+Programs/\+\+Unity/\+\+Projects/\+\+Gacha/\+\+Gacha\+Game.\+Azure/\+\+Core/\+\doxymbox{\hyperlink{_banner_roll_request_8cs}{Banner\+Roll\+Request.\+cs}}\end{DoxyCompactItemize}

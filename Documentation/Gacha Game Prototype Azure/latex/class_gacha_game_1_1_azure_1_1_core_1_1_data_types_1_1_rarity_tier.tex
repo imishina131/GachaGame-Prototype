@@ -1,0 +1,81 @@
+\doxysection{Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Rarity\+Tier Class Reference}
+\hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier}{}\label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier}\index{GachaGame.Azure.Core.DataTypes.RarityTier@{GachaGame.Azure.Core.DataTypes.RarityTier}}
+
+
+Represents a tier of characters that can be rolled. Stored as a JSON object on Play\+Fab.  
+
+
+Inheritance diagram for Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Rarity\+Tier:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+required Guid \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a097f338dee0d49058864b0d711d5f51b}{Tier\+ID}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em The ID of the rarity tier. This is used for lookups on the client side. \end{DoxyCompactList}\item 
+required uint \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a85099f526bffb2fe9c7fbd8785787281}{Rarity}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em The rarity of rolling this tier. \end{DoxyCompactList}\item 
+required IRoll\+Resolver$<$ \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} $>$ \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a1fd0f99231acec9a00d935bd0915a2d0}{Character\+Resolver}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em The \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{IRoll\+Resolver$<$\+T$>$} for each \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} in this tier. \end{DoxyCompactList}\item 
+required List$<$ \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} $>$ \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a4d0e29f66c8a159a18e4c13b4cea19ec}{Characters}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Each \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} in this tier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a tier of characters that can be rolled. Stored as a JSON object on Play\+Fab. 
+
+\label{doc-property-members}
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a1fd0f99231acec9a00d935bd0915a2d0}\index{GachaGame.Azure.Core.DataTypes.RarityTier@{GachaGame.Azure.Core.DataTypes.RarityTier}!CharacterResolver@{CharacterResolver}}
+\index{CharacterResolver@{CharacterResolver}!GachaGame.Azure.Core.DataTypes.RarityTier@{GachaGame.Azure.Core.DataTypes.RarityTier}}
+\doxysubsubsection{\texorpdfstring{CharacterResolver}{CharacterResolver}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a1fd0f99231acec9a00d935bd0915a2d0} 
+required IRoll\+Resolver$<$\doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}}$>$ Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Rarity\+Tier.\+Character\+Resolver\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{IRoll\+Resolver$<$\+T$>$} for each \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} in this tier. 
+
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a4d0e29f66c8a159a18e4c13b4cea19ec}\index{GachaGame.Azure.Core.DataTypes.RarityTier@{GachaGame.Azure.Core.DataTypes.RarityTier}!Characters@{Characters}}
+\index{Characters@{Characters}!GachaGame.Azure.Core.DataTypes.RarityTier@{GachaGame.Azure.Core.DataTypes.RarityTier}}
+\doxysubsubsection{\texorpdfstring{Characters}{Characters}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a4d0e29f66c8a159a18e4c13b4cea19ec} 
+required List$<$\doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}}$>$ Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Rarity\+Tier.\+Characters\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Each \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} in this tier. 
+
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a85099f526bffb2fe9c7fbd8785787281}\index{GachaGame.Azure.Core.DataTypes.RarityTier@{GachaGame.Azure.Core.DataTypes.RarityTier}!Rarity@{Rarity}}
+\index{Rarity@{Rarity}!GachaGame.Azure.Core.DataTypes.RarityTier@{GachaGame.Azure.Core.DataTypes.RarityTier}}
+\doxysubsubsection{\texorpdfstring{Rarity}{Rarity}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a85099f526bffb2fe9c7fbd8785787281} 
+required uint Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Rarity\+Tier.\+Rarity\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The rarity of rolling this tier. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_data_a0dcf7b0a5d1d9ad5d097f2f737e94ea8}{Gacha\+Game.\+Azure.\+Core.\+Interfaces.\+IRoll\+Data}}.
+
+\Hypertarget{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a097f338dee0d49058864b0d711d5f51b}\index{GachaGame.Azure.Core.DataTypes.RarityTier@{GachaGame.Azure.Core.DataTypes.RarityTier}!TierID@{TierID}}
+\index{TierID@{TierID}!GachaGame.Azure.Core.DataTypes.RarityTier@{GachaGame.Azure.Core.DataTypes.RarityTier}}
+\doxysubsubsection{\texorpdfstring{TierID}{TierID}}
+{\footnotesize\ttfamily \label{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier_a097f338dee0d49058864b0d711d5f51b} 
+required Guid Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Rarity\+Tier.\+Tier\+ID\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The ID of the rarity tier. This is used for lookups on the client side. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+F:\+/\+\+Programs/\+\+Unity/\+\+Projects/\+\+Gacha/\+\+Gacha\+Game.\+Azure/\+\+Core/\+\+Data Types/\+\doxymbox{\hyperlink{_rarity_tier_8cs}{Rarity\+Tier.\+cs}}\end{DoxyCompactItemize}

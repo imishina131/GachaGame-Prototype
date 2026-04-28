@@ -1,0 +1,78 @@
+\doxysection{F:\+/\+\+Programs/\+\+Unity/\+\+Projects/\+\+Gacha/\+\+Gacha\+Game.Azure/\+\+Program.cs File Reference}
+\hypertarget{_program_8cs}{}\label{_program_8cs}\index{F:/Programs/Unity/Projects/Gacha/GachaGame.Azure/Program.cs@{F:/Programs/Unity/Projects/Gacha/GachaGame.Azure/Program.cs}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+builder. \doxymbox{\hyperlink{_program_8cs_a0316ef7084e88636f9abca451441288b}{Configure\+Functions\+Web\+Application}} ()
+\item 
+builder.\+Services. \doxymbox{\hyperlink{_program_8cs_a2fff94a46bebecfaf004993c4b1fa0af}{Add\+Application\+Insights\+Telemetry\+Worker\+Service}} () .Configure\+Functions\+Application\+Insights()
+\item 
+builder. \doxymbox{\hyperlink{_program_8cs_a2a0360d8454cd37d8ea59618e0e703ee}{Build}} ().Run()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Functions\+Application\+Builder \doxymbox{\hyperlink{_program_8cs_a317b798a8908d190dfb020db40257ef2}{builder}} = Functions\+Application.\+Create\+Builder(args)
+\item 
+Play\+Fab.\+Play\+Fab\+Settings.\+static\+Settings. \doxymbox{\hyperlink{_program_8cs_a392f00a120cd950d6bbdb5e5283f8084}{Title\+Id}}
+\item 
+Play\+Fab.\+Play\+Fab\+Settings.\+static\+Settings. \doxymbox{\hyperlink{_program_8cs_a5d4a319cf8f814233416d126e93043bc}{Developer\+Secret\+Key}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_program_8cs_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_program_8cs_a2fff94a46bebecfaf004993c4b1fa0af}\index{Program.cs@{Program.cs}!AddApplicationInsightsTelemetryWorkerService@{AddApplicationInsightsTelemetryWorkerService}}
+\index{AddApplicationInsightsTelemetryWorkerService@{AddApplicationInsightsTelemetryWorkerService}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{AddApplicationInsightsTelemetryWorkerService()}{AddApplicationInsightsTelemetryWorkerService()}}
+{\footnotesize\ttfamily \label{_program_8cs_a2fff94a46bebecfaf004993c4b1fa0af} 
+builder.\+Services. Add\+Application\+Insights\+Telemetry\+Worker\+Service (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a2a0360d8454cd37d8ea59618e0e703ee}\index{Program.cs@{Program.cs}!Build@{Build}}
+\index{Build@{Build}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily \label{_program_8cs_a2a0360d8454cd37d8ea59618e0e703ee} 
+builder. Build (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a0316ef7084e88636f9abca451441288b}\index{Program.cs@{Program.cs}!ConfigureFunctionsWebApplication@{ConfigureFunctionsWebApplication}}
+\index{ConfigureFunctionsWebApplication@{ConfigureFunctionsWebApplication}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{ConfigureFunctionsWebApplication()}{ConfigureFunctionsWebApplication()}}
+{\footnotesize\ttfamily \label{_program_8cs_a0316ef7084e88636f9abca451441288b} 
+builder. Configure\+Functions\+Web\+Application (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{_program_8cs_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_program_8cs_a317b798a8908d190dfb020db40257ef2}\index{Program.cs@{Program.cs}!builder@{builder}}
+\index{builder@{builder}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{builder}{builder}}
+{\footnotesize\ttfamily \label{_program_8cs_a317b798a8908d190dfb020db40257ef2} 
+Functions\+Application\+Builder builder = Functions\+Application.\+Create\+Builder(args)}
+
+\Hypertarget{_program_8cs_a5d4a319cf8f814233416d126e93043bc}\index{Program.cs@{Program.cs}!DeveloperSecretKey@{DeveloperSecretKey}}
+\index{DeveloperSecretKey@{DeveloperSecretKey}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{DeveloperSecretKey}{DeveloperSecretKey}}
+{\footnotesize\ttfamily \label{_program_8cs_a5d4a319cf8f814233416d126e93043bc} 
+Play\+Fab.\+Play\+Fab\+Settings.\+static\+Settings. Developer\+Secret\+Key}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ }
+\DoxyCodeLine{Environment.GetEnvironmentVariable(\textcolor{stringliteral}{"{}PLAYFAB\_SECRET\_KEY"{}})}
+
+\end{DoxyCode}
+\Hypertarget{_program_8cs_a392f00a120cd950d6bbdb5e5283f8084}\index{Program.cs@{Program.cs}!TitleId@{TitleId}}
+\index{TitleId@{TitleId}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{TitleId}{TitleId}}
+{\footnotesize\ttfamily \label{_program_8cs_a392f00a120cd950d6bbdb5e5283f8084} 
+Play\+Fab.\+Play\+Fab\+Settings.\+static\+Settings. Title\+Id}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ }
+\DoxyCodeLine{Environment.GetEnvironmentVariable(\textcolor{stringliteral}{"{}PLAYFAB\_TITLE\_ID"{}})}
+
+\end{DoxyCode}
