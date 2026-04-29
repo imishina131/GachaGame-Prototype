@@ -62,12 +62,28 @@ MonoBehaviour:
       Value:
         <Name>k__BackingField: Pudu-Default5Star
         <Prefab>k__BackingField: {fileID: 5279811246306103102, guid: 252ba5fa5d8167e42af72cf97baa830e, type: 3}
+    - Key:
+        Part1: 1064364487
+        Part2: 1122270210
+        Part3: 762284454
+        Part4: 2530620649
+      Value:
+        <Name>k__BackingField: Gecko-3Star
+        <Prefab>k__BackingField: {fileID: 6842458599697738422, guid: cefda5744f2acb54d8f08973a10bee1e, type: 3}
+    - Key:
+        Part1: 2289803365
+        Part2: 1189645045
+        Part3: 2233553329
+        Part4: 1524891261
+      Value:
+        <Name>k__BackingField: Herring-4Star
+        <Prefab>k__BackingField: {fileID: 1342889782683910774, guid: 4aa01f1d5c72d4e47a8c44e612a6b6fc, type: 3}
     m_stagingEntry:
       Key:
-        Part1: 1390234104
-        Part2: 1197154338
-        Part3: 2709220009
-        Part4: 3017508947
+        Part1: 2289803365
+        Part2: 1189645045
+        Part3: 2233553329
+        Part4: 1524891261
       Value:
         <Name>k__BackingField: 
         <Prefab>k__BackingField: {fileID: 0}
