@@ -1,4 +1,5 @@
-﻿using GachaGame.Azure.Core.Interfaces;
+﻿//Irina Mishina
+using GachaGame.Azure.Core.Interfaces;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 
@@ -12,6 +13,9 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
     /// <inheritdoc/>
     public RarityTier ResolveRoll(List<RarityTier> possibleRolls, RollContext rollContext, ILogger logger)
 {
+    /// <summary>
+    /// Gets current pity of the player and adds 1 each time it goes through this function
+    /// </summary>
     uint pity = rollContext.PlayerData.BannerData.TryGetValue(rollContext.BannerName, out PlayerBannerData? bannerData) ? bannerData.CurrentPity : 0;
 
     logger.LogInformation("Pity BEFORE: " + pity);
@@ -20,7 +24,11 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
     uint rarityValue3Star;
     uint rarityValue4Star;
     uint rarityValue5Star;
-    switch (pity)
+
+        /// <summary>
+        /// Checks pity value to determine whether the chances of getting a 5 star will go higher and changes all other odds to keep 100
+        /// </summary>
+        switch (pity)
     {
         case >= 90:
             rarityValue5Star = 100;
@@ -50,6 +58,9 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
             break;
     }
 
+    /// <summary>
+    /// Updates all rarities for the rolls
+    /// </summary>
     rollContext.Banner.RarityTiers[0].Rarity = rarityValue3Star;
     rollContext.Banner.RarityTiers[1].Rarity = rarityValue4Star;
     rollContext.Banner.RarityTiers[2].Rarity = rarityValue5Star;
@@ -58,6 +69,10 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
     logger.LogInformation("Rarity Value 4 Star: " + rarityValue4Star);
     logger.LogInformation("Rarity Value 3 Star: " + rarityValue3Star);
     logger.LogInformation("Pity: " + pity);
+
+    /// <summary>
+    /// Updates the pity within the current banner and selects a reward to return it and check whether its the 5 star or not (will reset pity to 0)
+    /// </summary>
     rollContext.TryAddMutation(playerData =>
     {
         if (!playerData.BannerData.ContainsKey(rollContext.BannerName))

@@ -1,3 +1,6 @@
+//Irina Mishina
+//Gacha Game Prototype
+//2026-04-28
 using MatrixUtils.Attributes;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -11,13 +14,16 @@ public class CurrencyHandler : MonoBehaviour, ICurrencyDisplay
     [field: SerializeField, RequiredField] public TMP_Text CurrencyText { get; private set;}
     [field: SerializeField, RequiredField] public RawImage CurrencyIcon { get; private set;}
     
-    public void UpdateDisplayedCurrency(CurrencyInfoSO currencyInfo)
+    public void UpdateDisplayedCurrency(CurrencyInfoSO currencyInfo)//updates currency displayed for the player
     {
         m_activeCurrencyInfo = currencyInfo;
         CurrencyIcon.texture = currencyInfo.CurrencyIcon;
         UpdateActiveCurrency();
     }
-    
+
+    /// <summary>
+    /// updates the currency stored in playfab for the current player
+    /// </summary>
     public void UpdateActiveCurrency()
     {
         PlayFabClientAPI.GetUserInventory(new(), OnGetUserInventorySuccess, OnError);
@@ -28,6 +34,9 @@ public class CurrencyHandler : MonoBehaviour, ICurrencyDisplay
         UpdateActiveCurrency();
     }
 
+    /// <summary>
+    /// gets currency from playfab and displays it to the player
+    /// </summary>
     void OnGetUserInventorySuccess(GetUserInventoryResult result)
     {
         int coins = result.VirtualCurrency[m_activeCurrencyInfo.CurrencyCode];
@@ -35,6 +44,9 @@ public class CurrencyHandler : MonoBehaviour, ICurrencyDisplay
 
     }
 
+    /// <summary>
+    /// when button pressed, adds 100 currency and updates the virtual part on playfab
+    /// </summary>
     public void AddCurrency()
     {
         AddUserVirtualCurrencyRequest request = new()
