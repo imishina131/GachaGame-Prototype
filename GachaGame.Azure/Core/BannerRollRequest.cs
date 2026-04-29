@@ -105,13 +105,9 @@ public class BannerRollRequest(ILogger<BannerRollRequest> logger)
     {
         //Create the mutated player data from the roll context
         PlayerData playerData = rollContext.GetMutatedPlayerData();
-        //If banner data doesn't exist, create it for the player
-        if (!rollContext.PlayerData.BannerData.TryGetValue(result.BannerRolled, out PlayerBannerData? bannerData))
-        {
-            bannerData = new();
-        }
-        playerData.BannerData[result.BannerRolled] = bannerData;
-        
+         
+        if (!playerData.BannerData.ContainsKey(result.BannerRolled))
+            playerData.BannerData[result.BannerRolled] = new();
         //Set the player data to the updated player data
         PlayFabResult<SetObjectsResponse>? setResult = await PlayFabDataAPI.SetObjectsAsync(new()
         {

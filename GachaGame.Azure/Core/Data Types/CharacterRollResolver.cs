@@ -14,7 +14,7 @@ public struct CharacterRollResolver : IRollResolver<Character>
     {
         if (possibleRolls == null || possibleRolls.Count == 0)
         {
-            logger?.LogWarning("ResolveRoll called with an empty character list.");
+            logger.LogWarning("ResolveRoll called with an empty character list.");
             return default;
         }
 
@@ -30,12 +30,12 @@ public struct CharacterRollResolver : IRollResolver<Character>
 
             if (won5050 && featuredPool.Count > 0)
             {
-                logger?.LogInformation("50/50 WON: Select from event Gacha pool.");
+                logger.LogInformation("50/50 WON: Select from event Gacha pool.");
                 selected = featuredPool[Random.Shared.Next(featuredPool.Count)];
             }
             else
             {
-                logger?.LogInformation("50/50 LOST: select from default pool.");
+                logger.LogInformation("50/50 LOST: select from default pool.");
                 List<Character> fallbackPool = standardPool.Count > 0 ? standardPool : possibleRolls;
                 selected = fallbackPool[Random.Shared.Next(fallbackPool.Count)];
             }
