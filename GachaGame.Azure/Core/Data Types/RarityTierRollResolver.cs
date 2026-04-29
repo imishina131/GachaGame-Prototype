@@ -20,36 +20,34 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
     uint rarityValue3Star;
     uint rarityValue4Star;
     uint rarityValue5Star;
-    if (pity >= 90)
+    switch (pity)
     {
-        rarityValue5Star = 100;
-        rarityValue4Star = 0;
-        rarityValue3Star = 0;
-        pity = 0;
-    }
-    else if (pity >= 74)
-    {
-        rarityValue5Star = 25;
-        rarityValue4Star = 18;
-        rarityValue3Star = 57;
-    }
-    else if (pity >= 55)
-    {
-        rarityValue5Star = 15; 
-        rarityValue4Star = 20; 
-        rarityValue3Star = 65;
-    }
-    else if (pity >= 30)
-    {
-        rarityValue5Star = 10;
-        rarityValue4Star = 23;
-        rarityValue3Star = 67;
-    }
-    else
-    {
-        rarityValue5Star = 5; 
-        rarityValue4Star = 25; 
-        rarityValue3Star = 70;
+        case >= 90:
+            rarityValue5Star = 100;
+            rarityValue4Star = 0;
+            rarityValue3Star = 0;
+            pity = 0;
+            break;
+        case >= 74:
+            rarityValue5Star = 25;
+            rarityValue4Star = 18;
+            rarityValue3Star = 57;
+            break;
+        case >= 55:
+            rarityValue5Star = 15; 
+            rarityValue4Star = 20; 
+            rarityValue3Star = 65;
+            break;
+        case >= 30:
+            rarityValue5Star = 10;
+            rarityValue4Star = 23;
+            rarityValue3Star = 67;
+            break;
+        default:
+            rarityValue5Star = 5; 
+            rarityValue4Star = 25; 
+            rarityValue3Star = 70;
+            break;
     }
 
     rollContext.Banner.RarityTiers[0].Rarity = rarityValue3Star;
@@ -74,7 +72,14 @@ public struct RarityTierRollResolver : IRollResolver<RarityTier>
     foreach (RarityTier roll in possibleRolls)
     {
         numericValue -= roll.Rarity;
-        if (numericValue <= 0) return roll;
+        if (!(numericValue <= 0)) continue;
+        if (roll != possibleRolls[^1]) return roll;
+        rollContext.TryAddMutation(playerData =>
+        {
+            if (!playerData.BannerData.ContainsKey(rollContext.BannerName))
+                playerData.BannerData[rollContext.BannerName] = new();
+            playerData.BannerData[rollContext.BannerName].CurrentPity = 0;
+        });
     }
     return possibleRolls[^1];
 }
