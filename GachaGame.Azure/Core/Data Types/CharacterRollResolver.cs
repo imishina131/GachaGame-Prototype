@@ -1,68 +1,59 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using GachaGame.Azure.Core.Interfaces;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 
 namespace GachaGame.Azure.Core.DataTypes;
-
+/// <summary>
+/// Resolves the <see cref="Character"/> from a roll. It will guarantee a featured pull if the last pull was not featured. Otherwise, pulling a featured <see cref="Character"/> is a coinflip
+/// </summary>
 [UsedImplicitly]
 public struct CharacterRollResolver : IRollResolver<Character>
 {
+    /// <inheritdoc/>
     public Character ResolveRoll(List<Character> possibleRolls, RollContext rollContext, ILogger logger)
     {
-        if (possibleRolls == null || possibleRolls.Count == 0)
+        if (possibleRolls.Count == 0)
         {
             logger.LogWarning("ResolveRoll called with an empty character list.");
             return default;
         }
-
-        uint targetRarity = possibleRolls[0].Rarity;
-
-        if (targetRarity == 5)
+        List<Character> featuredPool = possibleRolls.Where(c => c.IsFeatured).ToList();
+        List<Character> standardPool = possibleRolls.Where(c => !c.IsFeatured).ToList();
+        if(featuredPool.Count == 0) return GetRandomFromList(standardPool);
+        if (!rollContext.PlayerData.BannerData.TryGetValue(rollContext.BannerName, out PlayerBannerData? bannerEntry)) bannerEntry = new();
+        if (bannerEntry.IsGuaranteedFeatured)
         {
-            List<Character> featuredPool = possibleRolls.Where(c => c.IsFeatured).ToList();
-            List<Character> standardPool = possibleRolls.Where(c => !c.IsFeatured).ToList();
-
-            Character selected;
-            bool won5050 = Random.Shared.NextSingle() > 0.5f;
-
-            if (won5050 && featuredPool.Count > 0)
-            {
-                logger.LogInformation("50/50 WON: Select from event Gacha pool.");
-                selected = featuredPool[Random.Shared.Next(featuredPool.Count)];
-            }
-            else
-            {
-                logger.LogInformation("50/50 LOST: select from default pool.");
-                List<Character> fallbackPool = standardPool.Count > 0 ? standardPool : possibleRolls;
-                selected = fallbackPool[Random.Shared.Next(fallbackPool.Count)];
-            }
-
-            var currentBanner = rollContext.Banner;
-
-            rollContext.TryAddMutation(data =>
-            {
-                string bannerKey = currentBanner.GetHashCode().ToString();
-
-                if (data.BannerData.TryGetValue(bannerKey, out var bannerEntry))
-                {
-                    bannerEntry.CurrentPity = 0;
-                }
-            });
-
-            return selected;
+            SetGuaranteedFeatured(rollContext, false);
+            return GetRandomFromList(featuredPool);
         }
+        bool won5050 = Random.Shared.NextSingle() > 0.5f;
+        if(won5050)
+        {
+            SetGuaranteedFeatured(rollContext, false);
+            return GetRandomFromList(featuredPool);
+        }
+        SetGuaranteedFeatured(rollContext, true);
+        return GetRandomFromList(standardPool);
+    }
 
+    void SetGuaranteedFeatured(RollContext rollContext, bool guaranteedFeaturedStatus)
+    {
+        rollContext.TryAddMutation(data =>
+        {
+            if (!data.BannerData.TryGetValue(rollContext.BannerName, out PlayerBannerData? bannerEntry)) bannerEntry = new();
+            bannerEntry.IsGuaranteedFeatured = guaranteedFeaturedStatus;
+            data.BannerData[rollContext.BannerName] = bannerEntry;
+        });
+    }
+    Character GetRandomFromList(List<Character> characters)
+    {
         uint ratioSum = 0;
-        foreach (Character roll in possibleRolls)
+        foreach (Character roll in characters)
         {
             ratioSum += roll.Rarity;
         }
-
         float numericValue = Random.Shared.NextSingle() * ratioSum;
-        foreach (Character roll in possibleRolls)
+        foreach (Character roll in characters)
         {
             numericValue -= roll.Rarity;
             if (numericValue <= 0)
@@ -70,7 +61,6 @@ public struct CharacterRollResolver : IRollResolver<Character>
                 return roll;
             }
         }
-
-        return possibleRolls[Random.Shared.Next(possibleRolls.Count)];
+        return characters[Random.Shared.Next(characters.Count)];
     }
 }
