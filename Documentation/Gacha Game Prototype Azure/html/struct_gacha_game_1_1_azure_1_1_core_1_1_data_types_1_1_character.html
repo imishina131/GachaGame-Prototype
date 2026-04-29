@@ -106,7 +106,7 @@ Inheritance diagram for GachaGame.Azure.Core.DataTypes.Character:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a85d87a0b6995ebedaabc453eae5ec740" id="r_a85d87a0b6995ebedaabc453eae5ec740"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a85d87a0b6995ebedaabc453eae5ec740">Character</a> (Guid characterID, uint rarity)</td></tr>
+<tr class="memitem:abe67ebe1c48ca7e84ae9adc1a8f6d540" id="r_abe67ebe1c48ca7e84ae9adc1a8f6d540"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#abe67ebe1c48ca7e84ae9adc1a8f6d540">Character</a> (Guid characterID, uint rarity, bool isFeatured)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-properties" class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
@@ -114,12 +114,13 @@ Properties</h2></td></tr>
 <tr class="memdesc:aad5d396940a4386d30b4a390e285d502"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ID of the character. This is used for lookups on the client side.  <br /></td></tr>
 <tr class="memitem:ad01f0d2e8a40d948e8692aa313bb3046" id="r_ad01f0d2e8a40d948e8692aa313bb3046"><td class="memItemLeft">required uint&#160;</td><td class="memItemRight"><a class="el" href="#ad01f0d2e8a40d948e8692aa313bb3046">Rarity</a><code> [get]</code></td></tr>
 <tr class="memdesc:ad01f0d2e8a40d948e8692aa313bb3046"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rarity of the character.  <br /></td></tr>
+<tr class="memitem:aaf877663355828b00394dc89f1bb9871" id="r_aaf877663355828b00394dc89f1bb9871"><td class="memItemLeft">required bool&#160;</td><td class="memItemRight"><a class="el" href="#aaf877663355828b00394dc89f1bb9871">IsFeatured</a><code> [get]</code></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a character that can be rolled. Stored as a JSON object on PlayFab inside a <a class="el" href="class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_rarity_tier.html" title="Represents a tier of characters that can be rolled. Stored as a JSON object on PlayFab.">RarityTier</a> in the title data. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a85d87a0b6995ebedaabc453eae5ec740" name="a85d87a0b6995ebedaabc453eae5ec740"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85d87a0b6995ebedaabc453eae5ec740">&#9670;&#160;</a></span>Character()</h2>
+<a id="abe67ebe1c48ca7e84ae9adc1a8f6d540" name="abe67ebe1c48ca7e84ae9adc1a8f6d540"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe67ebe1c48ca7e84ae9adc1a8f6d540">&#9670;&#160;</a></span>Character()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +133,12 @@ Properties</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>rarity</em></span>&#160;)</td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>rarity</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isFeatured</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -161,6 +167,28 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The ID of the character. This is used for lookups on the client side. </p>
+
+</div>
+</div>
+<a id="aaf877663355828b00394dc89f1bb9871" name="aaf877663355828b00394dc89f1bb9871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf877663355828b00394dc89f1bb9871">&#9670;&#160;</a></span>IsFeatured</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">required bool GachaGame.Azure.Core.DataTypes.Character.IsFeatured</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel get">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

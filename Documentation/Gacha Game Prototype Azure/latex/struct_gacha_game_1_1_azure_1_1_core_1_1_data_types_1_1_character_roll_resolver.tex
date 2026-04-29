@@ -2,7 +2,7 @@
 \hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver}{}\label{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver}\index{GachaGame.Azure.Core.DataTypes.CharacterRollResolver@{GachaGame.Azure.Core.DataTypes.CharacterRollResolver}}
 
 
-A \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{IRoll\+Resolver$<$\+T$>$} that rolls a \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} based on the rarity of the \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} and the pity in the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data} from the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}.  
+Resolves the \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} from a roll. It will guarantee a featured pull if the last pull was not featured. Otherwise, pulling a featured \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} is a coinflip.  
 
 
 Inheritance diagram for Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character\+Roll\+Resolver:\+\begin{figure}[H]
@@ -15,6 +15,10 @@ Inheritance diagram for Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character\+Ro
 \begin{DoxyCompactItemize}
 \item 
 \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_a853165413a9a69c537625f3a2e956a22}{Resolve\+Roll}} (List$<$ \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} $>$ possible\+Rolls, \doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}} roll\+Context, ILogger logger)
+\item 
+void \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_a743cde65f9bbe9970e45e433cf10568a}{Set\+Guaranteed\+Featured}} (\doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}} roll\+Context, bool guaranteed\+Featured\+Status)
+\item 
+\doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_af7cd8701fcfb49a6122069b2761df665}{Get\+Random\+From\+List}} (List$<$ \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} $>$ characters)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{Gacha\+Game.\+Azure.\+Core.\+Interfaces.\+IRoll\+Resolver$<$ T $>$}}}
 \begin{DoxyCompactItemize}
@@ -24,11 +28,17 @@ T \doxymbox{\hyperlink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_
 
 
 \doxysubsection{Detailed Description}
-A \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_resolver-1-g}{IRoll\+Resolver$<$\+T$>$} that rolls a \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} based on the rarity of the \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} and the pity in the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_player_data}{Player\+Data} from the \doxylink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}. 
+Resolves the \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} from a roll. It will guarantee a featured pull if the last pull was not featured. Otherwise, pulling a featured \doxylink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character} is a coinflip. 
 
 \label{doc-func-members}
 \Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_doc-func-members}
 \doxysubsection{Member Function Documentation}
+\Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_af7cd8701fcfb49a6122069b2761df665}\index{GachaGame.Azure.Core.DataTypes.CharacterRollResolver@{GachaGame.Azure.Core.DataTypes.CharacterRollResolver}!GetRandomFromList@{GetRandomFromList}}
+\index{GetRandomFromList@{GetRandomFromList}!GachaGame.Azure.Core.DataTypes.CharacterRollResolver@{GachaGame.Azure.Core.DataTypes.CharacterRollResolver}}
+\doxysubsubsection{\texorpdfstring{GetRandomFromList()}{GetRandomFromList()}}
+{\footnotesize\ttfamily \label{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_af7cd8701fcfb49a6122069b2761df665} 
+\doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character\+Roll\+Resolver.\+Get\+Random\+From\+List (\begin{DoxyParamCaption}\item[{List$<$ \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character}{Character}} $>$}]{characters}{}\end{DoxyParamCaption})}
+
 \Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_a853165413a9a69c537625f3a2e956a22}\index{GachaGame.Azure.Core.DataTypes.CharacterRollResolver@{GachaGame.Azure.Core.DataTypes.CharacterRollResolver}!ResolveRoll@{ResolveRoll}}
 \index{ResolveRoll@{ResolveRoll}!GachaGame.Azure.Core.DataTypes.CharacterRollResolver@{GachaGame.Azure.Core.DataTypes.CharacterRollResolver}}
 \doxysubsubsection{\texorpdfstring{ResolveRoll()}{ResolveRoll()}}
@@ -38,6 +48,12 @@ A \doxylink{interface_gacha_game_1_1_azure_1_1_core_1_1_interfaces_1_1_i_roll_re
 
 
 
+
+\Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_a743cde65f9bbe9970e45e433cf10568a}\index{GachaGame.Azure.Core.DataTypes.CharacterRollResolver@{GachaGame.Azure.Core.DataTypes.CharacterRollResolver}!SetGuaranteedFeatured@{SetGuaranteedFeatured}}
+\index{SetGuaranteedFeatured@{SetGuaranteedFeatured}!GachaGame.Azure.Core.DataTypes.CharacterRollResolver@{GachaGame.Azure.Core.DataTypes.CharacterRollResolver}}
+\doxysubsubsection{\texorpdfstring{SetGuaranteedFeatured()}{SetGuaranteedFeatured()}}
+{\footnotesize\ttfamily \label{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver_a743cde65f9bbe9970e45e433cf10568a} 
+void Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character\+Roll\+Resolver.\+Set\+Guaranteed\+Featured (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context}{Roll\+Context}}}]{roll\+Context}{, }\item[{bool}]{guaranteed\+Featured\+Status}{}\end{DoxyParamCaption})}
 
 
 

@@ -14,7 +14,7 @@ Inheritance diagram for Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character:\+\
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_a85d87a0b6995ebedaabc453eae5ec740}{Character}} (Guid character\+ID, uint rarity)
+\doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_abe67ebe1c48ca7e84ae9adc1a8f6d540}{Character}} (Guid character\+ID, uint rarity, bool is\+Featured)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Properties}
 \begin{DoxyCompactItemize}
@@ -22,7 +22,9 @@ Inheritance diagram for Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character:\+\
 required Guid \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_aad5d396940a4386d30b4a390e285d502}{Character\+ID}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
 \begin{DoxyCompactList}\small\item\em The ID of the character. This is used for lookups on the client side. \end{DoxyCompactList}\item 
 required uint \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_ad01f0d2e8a40d948e8692aa313bb3046}{Rarity}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
-\begin{DoxyCompactList}\small\item\em The rarity of the character. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The rarity of the character. \end{DoxyCompactList}\item 
+required bool \doxymbox{\hyperlink{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_aaf877663355828b00394dc89f1bb9871}{Is\+Featured}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -31,11 +33,11 @@ Represents a character that can be rolled. Stored as a JSON object on Play\+Fab 
 \label{doc-constructors}
 \Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_a85d87a0b6995ebedaabc453eae5ec740}\index{GachaGame.Azure.Core.DataTypes.Character@{GachaGame.Azure.Core.DataTypes.Character}!Character@{Character}}
+\Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_abe67ebe1c48ca7e84ae9adc1a8f6d540}\index{GachaGame.Azure.Core.DataTypes.Character@{GachaGame.Azure.Core.DataTypes.Character}!Character@{Character}}
 \index{Character@{Character}!GachaGame.Azure.Core.DataTypes.Character@{GachaGame.Azure.Core.DataTypes.Character}}
 \doxysubsubsection{\texorpdfstring{Character()}{Character()}}
-{\footnotesize\ttfamily \label{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_a85d87a0b6995ebedaabc453eae5ec740} 
-Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character.\+Character (\begin{DoxyParamCaption}\item[{Guid}]{character\+ID}{, }\item[{uint}]{rarity}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_abe67ebe1c48ca7e84ae9adc1a8f6d540} 
+Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character.\+Character (\begin{DoxyParamCaption}\item[{Guid}]{character\+ID}{, }\item[{uint}]{rarity}{, }\item[{bool}]{is\+Featured}{}\end{DoxyParamCaption})}
 
 
 
@@ -51,6 +53,12 @@ required Guid Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character.\+Character\+
 
 
 The ID of the character. This is used for lookups on the client side. 
+
+\Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_aaf877663355828b00394dc89f1bb9871}\index{GachaGame.Azure.Core.DataTypes.Character@{GachaGame.Azure.Core.DataTypes.Character}!IsFeatured@{IsFeatured}}
+\index{IsFeatured@{IsFeatured}!GachaGame.Azure.Core.DataTypes.Character@{GachaGame.Azure.Core.DataTypes.Character}}
+\doxysubsubsection{\texorpdfstring{IsFeatured}{IsFeatured}}
+{\footnotesize\ttfamily \label{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_aaf877663355828b00394dc89f1bb9871} 
+required bool Gacha\+Game.\+Azure.\+Core.\+Data\+Types.\+Character.\+Is\+Featured\hspace{0.3cm}{\ttfamily [get]}}
 
 \Hypertarget{struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_ad01f0d2e8a40d948e8692aa313bb3046}\index{GachaGame.Azure.Core.DataTypes.Character@{GachaGame.Azure.Core.DataTypes.Character}!Rarity@{Rarity}}
 \index{Rarity@{Rarity}!GachaGame.Azure.Core.DataTypes.Character@{GachaGame.Azure.Core.DataTypes.Character}}

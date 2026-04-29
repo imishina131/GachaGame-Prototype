@@ -13,5 +13,6 @@ var searchData=
   ['gachagame_3a_3aazure_3a_3acore_3a_3aplayfabhelpers_10',['PlayFabHelpers',['../namespace_gacha_game_1_1_azure_1_1_core_1_1_play_fab_helpers.html',1,'GachaGame::Azure::Core']]],
   ['generateplaystreamevent_11',['GeneratePlayStreamEvent',['../class_gacha_game_1_1_azure_1_1_core_1_1_play_fab_helpers_1_1_function_execution_context-1-g.html#ad2ac1cbe6239549cb6290f5ead9b7cdc',1,'GachaGame::Azure::Core::PlayFabHelpers::FunctionExecutionContext-1-g']]],
   ['gethashcode_12',['GetHashCode',['../struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_data.html#a62b809517cbbe4c054f1574d78c74ff4',1,'GachaGame::Azure::Core::DataTypes::RollData']]],
-  ['getmutatedplayerdata_13',['GetMutatedPlayerData',['../class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context.html#a4437370d2fa0dde23c529166ac28f701',1,'GachaGame::Azure::Core::DataTypes::RollContext']]]
+  ['getmutatedplayerdata_13',['GetMutatedPlayerData',['../class_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_roll_context.html#a4437370d2fa0dde23c529166ac28f701',1,'GachaGame::Azure::Core::DataTypes::RollContext']]],
+  ['getrandomfromlist_14',['GetRandomFromList',['../struct_gacha_game_1_1_azure_1_1_core_1_1_data_types_1_1_character_roll_resolver.html#af7cd8701fcfb49a6122069b2761df665',1,'GachaGame::Azure::Core::DataTypes::CharacterRollResolver']]]
 ];
