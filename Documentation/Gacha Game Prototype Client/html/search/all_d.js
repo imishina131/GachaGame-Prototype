@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['transitiontoscene_0',['TransitionToScene',['../interface_i_scene_transition_manager.html#a5e9f04cbc78bbed702b87a1a14a772c6',1,'ISceneTransitionManager.TransitionToScene()'],['../class_scene_transition_manager.html#a4e4a04e2888c5e6160dfb10bb57e4591',1,'SceneTransitionManager.TransitionToScene()'],['../class_scene_transitioner_proxy.html#a1809c7cc1c1545a7db957b0d5ffd0562',1,'SceneTransitionerProxy.TransitionToScene()']]]
+  ['scenetransitionerproxy_0',['SceneTransitionerProxy',['../class_scene_transitioner_proxy.html',1,'']]],
+  ['scenetransitionmanager_1',['SceneTransitionManager',['../class_scene_transition_manager.html',1,'']]],
+  ['signupscreenui_2',['SignUpScreenUI',['../class_sign_up_screen_u_i.html',1,'']]],
+  ['success_3',['Success',['../struct_roll_data.html#a0317b3fe94026fcf94db8ff2b77329c7',1,'RollData']]]
 ];

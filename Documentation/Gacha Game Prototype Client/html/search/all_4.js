@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['forgotpasswordscreenui_0',['ForgotPasswordScreenUI',['../class_forgot_password_screen_u_i.html',1,'']]]
+  ['errorbox_0',['ErrorBox',['../class_error_box.html',1,'']]]
 ];
